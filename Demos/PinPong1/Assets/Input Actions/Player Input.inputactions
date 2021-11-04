@@ -2,7 +2,7 @@
     "name": "Player Input",
     "maps": [
         {
-            "name": "Movement",
+            "name": "Player",
             "id": "294930f7-a661-46aa-bfa4-bf9ce4f2fceb",
             "actions": [
                 {
@@ -42,7 +42,7 @@
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Right Keyboard",
                     "action": "Right Keyboard",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -53,7 +53,7 @@
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Right Keyboard",
                     "action": "Right Keyboard",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -75,7 +75,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Left Keyboard",
                     "action": "Left Keyboard",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -86,7 +86,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Left Keyboard",
                     "action": "Left Keyboard",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -94,5 +94,28 @@
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "Left Keyboard",
+            "bindingGroup": "Left Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Right Keyboard",
+            "bindingGroup": "Right Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }

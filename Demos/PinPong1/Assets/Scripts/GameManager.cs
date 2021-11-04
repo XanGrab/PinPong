@@ -28,18 +28,18 @@ public class GameManager : MonoBehaviour
     private int rScore;
 
     void Start(){
-        var lefty = PlayerInput.all[0];
-        var righty = PlayerInput.all[1];
+        //var lefty = PlayerInput.all[0];
+        //var righty = PlayerInput.all[1];
         
         //InputUser.PerformPairingWithDevice(Keyboard.current, lefty);
 
-        lefty.user.ActivateControlScheme("Left Keyboard");
-        lefty.user.ActivateControlScheme("Right Keyboard");
-        //var lefty = PlayerInput.Instantiate(lefty, controlScheme: "Left Keyboard", pairWithDevice: Keyboard.current);
-        //var righy = PlayerInput.Instantiate(righty, controlScheme: "Left Keyboard", pairWithDevice: Keyboard.current);
+        //lefty.user.ActivateControlScheme("Left Keyboard");
+        //righty.user.ActivateControlScheme("Right Keyboard");
+        var left = PlayerInput.Instantiate(lefty, controlScheme: "Left Keyboard", pairWithDevice: Keyboard.current);
+        var right = PlayerInput.Instantiate(righty, controlScheme: "Right Keyboard", pairWithDevice: Keyboard.current);
         
-        //lefty.SetActive(false);
-        //righty.SetActive(false);
+        lefty.SetActive(false);
+        righty.SetActive(false);
     }
 
     public void leftScored(){
