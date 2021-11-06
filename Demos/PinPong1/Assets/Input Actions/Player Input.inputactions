@@ -6,7 +6,7 @@
             "id": "294930f7-a661-46aa-bfa4-bf9ce4f2fceb",
             "actions": [
                 {
-                    "name": "Left Keyboard",
+                    "name": "Keyboard",
                     "type": "Value",
                     "id": "0c373ca0-71a7-4bb3-8ea0-206d8387ff72",
                     "expectedControlType": "Vector2",
@@ -15,10 +15,10 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Right Keyboard",
-                    "type": "Value",
+                    "name": "FlipUp",
+                    "type": "Button",
                     "id": "e52da68b-1272-4635-9690-a8d19797fef6",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -26,46 +26,13 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
-                    "id": "824175fa-73f5-4bca-9c3c-38c0bcbb00a8",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Right Keyboard",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "30555a3b-485a-4c72-ba93-3db9ad5c8ecd",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Right Keyboard",
-                    "action": "Right Keyboard",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "8aeeb2d2-0401-4305-9ec3-a845e3030f1c",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Right Keyboard",
-                    "action": "Right Keyboard",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "WASD",
+                    "name": "Left",
                     "id": "307fb27a-1427-4572-b4c1-1cb721b4f918",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Left Keyboard",
+                    "action": "Keyboard",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -76,7 +43,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Left Keyboard",
-                    "action": "Left Keyboard",
+                    "action": "Keyboard",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -87,9 +54,64 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Left Keyboard",
-                    "action": "Left Keyboard",
+                    "action": "Keyboard",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "Right",
+                    "id": "824175fa-73f5-4bca-9c3c-38c0bcbb00a8",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Keyboard",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "30555a3b-485a-4c72-ba93-3db9ad5c8ecd",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Right Keyboard",
+                    "action": "Keyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "8aeeb2d2-0401-4305-9ec3-a845e3030f1c",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Right Keyboard",
+                    "action": "Keyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "8b549f5a-539e-40f1-8595-187a3e8cf7a5",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Right Keyboard",
+                    "action": "FlipUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7addb347-07bc-448e-9ae4-30f88b1c2394",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Left Keyboard",
+                    "action": "FlipUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
