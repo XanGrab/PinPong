@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         //lefty.user.ActivateControlScheme("Left Keyboard");
         //righty.user.ActivateControlScheme("Right Keyboard");
         var left = PlayerInput.Instantiate(lefty, controlScheme: "Left Keyboard", pairWithDevice: Keyboard.current);
-        var right = PlayerInput.Instantiate(righty, controlScheme: "Right Keyboard", pairWithDevice: Keyboard.current);
+        //var right = PlayerInput.Instantiate(righty, controlScheme: "Right Keyboard", pairWithDevice: Keyboard.current);
         
         lefty.SetActive(false);
         righty.SetActive(false);
