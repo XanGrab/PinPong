@@ -5,8 +5,8 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
  public Rigidbody2D rb; //get this obj's rigidbody;
-public float SpeedX = 2000f;
-public float SpeedY =3005f;
+public float SpeedX = 20f;
+public float SpeedY =30f;
     // Start is called before the first frame update
     void Start()
     {

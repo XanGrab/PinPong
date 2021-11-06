@@ -17,8 +17,6 @@ public class Target : MonoBehaviour
     }
 
   void OnCollisionEnter2D(Collision2D other) {
-Debug.Log("test");
-Debug.Log("test" + other.gameObject.tag);
              if (other.gameObject.tag == "target1" || other.gameObject.tag == "target2" || other.gameObject.tag == "target3" || other.gameObject.tag == "target4" || other.gameObject.tag == "target5") {
             Debug.Log ("pushRight");
             Destroy(other.gameObject);
