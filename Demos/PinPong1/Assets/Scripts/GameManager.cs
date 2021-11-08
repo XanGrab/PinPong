@@ -28,15 +28,8 @@ public class GameManager : MonoBehaviour
     private int rScore;
 
     void Start(){
-        //var lefty = PlayerInput.all[0];
-        //var righty = PlayerInput.all[1];
-        
-        //InputUser.PerformPairingWithDevice(Keyboard.current, lefty);
-
-        //lefty.user.ActivateControlScheme("Left Keyboard");
-        //righty.user.ActivateControlScheme("Right Keyboard");
         var left = PlayerInput.Instantiate(lefty, controlScheme: "Left Keyboard", pairWithDevice: Keyboard.current);
-        //var right = PlayerInput.Instantiate(righty, controlScheme: "Right Keyboard", pairWithDevice: Keyboard.current);
+        var right = PlayerInput.Instantiate(righty, controlScheme: "Right Keyboard", pairWithDevice: Keyboard.current);
         
         lefty.SetActive(false);
         righty.SetActive(false);

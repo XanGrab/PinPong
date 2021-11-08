@@ -295,7 +295,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 231645003}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4752, y: 6.32, z: 261.3899}
+  m_LocalPosition: {x: -1.4752, y: 7.46, z: 261.3899}
   m_LocalScale: {x: 23.471964, y: 0.4106, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -526,6 +526,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5010156999936449010, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5010156999936449011, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_Name
       value: Paddle 1
@@ -608,7 +612,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -625,7 +629,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6.5722933
+  orthographic size: 7.3684893
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -649,7 +653,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0.41, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -668,7 +672,7 @@ HingeJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 542115082}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}
@@ -676,7 +680,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0.5}
-  m_ConnectedAnchor: {x: -11, y: 1}
+  m_ConnectedAnchor: {x: 11, y: 1}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -684,7 +688,7 @@ HingeJoint2D:
   m_UseLimits: 1
   m_AngleLimits:
     m_LowerAngle: 0
-    m_UpperAngle: 90
+    m_UpperAngle: 45
 --- !u!114 &542115084 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6907043477694592206, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
@@ -699,11 +703,6 @@ MonoBehaviour:
 --- !u!50 &542115086 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 5010156999936449008, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
-  m_PrefabInstance: {fileID: 940506240}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &542115089 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5010156999936449009, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
   m_PrefabInstance: {fileID: 940506240}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &830939884
@@ -949,18 +948,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6907043477694592206, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: flipTorque
-      value: 10
+      value: -150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
 --- !u!50 &1129952720 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 5010156999936449008, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
-  m_PrefabInstance: {fileID: 471993396}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1129952725 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5010156999936449009, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
   m_PrefabInstance: {fileID: 471993396}
   m_PrefabAsset: {fileID: 0}
 --- !u!233 &1129952729
@@ -985,8 +979,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 315
-    m_UpperAngle: 359
+    m_LowerAngle: 0
+    m_UpperAngle: -45
 --- !u!1 &1340033674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,84 +1057,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1372472062
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1372472063}
-  - component: {fileID: 1372472065}
-  - component: {fileID: 1372472064}
-  m_Layer: 0
-  m_Name: Paddle-hinge
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1372472063
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1372472062}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1129952725}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!233 &1372472064
-HingeJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1372472062}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 1129952720}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0.5}
-  m_ConnectedAnchor: {x: 0, y: 0.5}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 1
-  m_AngleLimits:
-    m_LowerAngle: 180
-    m_UpperAngle: 270
---- !u!50 &1372472065
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1372472062}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &1476196536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,7 +1231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639542287}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5205, y: -5.69, z: 261.3899}
+  m_LocalPosition: {x: -1.5205, y: -6.64, z: 261.3899}
   m_LocalScale: {x: 23.566013, y: 0.4106, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1488,84 +1404,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3447168458245177638, guid: 405506923448b114b9469e4e08110eeb, type: 3}
   m_PrefabInstance: {fileID: 3447168456507234060}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2077060968
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2077060969}
-  - component: {fileID: 2077060971}
-  - component: {fileID: 2077060970}
-  m_Layer: 0
-  m_Name: Paddle-hinge
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2077060969
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2077060968}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 542115089}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!233 &2077060970
-HingeJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2077060968}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 542115086}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0.5}
-  m_ConnectedAnchor: {x: 0, y: 0.5}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 1
-  m_AngleLimits:
-    m_LowerAngle: 180
-    m_UpperAngle: 270
---- !u!50 &2077060971
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2077060968}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1001 &3447168456507234060
 PrefabInstance:
   m_ObjectHideFlags: 0
