@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "FlipDown",
+                    "type": "Button",
+                    "id": "c1aa5e49-c4b5-4497-8f61-497a042124f3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -110,6 +119,28 @@
                     "processors": "",
                     "groups": "Left Keyboard",
                     "action": "FlipUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cb9be57b-4663-45d9-8db1-0fe74cb04b7c",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Right Keyboard",
+                    "action": "FlipDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6e7a7147-1d17-4921-849a-e8d16c253b1b",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Left Keyboard",
+                    "action": "FlipDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
