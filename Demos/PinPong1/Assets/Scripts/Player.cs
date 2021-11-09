@@ -27,14 +27,13 @@ public class Player : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>(); 
         hj = gameObject.GetComponent<HingeJoint2D>();
         hj.enabled = false;
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation & RigidbodyConstraints2D.FreezePositionX;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
         playerState = state.Move;
     }
 
     //check for regognized input
     public void OnMove( InputAction.CallbackContext context ){
         movVector = context.ReadValue<Vector2>() * speed;
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation & RigidbodyConstraints2D.FreezePositionX;
     }
 
     public void OnFlipUp( InputAction.CallbackContext context ){
@@ -72,43 +71,46 @@ public class Player : MonoBehaviour
         switch(playerState){
             case state.Move:
                 rb.velocity = new Vector2(0, movVector.y) * speed;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
                 break;
             case state.FlipUp:
                 rb.AddTorque(flipTorque * 10f);
                 if(!flippingUp){
-                    playerState = state.ResetDown;
                     flippingUp = true;
+                    playerState = state.ResetDown;
                 }
                 break;
             case state.ResetDown:
                 rb.AddTorque((-1) * flipTorque);
                 if(Mathf.Round(gameObject.transform.rotation.eulerAngles.z)%360 == Mathf.Abs(hj.limits.min)){
+                    rb.transform.position = new Vector3(setX, rb.transform.position.y, rb.transform.position.z);
                     gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
                     hj.enabled = false;
-                    rb.constraints = RigidbodyConstraints2D.FreezeRotation & RigidbodyConstraints2D.FreezePositionX;
-                    playerState = state.Move;
+                    rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
                     flippingUp = false;
+                    playerState = state.Move;
                 }
                 break;
             case state.FlipDown:
                 rb.AddTorque(flipTorque * -10f);
                 if(!flippingDown){
-                    playerState = state.ResetUp;
                     flippingDown = true;
+                    playerState = state.ResetUp;
                 }
                 break;
             case state.ResetUp:
                 rb.AddTorque(flipTorque);
                 if(Mathf.Round(gameObject.transform.rotation.eulerAngles.z)%360 == Mathf.Abs(hj.limits.min)){
-                    gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
                     rb.transform.position = new Vector3(setX, rb.transform.position.y, rb.transform.position.z);
+                    gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
                     hj.enabled = false;
                     flippingDown = false;
-                    rb.constraints = RigidbodyConstraints2D.FreezeRotation & RigidbodyConstraints2D.FreezePositionX;
+                    rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
                     playerState = state.Move;
                 }
                 break;
         }
-        Debug.Log(gameObject.name + Mathf.Round(gameObject.transform.rotation.eulerAngles.z)%360);
+        //Debug.Log(gameObject.name + Mathf.Round(gameObject.transform.rotation.eulerAngles.z)%360);
+        //Debug.Log(gameObject.name + " " + flippingDown + " " + flippingUp);
     }
 }

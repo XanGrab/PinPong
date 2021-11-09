@@ -532,7 +532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5010156999936449008, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_Constraints
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5010156999936449009, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_RootOrder
@@ -540,7 +540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5010156999936449009, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 5010156999936449009, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_LocalPosition.y
@@ -732,7 +732,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0.5}
-  m_ConnectedAnchor: {x: 11, y: 1}
+  m_ConnectedAnchor: {x: 14, y: 1}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -964,7 +964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5010156999936449008, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_Constraints
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5010156999936449009, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_RootOrder
@@ -972,7 +972,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5010156999936449009, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5010156999936449009, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1060,7 +1060,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0.5}
-  m_ConnectedAnchor: {x: -11, y: 1}
+  m_ConnectedAnchor: {x: -14, y: 1}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
