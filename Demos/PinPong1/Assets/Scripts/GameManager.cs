@@ -16,13 +16,11 @@ public class GameManager : MonoBehaviour
 
     [Header("Left Player")]
     public GameObject lefty;
-    public PlayerInput leftInput;
     public GameObject leftGoal;
 
 
     [Header("Right Player")]
     public GameObject righty;
-    public PlayerInput rightInput;
     public GameObject rightGoal;
 
     [Header("Score UI")]
@@ -36,11 +34,16 @@ public class GameManager : MonoBehaviour
     public Text timerText;
     public float timeValue = 90;
 
+    [Header("Targets")]
+    public GameObject targetManager;
+    public GameObject currentLayout;
+
     void Start(){
         resetMenu.SetActive(false);
 
         lefty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Left Keyboard", Keyboard.current);
         righty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Right Keyboard", Keyboard.current);
+        currentLayout = targetManager.transform.GetChild(Random.Range(0, targetManager.transform.childCount - 1)).gameObject;
     }
 
     void Update(){
@@ -49,6 +52,7 @@ public class GameManager : MonoBehaviour
 
         if(timeValue < 1){
             resetMenu.SetActive(true);
+            targetManager.SetActive(false);
             ball.SetActive(false);
             lefty.SetActive(false);
             righty.SetActive(false);
@@ -56,15 +60,17 @@ public class GameManager : MonoBehaviour
     }
 
     public void leftScored(){
-        lScore++;
+        lScore += ball.GetComponent<Ball>().score;
         lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
         ball.GetComponent<Ball>().Reset();
+        resetTargets(currentLayout);
     }
 
     public void rightScored(){
-        rScore++;
+        rScore += ball.GetComponent<Ball>().score;
         rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
         ball.GetComponent<Ball>().Reset();
+        resetTargets(currentLayout);
     }
 
     void DisplayTime(float timeToDisplay){
@@ -78,19 +84,16 @@ public class GameManager : MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}", min, sec);
     }
 
+    public void resetTargets(GameObject curr){
+        curr.SetActive(false);
+        int rand = Random.Range(0, targetManager.transform.childCount);
+        Debug.Log(rand);
+        curr = targetManager.transform.GetChild(rand).gameObject;
+        curr.SetActive(true);
+    }
+
     public void Rematch(){
-        //Debug.Log("Rematch!");
         SceneManager.LoadScene("Arena");
-        /*timeValue = 90;
-        resetMenu.SetActive(false);
-        ball.SetActive(true);
-        ball.GetComponent<Ball>().Reset();
-        lefty.transform.position = new Vector3(lefty.transform.position.x, 0, 0);
-        lefty.SetActive(true);
-        righty.transform.position = new Vector3(righty.transform.position.x, 0, 0);
-        righty.SetActive(true);
-        lScore = 0;
-        rScore = 0;*/
     }
 
     public void ToMainMenu(){
