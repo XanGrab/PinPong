@@ -1847,7 +1847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8607d98cd9abab944a0b7a9f526fb359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
+  speed: 3.5
   score: 100
   rb: {fileID: 1412246840}
   startPos: {x: 0, y: 0}

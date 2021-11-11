@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
             }
             hj.enabled = true;
             rb.constraints = RigidbodyConstraints2D.None;
-            //flippingUp = context.action.triggered;
+            flippingUp = context.action.triggered;
             playerState = state.FlipUp;
         }
     }
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
             }
             hj.enabled = true;
             rb.constraints = RigidbodyConstraints2D.None;
-            //flippingDown = context.action.triggered;
+            flippingDown = context.action.triggered;
             playerState = state.FlipDown;
         }
     }
@@ -76,7 +76,6 @@ public class Player : MonoBehaviour
             case state.FlipUp:
                 rb.AddTorque(flipTorque * 10f);
                 if(!flippingUp){
-                    //flippingDown = true;
                     playerState = state.ResetDown;
                 }
                 break;
@@ -94,7 +93,6 @@ public class Player : MonoBehaviour
             case state.FlipDown:
                 rb.AddTorque(flipTorque * -10f);
                 if(!flippingDown){
-                    //flippingDown = true;
                     playerState = state.ResetUp;
                 }
                 break;
