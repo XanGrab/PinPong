@@ -38,7 +38,10 @@ public class GameManager : MonoBehaviour
     public GameObject targetManager;
     public GameObject currentLayout;
 
+    private bool playing;
+
     void Start(){
+        playing = true;
         resetMenu.SetActive(false);
 
         lefty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Left Keyboard", Keyboard.current);
@@ -47,15 +50,18 @@ public class GameManager : MonoBehaviour
     }
 
     void Update(){
-        timeValue -= Time.deltaTime;
-        DisplayTime(timeValue);
+        if(playing){
+            timeValue -= Time.deltaTime;
+            DisplayTime(timeValue);
 
-        if(timeValue < 1){
-            resetMenu.SetActive(true);
-            targetManager.SetActive(false);
-            ball.SetActive(false);
-            lefty.SetActive(false);
-            righty.SetActive(false);
+            if(timeValue < 1){
+                if(lScore != rScore){
+                    playing = false;
+                    StartCoroutine(EndMatch());
+                }else{
+                    timeValue += 30;
+                }
+            }
         }
     }
 
@@ -90,6 +96,52 @@ public class GameManager : MonoBehaviour
         Debug.Log(rand);
         curr = targetManager.transform.GetChild(rand).gameObject;
         curr.SetActive(true);
+        for(int i = 0; i < curr.transform.childCount; i++){
+            curr.transform.GetChild(i).gameObject.SetActive(true);
+        }
+    }
+
+    public IEnumerator EndMatch(){
+        ball.SetActive(false);
+        targetManager.SetActive(false);
+
+        ParticleSystem death;
+        if(lScore > rScore){
+            lefty.GetComponent<Player>().enabled = false;
+            righty.GetComponent<Player>().enabled = false;
+            
+            lefty.transform.GetChild(0).gameObject.SetActive(true);
+            death = righty.transform.GetChild(1).GetComponent<ParticleSystem>();
+            righty.GetComponent<SpriteRenderer>().enabled = false;
+            death.Play();
+            yield return new WaitForSeconds(death.main.startLifetime.constantMax);
+            death.Stop();
+            yield return new WaitForSeconds(3f);
+            lefty.transform.GetChild(0).gameObject.SetActive(false);
+            lefty.SetActive(false);
+            righty.SetActive(false);
+            righty.GetComponent<SpriteRenderer>().enabled = true;
+        }else if(lScore < rScore){
+            lefty.GetComponent<Player>().enabled = false;
+            righty.GetComponent<Player>().enabled = false;
+
+            righty.transform.GetChild(0).gameObject.SetActive(true);
+            death = lefty.transform.GetChild(1).GetComponent<ParticleSystem>();
+            lefty.GetComponent<SpriteRenderer>().enabled = false;
+            death.Play();
+            yield return new WaitForSeconds(death.main.startLifetime.constantMax);
+            death.Stop();
+            yield return new WaitForSeconds(3f);
+            righty.transform.GetChild(0).gameObject.SetActive(false);
+            lefty.SetActive(false);
+            righty.SetActive(false);
+            righty.GetComponent<SpriteRenderer>().enabled = true;
+        }
+
+        lefty.SetActive(false);
+        righty.SetActive(false);
+
+        resetMenu.SetActive(true);
     }
 
     public void Rematch(){
