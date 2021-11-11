@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     }
 
     public void OnFlipUp( InputAction.CallbackContext context ){
-        if(!flippingDown){
+        if((playerState == state.Move) || (playerState == state.ResetDown)){
             if(hj.anchor.y != 0.5){
                 JointAngleLimits2D limits = hj.limits;
                 hj.anchor = new Vector2(0, 0.5f);
@@ -46,13 +46,13 @@ public class Player : MonoBehaviour
             }
             hj.enabled = true;
             rb.constraints = RigidbodyConstraints2D.None;
-            flippingUp = context.action.triggered;
+            //flippingUp = context.action.triggered;
             playerState = state.FlipUp;
         }
     }
 
     public void OnFlipDown( InputAction.CallbackContext context ){
-        if(!flippingUp){
+        if((playerState == state.Move) || (playerState == state.ResetUp)){
             if(hj.anchor.y != -0.5){
                 JointAngleLimits2D limits = hj.limits;
                 limits.max *= -1;
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
             }
             hj.enabled = true;
             rb.constraints = RigidbodyConstraints2D.None;
-            flippingDown = context.action.triggered;
+            //flippingDown = context.action.triggered;
             playerState = state.FlipDown;
         }
     }
@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
             case state.FlipUp:
                 rb.AddTorque(flipTorque * 10f);
                 if(!flippingUp){
-                    flippingUp = true;
+                    //flippingDown = true;
                     playerState = state.ResetDown;
                 }
                 break;
@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
             case state.FlipDown:
                 rb.AddTorque(flipTorque * -10f);
                 if(!flippingDown){
-                    flippingDown = true;
+                    //flippingDown = true;
                     playerState = state.ResetUp;
                 }
                 break;

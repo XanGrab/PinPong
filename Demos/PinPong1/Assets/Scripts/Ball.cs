@@ -31,10 +31,8 @@ public class Ball : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D obj){
-        //Debug.Log("Entered");
         if(obj.gameObject.CompareTag("Target")){
             score += 100;
-            obj.gameObject.SetActive(false);
         }
     }
 }

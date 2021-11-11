@@ -764,7 +764,7 @@ MonoBehaviour:
   rScoreTxt: {fileID: 217116410}
   resetMenu: {fileID: 1002333491}
   timerText: {fileID: 1822708175}
-  timeValue: 45
+  timeValue: 90
   targetManager: {fileID: 1305210467}
   currentLayout: {fileID: 0}
 --- !u!4 &358041412
@@ -1391,6 +1391,10 @@ PrefabInstance:
       propertyPath: m_BodyType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5010156999936449008, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: efc4f57a3b675244aa9c5e91dee1855e, type: 2}
     - target: {fileID: 5010156999936449008, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_Constraints
       value: 5
@@ -3063,6 +3067,10 @@ PrefabInstance:
       propertyPath: m_BodyType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5010156999936449008, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: efc4f57a3b675244aa9c5e91dee1855e, type: 2}
     - target: {fileID: 5010156999936449008, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_Constraints
       value: 5
