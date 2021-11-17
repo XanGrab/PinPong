@@ -23,10 +23,12 @@ public class GameManager : MonoBehaviour
     public GameObject righty;
     public GameObject rightGoal;
 
-    [Header("Score UI")]
+    [Header("UI")]
+    public GameObject gameMenu;
     public GameObject lScoreTxt;
     public GameObject rScoreTxt;
     public GameObject resetMenu;
+    public GameObject pauseMenu;
     private int lScore;
     private int rScore;
 
@@ -38,10 +40,12 @@ public class GameManager : MonoBehaviour
     public GameObject targetManager;
     public GameObject currentLayout;
 
-    private bool playing;
+    private static bool playing;
+    private static bool gamePaused;
 
     void Start(){
         playing = true;
+        gamePaused = false;
         resetMenu.SetActive(false);
 
         lefty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Left Keyboard", Keyboard.current);
@@ -50,7 +54,7 @@ public class GameManager : MonoBehaviour
     }
 
     void Update(){
-        if(playing){
+        if(playing && !gamePaused){
             timeValue -= Time.deltaTime;
             DisplayTime(timeValue);
 
@@ -88,6 +92,24 @@ public class GameManager : MonoBehaviour
         int sec = Mathf.FloorToInt(timeToDisplay % 60);
 
         timerText.text = string.Format("{0:00}:{1:00}", min, sec);
+    }
+
+    public void OnPause( InputAction.CallbackContext context ){
+        if(context.canceled){
+            if(gamePaused){
+                Debug.Log("Resume!");
+                gamePaused = false;
+                Time.timeScale = 1f;
+                gameMenu.SetActive(true);
+                pauseMenu.SetActive(false);
+            }else{
+                Debug.Log("Pause.");
+                gamePaused = true;
+                Time.timeScale = 0f;
+                gameMenu.SetActive(false);
+                pauseMenu.SetActive(true);
+            }
+        }
     }
 
     public void resetTargets(GameObject curr){
