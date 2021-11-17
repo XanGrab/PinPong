@@ -8,6 +8,7 @@ TagManager:
   - Paddle
   - Wall
   - Target
+  - PointsTarget
   layers:
   - Default
   - TransparentFX
