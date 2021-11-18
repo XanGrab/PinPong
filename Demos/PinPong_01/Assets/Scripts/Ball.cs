@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public bool leftTouchedLast;
+    public int touchedLast = 0;
     public float speed;
     public float maxSqrVelocity;
     public int score = 100;
@@ -48,6 +48,7 @@ public class Ball : MonoBehaviour
         lerpValue = 0f;
         trail.material.color = initColor;
         _render.material.color = trail.material.color;
+        touchedLast = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D obj){
@@ -62,15 +63,15 @@ public class Ball : MonoBehaviour
         }
     }
 
-    /*void OnCollisionEnter2D(Collision2D other) {
+    void OnCollisionEnter2D(Collision2D other) {
 
             if (other.gameObject.name.Equals("Paddle Left")) {
                 Debug.Log("Left");
-                leftTouchedLast = true;
+                touchedLast = -1;
             } else if (other.gameObject.name.Equals("Paddle Right")) {
                 Debug.Log("Right");
-                leftTouchedLast = false;
+                touchedLast = 1;
             }
                      
-    }*/
+    }
 }

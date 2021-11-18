@@ -50,13 +50,16 @@ public class GameManager : MonoBehaviour
 
     [Header("Targets")]
     public GameObject targetManager;
+    public GameObject pointsTargetManager;
     public GameObject currentLayout;
+    public GameObject pointTargetsCurrentLayout;
 
     private static bool playing;
     private static bool gamePaused;
 
     void Awake(){
         controls = new PlayerControls();
+        _instance = this;
         //controls.Player.Pause.canceled += ctx => OnPause();
     }
     void Start(){
@@ -67,6 +70,8 @@ public class GameManager : MonoBehaviour
         lefty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Left Keyboard", Keyboard.current);
         righty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Right Keyboard", Keyboard.current);
         currentLayout = targetManager.transform.GetChild(Random.Range(0, targetManager.transform.childCount - 1)).gameObject;
+        pointsTargetManager = GameObject.Find("Points Target Manager");
+        pointTargetsCurrentLayout = pointsTargetManager.transform.GetChild(Random.Range(0, pointsTargetManager.transform.childCount - 1)).gameObject;
     }
 
     void Update(){
@@ -92,6 +97,7 @@ public class GameManager : MonoBehaviour
         lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
         ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
+        resetPointTargets(pointTargetsCurrentLayout);
     }
 
     public void rightScored(){
@@ -99,6 +105,7 @@ public class GameManager : MonoBehaviour
         rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
         ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
+        resetPointTargets(pointTargetsCurrentLayout);
     }
 
      public void TargetLeftScored(){
@@ -149,9 +156,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+public void resetPointTargets(GameObject curr){
+        curr.SetActive(false);
+        int rand = Random.Range(0, pointsTargetManager.transform.childCount);
+        Debug.Log(rand);
+        curr = pointsTargetManager.transform.GetChild(rand).gameObject;
+        curr.SetActive(true);
+        for(int i = 0; i < curr.transform.childCount; i++){
+            curr.transform.GetChild(i).gameObject.SetActive(true);
+        }
+    }
+
     public IEnumerator EndMatch(){
         ball.SetActive(false);
         targetManager.SetActive(false);
+        pointsTargetManager.SetActive(false);
 
         ParticleSystem death;
         if(lScore > rScore){
