@@ -36,46 +36,44 @@ public class Player : MonoBehaviour
 
     //check for regognized input
     public void OnMove( InputAction.CallbackContext context ){
-        movVector = context.ReadValue<Vector2>() * speed;
+        if(context.performed){
+            movVector = context.ReadValue<Vector2>() * speed;
+        }
     }
 
     public void OnFlipUp( InputAction.CallbackContext context ){
-        if((playerState == state.Move) || (playerState == state.ResetDown)){
-            if(hj.anchor.y != 0.5){
-                JointAngleLimits2D limits = hj.limits;
-                hj.anchor = new Vector2(0, 0.5f);
-                limits.max *= -1;
-                hj.limits = limits;
+        if(context.performed){
+            if((playerState == state.Move) || (playerState == state.ResetDown)){
+                if(hj.anchor.y != 0.5){
+                    JointAngleLimits2D limits = hj.limits;
+                    hj.anchor = new Vector2(0, 0.5f);
+                    limits.max *= -1;
+                    hj.limits = limits;
+                }
+                hj.enabled = true;
+                rb.constraints = RigidbodyConstraints2D.None;
+                flippingUp = context.action.triggered;
+                playerState = state.FlipUp;
             }
-            hj.enabled = true;
-            rb.constraints = RigidbodyConstraints2D.None;
-            flippingUp = context.action.triggered;
-            playerState = state.FlipUp;
         }
     }
 
     public void OnFlipDown( InputAction.CallbackContext context ){
-        if((playerState == state.Move) || (playerState == state.ResetUp)){
-            if(hj.anchor.y != -0.5){
-                JointAngleLimits2D limits = hj.limits;
-                limits.max *= -1;
-                hj.anchor = new Vector2(0, -0.5f);
-                hj.limits = limits;
+        if(context.performed){
+            if((playerState == state.Move) || (playerState == state.ResetUp)){
+                if(hj.anchor.y != -0.5){
+                    JointAngleLimits2D limits = hj.limits;
+                    limits.max *= -1;
+                    hj.anchor = new Vector2(0, -0.5f);
+                    hj.limits = limits;
+                }
+                hj.enabled = true;
+                rb.constraints = RigidbodyConstraints2D.None;
+                flippingDown = context.action.triggered;
+                playerState = state.FlipDown;
             }
-            hj.enabled = true;
-            rb.constraints = RigidbodyConstraints2D.None;
-            flippingDown = context.action.triggered;
-            playerState = state.FlipDown;
         }
     }
-
-    /*void OnCollisionEnter2D(Collision2D other){
-        if(other.gameObject.tag == "Wall"){
-            if(playerState != state.Move){
-                
-            }
-        }
-    }*/
 
     void FixedUpdate()
     {

@@ -6,6 +6,7 @@ public class Ball : MonoBehaviour
 {
     public bool leftTouchedLast;
     public float speed;
+    public float maxSqrVelocity;
     public int score = 100;
     public Vector2 velo;
     public Rigidbody2D rb;
