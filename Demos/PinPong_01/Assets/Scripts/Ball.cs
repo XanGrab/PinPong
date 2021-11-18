@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    public bool leftTouchedLast;
     public float speed;
-    public float maxSqrVelocity;
     public int score = 100;
+    public Vector2 velo;
     public Rigidbody2D rb;
     public Vector2 startPos;
     private TrailRenderer trail;
@@ -38,6 +39,7 @@ public class Ball : MonoBehaviour
         float x = Random.Range(0, 2) == 0 ? -1 : 1;
         float y = Random.Range(0, 2) == 0 ? -1 : 1;
         rb.velocity = new Vector2(x, y) * speed;
+        velo = rb.velocity;	
     }
 
     public void Reset(){
@@ -60,4 +62,16 @@ public class Ball : MonoBehaviour
             trail.material.color = _render.material.color;
         }
     }
+
+    /*void OnCollisionEnter2D(Collision2D other) {
+
+            if (other.gameObject.name.Equals("Paddle Left")) {
+                Debug.Log("Left");
+                leftTouchedLast = true;
+            } else if (other.gameObject.name.Equals("Paddle Right")) {
+                Debug.Log("Right");
+                leftTouchedLast = false;
+            }
+                     
+    }*/
 }
