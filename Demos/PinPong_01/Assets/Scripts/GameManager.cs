@@ -18,15 +18,13 @@ public class GameManager : MonoBehaviour
         return _instance;
         }
     }
-private void Awake() {
-_instance = this;
-}
 
     [Header("Ball")]
     public GameObject ball;
 
     [Header("Player Input")]
     private PlayerInput playerInput;
+    private PlayerControls controls;
 
     [Header("Left Player")]
     public GameObject lefty;
@@ -57,6 +55,10 @@ _instance = this;
     private static bool playing;
     private static bool gamePaused;
 
+    void Awake(){
+        controls = new PlayerControls();
+        //controls.Player.Pause.canceled += ctx => OnPause();
+    }
     void Start(){
         playing = true;
         gamePaused = false;
@@ -120,21 +122,19 @@ _instance = this;
         timerText.text = string.Format("{0:00}:{1:00}", min, sec);
     }
 
-    public void OnPause( InputAction.CallbackContext context ){
-        if(context.canceled){
-            if(gamePaused){
-                Debug.Log("Resume!");
-                gamePaused = false;
-                Time.timeScale = 1f;
-                gameMenu.SetActive(true);
-                pauseMenu.SetActive(false);
-            }else{
-                Debug.Log("Pause.");
-                gamePaused = true;
-                Time.timeScale = 0f;
-                gameMenu.SetActive(false);
-                pauseMenu.SetActive(true);
-            }
+    public void OnPause(){
+        if(gamePaused){
+            Debug.Log("Resume!");
+            gamePaused = false;
+            Time.timeScale = 1f;
+            gameMenu.SetActive(true);
+            pauseMenu.SetActive(false);
+        }else{
+            Debug.Log("Pause.");
+            gamePaused = true;
+            Time.timeScale = 0f;
+            gameMenu.SetActive(false);
+            pauseMenu.SetActive(true);
         }
     }
 
@@ -197,6 +197,7 @@ _instance = this;
     }
 
     public void ToMainMenu(){
+        gamePaused = false;
         SceneManager.LoadScene("Main Menu");
     }
 }

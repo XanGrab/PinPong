@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    PlayerControls controls;
     public enum state{
         Move,
         FlipUp,
@@ -10,7 +11,6 @@ public class Player : MonoBehaviour
         ResetUp,
         ResetDown
     }
-
     private float setX;
     private state playerState;
     public float speed;
@@ -22,6 +22,17 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private HingeJoint2D hj;
     GameObject[] walls;
+
+    void Awake(){
+        controls = new PlayerControls();
+    }
+
+    void OnEnable(){
+        controls.Player.Enable();
+    }
+    void OnDisable(){
+        controls.Player.Disable();
+    }
 
     void Start()
     {
@@ -36,48 +47,44 @@ public class Player : MonoBehaviour
 
     //check for regognized input
     public void OnMove( InputAction.CallbackContext context ){
-        if(context.performed){
-            movVector = context.ReadValue<Vector2>() * speed;
+        movVector = context.ReadValue<Vector2>() * speed;
+    }
+
+    public void OnFlipUp( InputAction.CallbackContext ctx ){
+        if((playerState == state.Move) || (playerState == state.ResetDown)){
+            if(hj.anchor.y != 0.5){
+                JointAngleLimits2D limits = hj.limits;
+                hj.anchor = new Vector2(0, 0.5f);
+                limits.max *= -1;
+                hj.limits = limits;
+            }
+            flippingUp = ctx.action.triggered;
+            hj.enabled = true;
+            rb.constraints = RigidbodyConstraints2D.None;
+            playerState = state.FlipUp;
         }
     }
 
-    public void OnFlipUp( InputAction.CallbackContext context ){
-        if(context.performed){
-            if((playerState == state.Move) || (playerState == state.ResetDown)){
-                if(hj.anchor.y != 0.5){
-                    JointAngleLimits2D limits = hj.limits;
-                    hj.anchor = new Vector2(0, 0.5f);
-                    limits.max *= -1;
-                    hj.limits = limits;
-                }
-                hj.enabled = true;
-                rb.constraints = RigidbodyConstraints2D.None;
-                flippingUp = context.action.triggered;
-                playerState = state.FlipUp;
-            }
-        }
-    }
+    public void OnFlipDown( InputAction.CallbackContext ctx ){
 
-    public void OnFlipDown( InputAction.CallbackContext context ){
-        if(context.performed){
-            if((playerState == state.Move) || (playerState == state.ResetUp)){
-                if(hj.anchor.y != -0.5){
-                    JointAngleLimits2D limits = hj.limits;
-                    limits.max *= -1;
-                    hj.anchor = new Vector2(0, -0.5f);
-                    hj.limits = limits;
-                }
-                hj.enabled = true;
-                rb.constraints = RigidbodyConstraints2D.None;
-                flippingDown = context.action.triggered;
-                playerState = state.FlipDown;
+        if((playerState == state.Move) || (playerState == state.ResetUp)){
+            if(hj.anchor.y != -0.5){
+                JointAngleLimits2D limits = hj.limits;
+                limits.max *= -1;
+                hj.anchor = new Vector2(0, -0.5f);
+                hj.limits = limits;
             }
+
+            flippingDown = ctx.action.triggered;
+            hj.enabled = true;
+            rb.constraints = RigidbodyConstraints2D.None;
+            playerState = state.FlipDown;
         }
     }
 
     void FixedUpdate()
-    {
-        
+    {        
+        //Debug.Log(gameObject.name + " state: " + playerState);
         switch(playerState){
             case state.Move:
                 rb.velocity = new Vector2(0, movVector.y) * speed;

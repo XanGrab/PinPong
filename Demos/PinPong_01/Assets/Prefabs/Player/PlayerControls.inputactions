@@ -1,5 +1,5 @@
 {
-    "name": "Player Input",
+    "name": "PlayerControls",
     "maps": [
         {
             "name": "Player",
@@ -20,7 +20,7 @@
                     "id": "e52da68b-1272-4635-9690-a8d19797fef6",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": true
                 },
                 {
@@ -29,7 +29,7 @@
                     "id": "c1aa5e49-c4b5-4497-8f61-497a042124f3",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": true
                 },
                 {
@@ -38,7 +38,7 @@
                     "id": "ea100c6c-4e55-45c5-a860-b16925b612ca",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(behavior=1)",
                     "initialStateCheck": false
                 }
             ],

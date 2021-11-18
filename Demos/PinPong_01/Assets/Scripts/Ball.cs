@@ -8,7 +8,6 @@ public class Ball : MonoBehaviour
     public float speed;
     public float maxSqrVelocity;
     public int score = 100;
-    public Vector2 velo;
     public Rigidbody2D rb;
     public Vector2 startPos;
     private TrailRenderer trail;
@@ -40,7 +39,6 @@ public class Ball : MonoBehaviour
         float x = Random.Range(0, 2) == 0 ? -1 : 1;
         float y = Random.Range(0, 2) == 0 ? -1 : 1;
         rb.velocity = new Vector2(x, y) * speed;
-        velo = rb.velocity;	
     }
 
     public void Reset(){
