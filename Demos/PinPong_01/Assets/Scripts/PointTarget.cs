@@ -21,9 +21,9 @@ public class PointTarget : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D obj){
         if(obj.gameObject.CompareTag("Ball")){
             StartCoroutine(Break());
-            if (obj.gameObject.GetComponent<Ball>().leftTouchedLast) {
+            if (obj.gameObject.GetComponent<Ball>().touchedLast == -1) {
                     GameManager.Instance.TargetLeftScored();
-            } else {
+            } else if (obj.gameObject.GetComponent<Ball>().touchedLast == 1){
                     GameManager.Instance.TargetRightScored();
             }
 
