@@ -43,6 +43,7 @@ public class Ball : MonoBehaviour
 
     public void Reset(){
         transform.position = startPos;
+        FindObjectOfType<AudioManager>().Play("Break");
         Launch();
         //trail.Clear();
         lerpValue = 0f;
@@ -53,6 +54,7 @@ public class Ball : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D obj){
         if(obj.gameObject.CompareTag("Target")){
             score += 100;
+            FindObjectOfType<AudioManager>().Play("TargetBreak");
             lerpValue += 0.15f;  
 
             Color objColor = obj.GetComponent<Renderer>().material.color;
