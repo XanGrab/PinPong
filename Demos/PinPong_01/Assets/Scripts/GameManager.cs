@@ -8,6 +8,20 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
+
+    private static GameManager _instance;
+    public static GameManager Instance {
+    get {
+        if (_instance == null) {
+        Debug.LogError( "Game Manager is NULL!");
+        }
+        return _instance;
+        }
+    }
+private void Awake() {
+_instance = this;
+}
+
     [Header("Ball")]
     public GameObject ball;
 
@@ -67,13 +81,13 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        // Debug.Log(ball.GetComponent<Ball>().velo);
+        //  Debug.Log(ball.GetComponent<Ball>().speed);
     }
 
     public void leftScored(){
         lScore += ball.GetComponent<Ball>().score;
         lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
-        //ball.GetComponent<TrailRenderer>().Clear();
-        ball.GetComponent<TrailRenderer>().enabled = false;
         ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
     }
@@ -83,6 +97,16 @@ public class GameManager : MonoBehaviour
         rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
         ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
+    }
+
+     public void TargetLeftScored(){
+        lScore += 50;
+        lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
+    }
+
+    public void TargetRightScored(){
+        rScore += 50;
+        rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
     }
 
     void DisplayTime(float timeToDisplay){
