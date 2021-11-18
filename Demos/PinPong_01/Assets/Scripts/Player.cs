@@ -15,7 +15,6 @@ public class Player : MonoBehaviour
     private state playerState;
     public float speed;
     public float flipTorque;
-
     private Vector2 movVector;
     private bool flippingUp;
     private bool flippingDown;

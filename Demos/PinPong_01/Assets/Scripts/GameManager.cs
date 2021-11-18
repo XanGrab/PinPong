@@ -8,20 +8,6 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-
-    private static GameManager _instance;
-    public static GameManager Instance {
-    get {
-        if (_instance == null) {
-        Debug.LogError( "Game Manager is NULL!");
-        }
-        return _instance;
-        }
-    }
-private void Awake() {
-_instance = this;
-}
-
     [Header("Ball")]
     public GameObject ball;
 
@@ -81,8 +67,6 @@ _instance = this;
                 }
             }
         }
-        // Debug.Log(ball.GetComponent<Ball>().velo);
-        //  Debug.Log(ball.GetComponent<Ball>().speed);
     }
 
     public void leftScored(){
@@ -97,16 +81,6 @@ _instance = this;
         rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
         ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
-    }
-
-     public void TargetLeftScored(){
-        lScore += 27;
-        lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
-    }
-
-    public void TargetRightScored(){
-        rScore += 27;
-        rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
     }
 
     void DisplayTime(float timeToDisplay){
