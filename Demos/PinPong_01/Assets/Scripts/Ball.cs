@@ -12,11 +12,8 @@ public class Ball : MonoBehaviour
     private TrailRenderer trail;
     private Renderer _render;
     Color initColor;
-    Color finColor;
-    Color lerpColor;
-    private float t = 0;
-    //private Gradient startGradient;
-    // Start is called before the first frame update
+    private float lerpValue;
+
     void Start()
     {
         startPos = transform.position;
@@ -25,22 +22,11 @@ public class Ball : MonoBehaviour
         //startGradient = trail.colorGradient;
         _render = GetComponent<Renderer>();
         initColor = Color.white;
-        finColor = Color.red;
+        lerpValue = 0f;
         Launch();
     }
 
     void Update(){
-        //Debug.Log("Ball velocity: " + rb.velocity.sqrMagnitude);
-        //Debug.Log(trail.colorGradient.colorKeys[0].color);
-
- 
-        if(t < 1f){
-            Debug.Log("Changing Color");
-            lerpColor = Color.Lerp(initColor, finColor,  t);
-            _render.material.color = lerpColor;
-            t += Time.deltaTime/6f;
-        }
-        //trail.colorGradient.colorKeys[0].color;
         if(rb.velocity.sqrMagnitude > maxSqrVelocity){
             Debug.Log("slowling velocity: " + rb.velocity.sqrMagnitude);
             rb.velocity *= 0.991f;
@@ -55,20 +41,23 @@ public class Ball : MonoBehaviour
     }
 
     public void Reset(){
-        //trail.colorGradient = startGradient; 
-        trail.enabled = false;
         transform.position = startPos;
         Launch();
-        trail.enabled = true;
-        _render.material.color = initColor;
-        t = 0;
+        //trail.Clear();
+        lerpValue = 0f;
+        trail.material.color = initColor;
+        _render.material.color = trail.material.color;
     }
 
     private void OnTriggerEnter2D(Collider2D obj){
         if(obj.gameObject.CompareTag("Target")){
             score += 100;
+            lerpValue += 0.15f;  
 
-            //trail.colorGradient.colorKeys[0].color = newColor;
+            Color objColor = obj.GetComponent<Renderer>().material.color;
+
+            _render.material.color = Color.Lerp(initColor, objColor,  lerpValue);
+            trail.material.color = _render.material.color;
         }
     }
 }

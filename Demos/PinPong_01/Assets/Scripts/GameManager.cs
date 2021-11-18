@@ -72,8 +72,6 @@ public class GameManager : MonoBehaviour
     public void leftScored(){
         lScore += ball.GetComponent<Ball>().score;
         lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
-        //ball.GetComponent<TrailRenderer>().Clear();
-        ball.GetComponent<TrailRenderer>().enabled = false;
         ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
     }
