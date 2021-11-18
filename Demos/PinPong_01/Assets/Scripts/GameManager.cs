@@ -67,8 +67,8 @@ public class GameManager : MonoBehaviour
         gamePaused = false;
         resetMenu.SetActive(false);
 
-        lefty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Left Keyboard", Keyboard.current);
-        righty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Right Keyboard", Keyboard.current);
+        //lefty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Left Keyboard", Keyboard.current);
+        //righty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Right Keyboard", Keyboard.current);
         currentLayout = targetManager.transform.GetChild(Random.Range(0, targetManager.transform.childCount - 1)).gameObject;
         pointsTargetManager = GameObject.Find("Points Target Manager");
         pointTargetsCurrentLayout = pointsTargetManager.transform.GetChild(Random.Range(0, pointsTargetManager.transform.childCount - 1)).gameObject;
@@ -216,7 +216,9 @@ public void resetPointTargets(GameObject curr){
     }
 
     public void ToMainMenu(){
-        gamePaused = false;
+        if(gamePaused){
+            OnPause();
+        }
         SceneManager.LoadScene("Main Menu");
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class HowPlayer : MonoBehaviour
 {
     PlayerControls controls;
     public enum state{
@@ -61,9 +61,9 @@ public class Player : MonoBehaviour
 
     public void OnFlipUp( InputAction.CallbackContext ctx ){
         if((playerState == state.Move) || (playerState == state.ResetDown)){
-            if(hj.anchor.y != 0.5){
+            if(hj.anchor.y != 20f){
                 JointAngleLimits2D limits = hj.limits;
-                hj.anchor = new Vector2(0, 0.5f);
+                hj.anchor = new Vector2(0, 20f);
                 limits.max *= -1;
                 hj.limits = limits;
             }
@@ -77,10 +77,10 @@ public class Player : MonoBehaviour
     public void OnFlipDown( InputAction.CallbackContext ctx ){
 
         if((playerState == state.Move) || (playerState == state.ResetUp)){
-            if(hj.anchor.y != -0.5){
+            if(hj.anchor.y != -20f){
                 JointAngleLimits2D limits = hj.limits;
                 limits.max *= -1;
-                hj.anchor = new Vector2(0, -0.5f);
+                hj.anchor = new Vector2(0, -20f);
                 hj.limits = limits;
             }
 
@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
                     Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>());
                 }
 
-                rb.AddTorque(flipTorque * 10f);
+                rb.AddTorque(flipTorque / 10f);
                 if(!flippingUp){
                     playerState = state.ResetDown;
                 }
@@ -132,7 +132,7 @@ public class Player : MonoBehaviour
                     Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>());
                 }
 
-                rb.AddTorque(flipTorque * -10f);
+                rb.AddTorque(flipTorque / 10f);
                 if(!flippingDown){
                     playerState = state.ResetUp;
                 }
