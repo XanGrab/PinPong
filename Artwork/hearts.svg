@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:export-filename="C:\Users\Xander\OneDrive\Documents\UW Madison\Fall 2021\PinPong\Artwork\Hearts.png"
+   inkscape:export-xdpi="287.90564"
+   inkscape:export-ydpi="287.90564"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="hearts.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:snap-object-midpoints="true"
+     inkscape:zoom="2.5387401"
+     inkscape:cx="396.85039"
+     inkscape:cy="257.01725"
+     inkscape:window-width="2560"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect1953"
+       style="fill:#ff0f4c;stroke-width:0.999999;stop-color:#000000;fill-opacity:1"
+       d="m 141.82617,194.74609 c -10.14655,10.14656 -10.14655,26.48431 0,36.63086 l 4.15821,4.15821 c 36.6289,36.6289 36.6289,36.6289 36.6289,36.6289 0,0 0.13032,-0.12836 36.63086,-36.6289 l 4.1582,-4.15821 c 10.14656,-10.14655 10.14656,-26.4843 0,-36.63086 -10.14655,-10.14655 -26.48235,-10.14655 -36.6289,0 l -4.16016,4.16016 -4.1582,-4.16016 c -11.59215,-9.98312 -26.71016,-9.62116 -36.62891,0 z"
+       transform="scale(0.26458333)"
+       sodipodi:nodetypes="cscccsssccc"
+       inkscape:export-filename="C:\Users\Xander\OneDrive\Documents\UW Madison\Fall 2021\PinPong\Artwork\Hearts.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       id="path5689"
+       style="fill:#7c2a3f;fill-opacity:1;stroke-width:0.264583;stop-color:#000000"
+       d="m 66.416275,51.526569 c -2.684608,2.684611 -2.684608,7.007307 0,9.691915 l 1.100193,1.100193 c 9.691396,9.691396 9.691396,9.691396 9.691396,9.691396 0,0 0.03448,-0.03396 9.691915,-9.691396 l 1.10019,-1.100193 c 2.684611,-2.684608 2.684611,-7.007304 0,-9.691915 -2.684608,-2.684608 -7.006788,-2.684608 -9.691396,0 l -1.100709,1.100709 -1.10019,-1.100709 c -3.06709,-2.641367 -7.067063,-2.545599 -9.691399,0 z"
+       sodipodi:nodetypes="cscccsssccc"
+       inkscape:export-filename="C:\Users\Xander\OneDrive\Documents\UW Madison\Fall 2021\PinPong\Artwork\Hearts.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+  </g>
+</svg>
