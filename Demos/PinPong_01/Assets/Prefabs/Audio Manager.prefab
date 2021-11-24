@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4824456506369763225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4824456506369763227}
+  - component: {fileID: 4824456506369763224}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4824456506369763227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4824456506369763225}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4824456506369763224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4824456506369763225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b14ac9acd9e264a89a8eb3ea07eca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: ButtonPress
+    clip: {fileID: 8300000, guid: dd41693ef2123a745ad916972d0165fc, type: 3}
+    volume: 0.3
+    loop: 0
+    source: {fileID: 0}
+  - name: Flip
+    clip: {fileID: 8300000, guid: a4f756e3328619e4eb668f10d0db7cb9, type: 3}
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: TargetBreak
+    clip: {fileID: 8300000, guid: 2369a4ddae25e524aa360725fd494075, type: 3}
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: Break
+    clip: {fileID: 8300000, guid: 25b071e5460c5284ba3950f08a5cb9e3, type: 3}
+    volume: 0.4
+    loop: 0
+    source: {fileID: 0}
+  - name: MenuTheme
+    clip: {fileID: 8300000, guid: 6b85ce0e04b9c8c43b7862aa05175e2e, type: 3}
+    volume: 0.3
+    loop: 1
+    source: {fileID: 0}
+  - name: ArenaTheme
+    clip: {fileID: 8300000, guid: a84d026f74a301045bfb94cba9b2cccd, type: 3}
+    volume: 0.3
+    loop: 1
+    source: {fileID: 0}

@@ -44,9 +44,9 @@ public class GameManager : MonoBehaviour
     private int lScore;
     private int rScore;
 
-    [Header("Timer")]
+    /*[Header("Timer")]
     public Text timerText;
-    public float timeValue = 90;
+    public float timeValue = 90;*/
 
     [Header("Targets")]
     public GameObject targetManager;
@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
 
     void Update(){
         if(playing && !gamePaused){
+            /*
             timeValue -= Time.deltaTime;
             DisplayTime(timeValue);
 
@@ -86,7 +87,7 @@ public class GameManager : MonoBehaviour
                 }else{
                     timeValue += 30;
                 }
-            }
+            }*/
         }
         // Debug.Log(ball.GetComponent<Ball>().velo);
         //  Debug.Log(ball.GetComponent<Ball>().speed);
@@ -118,7 +119,10 @@ public class GameManager : MonoBehaviour
         rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
     }
 
-    void DisplayTime(float timeToDisplay){
+    /**
+     * Timer Functionality
+     */
+    /*void DisplayTime(float timeToDisplay){
         if(timeToDisplay < 0){
             timeToDisplay = 0;
         }
@@ -127,7 +131,7 @@ public class GameManager : MonoBehaviour
         int sec = Mathf.FloorToInt(timeToDisplay % 60);
 
         timerText.text = string.Format("{0:00}:{1:00}", min, sec);
-    }
+    }*/
 
     public void OnPause(){
         if(gamePaused){
@@ -219,6 +223,11 @@ public void resetPointTargets(GameObject curr){
         if(gamePaused){
             OnPause();
         }
+        
+        AudioManager am = FindObjectOfType<AudioManager>();
+        int currTime = am.GetSoundTime("MenuTheme");
+        am.Stop("MenuTheme");
+        am.Play("ArenaTheme", currTime);
         SceneManager.LoadScene("Main Menu");
     }
 }

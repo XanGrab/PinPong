@@ -54,7 +54,9 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D obj){
         if(obj.gameObject.CompareTag("Target")){
-            score += 100;
+            if(obj.gameObject.name.Equals("Target")){
+                score += 100;
+            }
             FindObjectOfType<AudioManager>().Play("TargetBreak");
             lerpValue += 0.15f;  
 
@@ -66,12 +68,11 @@ public class Ball : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-
             if (other.gameObject.name.Equals("Paddle Left")) {
-                Debug.Log("Left");
+                //Debug.Log("Left");
                 touchedLast = -1;
             } else if (other.gameObject.name.Equals("Paddle Right")) {
-                Debug.Log("Right");
+                //Debug.Log("Right");
                 touchedLast = 1;
             }
                      

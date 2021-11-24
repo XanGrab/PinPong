@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public void PlayGame(){
+        AudioManager am = FindObjectOfType<AudioManager>();
+        int currTime = am.GetSoundTime("MenuTheme");
+        am.Stop("MenuTheme");
+        am.Play("ArenaTheme", currTime);
         SceneManager.LoadScene("Arena");
     }
 

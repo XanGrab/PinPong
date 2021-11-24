@@ -6,9 +6,11 @@ TagManager:
   tags:
   - Wall
   - Ball
-  - Target
   - Paddle
   - PointsTargetManager
+  - Score Target
+  - Point Target
+  - Target
   layers:
   - Default
   - TransparentFX
