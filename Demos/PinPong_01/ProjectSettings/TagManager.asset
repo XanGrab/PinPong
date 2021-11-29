@@ -7,10 +7,8 @@ TagManager:
   - Wall
   - Ball
   - Paddle
-  - PointsTargetManager
-  - Score Target
-  - Point Target
   - Target
+  - PlayerWall
   layers:
   - Default
   - TransparentFX

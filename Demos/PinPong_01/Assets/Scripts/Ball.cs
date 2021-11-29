@@ -14,6 +14,7 @@ public class Ball : MonoBehaviour
     private Renderer _render;
     Color initColor;
     private float lerpValue;
+    GameObject[] playerWalls;
 
     void Start()
     {
@@ -22,6 +23,10 @@ public class Ball : MonoBehaviour
         trail = GetComponent<TrailRenderer>();
         //startGradient = trail.colorGradient;
         _render = GetComponent<Renderer>();
+        playerWalls = GameObject.FindGameObjectsWithTag("PlayerWall");
+        foreach(GameObject wall in playerWalls){
+            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>());
+        }
         initColor = Color.white;
         lerpValue = 0f;
         Launch();
@@ -30,7 +35,7 @@ public class Ball : MonoBehaviour
     void Update(){
         if(rb.velocity.sqrMagnitude > maxSqrVelocity){
             Debug.Log("slowling velocity: " + rb.velocity.sqrMagnitude);
-            rb.velocity *= 0.991f;
+            rb.velocity *= 0.9f;
         }
     }
 

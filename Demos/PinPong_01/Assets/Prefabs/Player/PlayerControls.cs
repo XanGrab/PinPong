@@ -67,7 +67,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": ""Left"",
-                    ""id"": ""307fb27a-1427-4572-b4c1-1cb721b4f918"",
+                    ""id"": ""21cb36e6-b2b5-4b28-ab7b-20d15f348e3d"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -78,7 +78,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""5ea451d4-4699-4ead-8f6f-eb08f3793bce"",
+                    ""id"": ""c5c39dc5-fdfd-470d-a7a3-e9edd32d726d"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -89,7 +89,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""c5da24a9-6540-498d-8230-0a77dcf3a955"",
+                    ""id"": ""7267bc8a-cfc6-4cd8-8b6c-f715c001334f"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -99,8 +99,30 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""left"",
+                    ""id"": ""9a968064-d659-40f6-93a8-c3a3abb8fd9a"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Left Keyboard"",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""56a8b14d-9faa-45d5-945a-0c2ced3a0799"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Left Keyboard"",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": ""Right"",
-                    ""id"": ""824175fa-73f5-4bca-9c3c-38c0bcbb00a8"",
+                    ""id"": ""3fa81e14-3d96-4b43-89df-fbbebd0dc588"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -111,8 +133,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""30555a3b-485a-4c72-ba93-3db9ad5c8ecd"",
-                    ""path"": ""<Keyboard>/upArrow"",
+                    ""id"": ""c4998164-3cb1-418d-97e3-24771b7a717c"",
+                    ""path"": ""<Keyboard>/i"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Right Keyboard"",
@@ -122,8 +144,30 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""8aeeb2d2-0401-4305-9ec3-a845e3030f1c"",
-                    ""path"": ""<Keyboard>/downArrow"",
+                    ""id"": ""a59b8bb3-2f20-4e52-92ad-6da140be2b5e"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Right Keyboard"",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""cf92b512-8994-47d2-b1bb-3d3ab8bb530a"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Right Keyboard"",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""c882fe34-d519-4c52-b3af-bb9e707d2240"",
+                    ""path"": ""<Keyboard>/l"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Right Keyboard"",
@@ -134,7 +178,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8b549f5a-539e-40f1-8595-187a3e8cf7a5"",
-                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""path"": ""<Keyboard>/u"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Right Keyboard"",
@@ -145,7 +189,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7addb347-07bc-448e-9ae4-30f88b1c2394"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Left Keyboard"",
@@ -156,7 +200,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cb9be57b-4663-45d9-8db1-0fe74cb04b7c"",
-                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""path"": ""<Keyboard>/o"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Right Keyboard"",
@@ -167,7 +211,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6e7a7147-1d17-4921-849a-e8d16c253b1b"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Left Keyboard"",

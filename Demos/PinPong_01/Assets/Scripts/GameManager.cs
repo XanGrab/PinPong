@@ -225,9 +225,9 @@ public void resetPointTargets(GameObject curr){
         }
         
         AudioManager am = FindObjectOfType<AudioManager>();
-        int currTime = am.GetSoundTime("MenuTheme");
-        am.Stop("MenuTheme");
-        am.Play("ArenaTheme", currTime);
+        int currTime = am.GetSoundTime("ArenaTheme");
+        am.Stop("ArenaTheme");
+        am.Play("MenuTheme", currTime);
         SceneManager.LoadScene("Main Menu");
     }
 }

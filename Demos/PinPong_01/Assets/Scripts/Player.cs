@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
         ResetUp,
         ResetDown
     }
-    private float setX;
     private state playerState;
     public float speed;
     public float flipTorque;
@@ -22,6 +21,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private HingeJoint2D hj;
     GameObject[] walls;
+    GameObject[] playerWalls;
 
     void Awake(){
         controls = new PlayerControls();
@@ -36,25 +36,17 @@ public class Player : MonoBehaviour
         }
     }
 
-    /*void OnEnable(){
-        controls.Player.Enable();
-    }
-    void OnDisable(){
-        controls.Player.Disable();
-    }*/
-
     void Start()
     {
-        setX = transform.position.x;
         rb = gameObject.GetComponent<Rigidbody2D>(); 
         hj = gameObject.GetComponent<HingeJoint2D>();
-        hj.enabled = false;
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
-        playerState = state.Move;
         walls = GameObject.FindGameObjectsWithTag("Wall");
+        playerWalls = GameObject.FindGameObjectsWithTag("PlayerWall");
+
+        SetMoveComponents();
+        playerState = state.Move;
     }
 
-    //check for regognized input
     public void OnMove( InputAction.CallbackContext context ){
         movVector = context.ReadValue<Vector2>() * speed;
     }
@@ -67,15 +59,13 @@ public class Player : MonoBehaviour
                 limits.max *= -1;
                 hj.limits = limits;
             }
+            SetFlipComponents();
             flippingUp = ctx.action.triggered;
-            hj.enabled = true;
-            rb.constraints = RigidbodyConstraints2D.None;
             playerState = state.FlipUp;
         }
     }
 
     public void OnFlipDown( InputAction.CallbackContext ctx ){
-
         if((playerState == state.Move) || (playerState == state.ResetUp)){
             if(hj.anchor.y != -0.5){
                 JointAngleLimits2D limits = hj.limits;
@@ -83,11 +73,33 @@ public class Player : MonoBehaviour
                 hj.anchor = new Vector2(0, -0.5f);
                 hj.limits = limits;
             }
-
+            SetFlipComponents();
             flippingDown = ctx.action.triggered;
-            hj.enabled = true;
-            rb.constraints = RigidbodyConstraints2D.None;
             playerState = state.FlipDown;
+        }
+    }
+
+    void SetMoveComponents(){
+        hj.enabled = false;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
+        
+        foreach(GameObject wall in walls){
+            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>(), false);
+        }
+        foreach(GameObject wall in playerWalls){
+            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>(), false);
+        }
+    }
+
+    void SetFlipComponents(){
+        rb.constraints = RigidbodyConstraints2D.None;
+        hj.enabled = true;
+        
+        foreach(GameObject wall in walls){
+            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>());
+        }
+        foreach(GameObject wall in playerWalls){
+            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>());
         }
     }
 
@@ -96,16 +108,11 @@ public class Player : MonoBehaviour
         //Debug.Log(gameObject.name + " state: " + playerState);
         switch(playerState){
             case state.Move:
-                rb.velocity = new Vector2(0, movVector.y) * speed;
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
+                rb.velocity = movVector * speed;
                 break;
             case state.FlipUp:
-                //disable wall collisions
-                foreach(GameObject wall in walls){
-                    Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>());
-                }
-
                 rb.AddTorque(flipTorque * 10f);
+
                 if(!flippingUp){
                     playerState = state.ResetDown;
                 }
@@ -114,25 +121,15 @@ public class Player : MonoBehaviour
                 rb.AddTorque((-1) * flipTorque);
                 if(Mathf.Round(gameObject.transform.rotation.eulerAngles.z)%360 == Mathf.Abs(hj.limits.min)){
                     //re-enable wall collisions
-                    foreach(GameObject wall in walls){
-                        Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>(), false);
-                    }
-
-                    rb.transform.position = new Vector3(setX, rb.transform.position.y, rb.transform.position.z);
                     gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-                    hj.enabled = false;
-                    rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
                     flippingUp = false;
+                    SetMoveComponents();
                     playerState = state.Move;
                 }
                 break;
             case state.FlipDown:
-                //disable wall collisions
-                foreach(GameObject wall in walls){
-                    Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>());
-                }
-
                 rb.AddTorque(flipTorque * -10f);
+
                 if(!flippingDown){
                     playerState = state.ResetUp;
                 }
@@ -140,16 +137,9 @@ public class Player : MonoBehaviour
             case state.ResetUp:
                 rb.AddTorque(flipTorque);
                 if(Mathf.Round(gameObject.transform.rotation.eulerAngles.z)%360 == Mathf.Abs(hj.limits.min)){
-                    //re-enable wall collisions
-                    foreach(GameObject wall in walls){
-                        Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>(), false);
-                    }
-
-                    rb.transform.position = new Vector3(setX, rb.transform.position.y, rb.transform.position.z);
                     gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-                    hj.enabled = false;
                     flippingDown = false;
-                    rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
+                    SetMoveComponents();
                     playerState = state.Move;
                 }
                 break;
