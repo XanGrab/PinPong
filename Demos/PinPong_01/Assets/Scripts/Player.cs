@@ -16,15 +16,18 @@ public class Player : MonoBehaviour
     public float flipTorque;
 
     private Vector2 movVector;
-    private bool flippingUp;
-    private bool flippingDown;
+    //private bool flippingUp;
+    //private bool flippingDown;
     private Rigidbody2D rb;
     private HingeJoint2D hj;
     GameObject[] walls;
     GameObject[] playerWalls;
+    AudioManager am;
+
+    void OnEnable(){ controls.Player.Enable(); }
+    void OnDisable(){ controls.Player.Disable(); }
 
     void Awake(){
-        controls = new PlayerControls();
         //Debug.Log("Gamepad Count: " + Gamepad.all.Count);
         if(Gamepad.all.Count == 0){
             PlayerInput input = GetComponent<PlayerInput>();
@@ -34,12 +37,17 @@ public class Player : MonoBehaviour
             //Debug.Log(gameObject.name + ": " + d);
             input.SwitchCurrentControlScheme(d, Keyboard.current);
         }
+
+        controls = new PlayerControls();
+        //controls.Player.FlipUp.activeControl.IsPressed += ctx => OnFlipUp( ctx );
+        //controls.Player.FlipDown.performed += ctx => OnFlipDown( ctx );
     }
 
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>(); 
         hj = gameObject.GetComponent<HingeJoint2D>();
+        am = FindObjectOfType<AudioManager>();
         walls = GameObject.FindGameObjectsWithTag("Wall");
         playerWalls = GameObject.FindGameObjectsWithTag("PlayerWall");
 
@@ -52,30 +60,35 @@ public class Player : MonoBehaviour
     }
 
     public void OnFlipUp( InputAction.CallbackContext ctx ){
-        if((playerState == state.Move) || (playerState == state.ResetDown)){
-            if(hj.anchor.y != 0.5){
-                JointAngleLimits2D limits = hj.limits;
-                hj.anchor = new Vector2(0, 0.5f);
-                limits.max *= -1;
-                hj.limits = limits;
+        if(ctx.performed){
+            if((playerState == state.Move) || (playerState == state.ResetDown)){
+                if(hj.anchor.y != 0.5){
+                    JointAngleLimits2D limits = hj.limits;
+                    hj.anchor = new Vector2(0, 0.5f);
+                    limits.max *= -1;
+                    hj.limits = limits;
+                }
+                SetFlipComponents();
+                playerState = state.FlipUp;
             }
-            SetFlipComponents();
-            flippingUp = ctx.action.triggered;
-            playerState = state.FlipUp;
+            am.Play("Flip");
         }
     }
 
     public void OnFlipDown( InputAction.CallbackContext ctx ){
-        if((playerState == state.Move) || (playerState == state.ResetUp)){
-            if(hj.anchor.y != -0.5){
-                JointAngleLimits2D limits = hj.limits;
-                limits.max *= -1;
-                hj.anchor = new Vector2(0, -0.5f);
-                hj.limits = limits;
+        if(ctx.performed){
+            if((playerState == state.Move) || (playerState == state.ResetUp)){
+                if(hj.anchor.y != -0.5){
+                    JointAngleLimits2D limits = hj.limits;
+                    limits.max *= -1;
+                    hj.anchor = new Vector2(0, -0.5f);
+                    hj.limits = limits;
+                }
+                SetFlipComponents();
+                //flippingDown = ctx.action.triggered;
+                playerState = state.FlipDown;
             }
-            SetFlipComponents();
-            flippingDown = ctx.action.triggered;
-            playerState = state.FlipDown;
+            am.Play("Flip");
         }
     }
 
@@ -113,16 +126,14 @@ public class Player : MonoBehaviour
             case state.FlipUp:
                 rb.AddTorque(flipTorque * 10f);
 
-                if(!flippingUp){
-                    playerState = state.ResetDown;
-                }
+                playerState = state.ResetDown;
                 break;
             case state.ResetDown:
                 rb.AddTorque((-1) * flipTorque);
                 if(Mathf.Round(gameObject.transform.rotation.eulerAngles.z)%360 == Mathf.Abs(hj.limits.min)){
                     //re-enable wall collisions
                     gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-                    flippingUp = false;
+                    //flippingUp = false;
                     SetMoveComponents();
                     playerState = state.Move;
                 }
@@ -130,15 +141,13 @@ public class Player : MonoBehaviour
             case state.FlipDown:
                 rb.AddTorque(flipTorque * -10f);
 
-                if(!flippingDown){
-                    playerState = state.ResetUp;
-                }
+                playerState = state.ResetUp;
                 break;
             case state.ResetUp:
                 rb.AddTorque(flipTorque);
                 if(Mathf.Round(gameObject.transform.rotation.eulerAngles.z)%360 == Mathf.Abs(hj.limits.min)){
                     gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-                    flippingDown = false;
+                    //flippingDown = false;
                     SetMoveComponents();
                     playerState = state.Move;
                 }

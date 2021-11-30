@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
 
     private static bool playing;
     private static bool gamePaused;
+    AudioManager am;
 
     void Awake(){
         controls = new PlayerControls();
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
 
         //lefty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Left Keyboard", Keyboard.current);
         //righty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Right Keyboard", Keyboard.current);
+        am = FindObjectOfType<AudioManager>();
         currentLayout = targetManager.transform.GetChild(Random.Range(0, targetManager.transform.childCount - 1)).gameObject;
         pointsTargetManager = GameObject.Find("Points Target Manager");
         pointTargetsCurrentLayout = pointsTargetManager.transform.GetChild(Random.Range(0, pointsTargetManager.transform.childCount - 1)).gameObject;
@@ -94,7 +96,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void leftScored(){
-        lScore += ball.GetComponent<Ball>().score;
+        //lScore += ball.GetComponent<Ball>().score;
         lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
         ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
@@ -102,7 +104,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void rightScored(){
-        rScore += ball.GetComponent<Ball>().score;
+        //rScore += ball.GetComponent<Ball>().score;
         rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
         ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
@@ -134,6 +136,7 @@ public class GameManager : MonoBehaviour
     }*/
 
     public void OnPause(){
+
         if(gamePaused){
             Debug.Log("Resume!");
             gamePaused = false;
@@ -221,10 +224,10 @@ public void resetPointTargets(GameObject curr){
 
     public void ToMainMenu(){
         if(gamePaused){
+            am.Play("ButtonPress");
             OnPause();
         }
         
-        AudioManager am = FindObjectOfType<AudioManager>();
         int currTime = am.GetSoundTime("ArenaTheme");
         am.Stop("ArenaTheme");
         am.Play("MenuTheme", currTime);
