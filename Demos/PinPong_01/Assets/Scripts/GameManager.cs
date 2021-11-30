@@ -78,6 +78,10 @@ public class GameManager : MonoBehaviour
 
     void Update(){
         if(playing && !gamePaused){
+            if(lefty.GetComponent<Health>().health <= 0 || righty.GetComponent<Health>().health <= 0){
+                EndMatch();
+            }
+
             /*
             timeValue -= Time.deltaTime;
             DisplayTime(timeValue);
@@ -97,6 +101,8 @@ public class GameManager : MonoBehaviour
 
     public void leftScored(){
         //lScore += ball.GetComponent<Ball>().score;
+        righty.GetComponent<Health>().health--;
+        righty.GetComponent<Health>().UpdateHealth();
         lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
         ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
@@ -105,6 +111,8 @@ public class GameManager : MonoBehaviour
 
     public void rightScored(){
         //rScore += ball.GetComponent<Ball>().score;
+        lefty.GetComponent<Health>().health--;
+        lefty.GetComponent<Health>().UpdateHealth();
         rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
         ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
@@ -136,7 +144,6 @@ public class GameManager : MonoBehaviour
     }*/
 
     public void OnPause(){
-
         if(gamePaused){
             Debug.Log("Resume!");
             gamePaused = false;
@@ -180,7 +187,7 @@ public void resetPointTargets(GameObject curr){
         pointsTargetManager.SetActive(false);
 
         ParticleSystem death;
-        if(lScore > rScore){
+        if(lefty.GetComponent<Health>().health > righty.GetComponent<Health>().health){
             lefty.GetComponent<Player>().enabled = false;
             righty.GetComponent<Player>().enabled = false;
             
@@ -195,7 +202,7 @@ public void resetPointTargets(GameObject curr){
             lefty.SetActive(false);
             righty.SetActive(false);
             righty.GetComponent<SpriteRenderer>().enabled = true;
-        }else if(lScore < rScore){
+        }else if(lefty.GetComponent<Health>().health < righty.GetComponent<Health>().health){
             lefty.GetComponent<Player>().enabled = false;
             righty.GetComponent<Player>().enabled = false;
 

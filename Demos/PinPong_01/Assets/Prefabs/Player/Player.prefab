@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 5010156999936449008}
   - component: {fileID: 5010156999936448973}
   - component: {fileID: 6907043477694592206}
+  - component: {fileID: 3311829254527317022}
   m_Layer: 0
   m_Name: Player
   m_TagString: Paddle
@@ -321,6 +322,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   flipTorque: 0
+--- !u!114 &3311829254527317022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5010156999936449011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552962254a1d7834cbd192a8fa2a7597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullHeart: {fileID: 1830322371, guid: 3e3987c0442c7564bab8371c2037f422, type: 3}
+  emptyHeart: {fileID: 1419905371, guid: 3e3987c0442c7564bab8371c2037f422, type: 3}
+  hearts: []
+  health: 3
+  numHearts: 3
 --- !u!1 &5758074168082128700
 GameObject:
   m_ObjectHideFlags: 0
