@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     public GameObject pointsTargetManager;
     public GameObject currentLayout;
     public GameObject pointTargetsCurrentLayout;
+    public int targetHealthPickUp;
 
     private static bool playing;
     private static bool gamePaused;
@@ -98,43 +99,46 @@ public class GameManager : MonoBehaviour
     }
 
     public void leftScored(){
-        Debug.Log(righty.GetComponent<Health>().health);
-        if(righty.GetComponent<Health>().health <= 0){
-            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
-            EndMatch();
-        }
+        //Debug.Log("Right HP" + righty.GetComponent<HP>().hp);
         //lScore += ball.GetComponent<Ball>().score;
-        righty.GetComponent<Health>().health--;
-        righty.GetComponent<Health>().UpdateHealth();
+        righty.GetComponent<HP>().hp -= ball.GetComponent<Ball>().score;
+        righty.GetComponent<HP>().UpdateHealth();
         lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
         ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
         resetPointTargets(pointTargetsCurrentLayout);
+        if(righty.GetComponent<HP>().hp <= 0){
+            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
+            EndMatch();
+        }
     }
 
     public void rightScored(){
-        Debug.Log(lefty.GetComponent<Health>().health);
-        if(lefty.GetComponent<Health>().health <= 0){
-            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
-            EndMatch();
-        }
-        //rScore += ball.GetComponent<Ball>().score;
-        lefty.GetComponent<Health>().health--;
-        lefty.GetComponent<Health>().UpdateHealth();
+        //Debug.Log("Left HP: " + lefty.GetComponent<HP>().hp);
+        rScore += ball.GetComponent<Ball>().score;
+        //lefty.GetComponent<HP>().hp--;
+        lefty.GetComponent<HP>().hp -= ball.GetComponent<Ball>().score;
+        lefty.GetComponent<HP>().UpdateHealth();
         rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
         ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
         resetPointTargets(pointTargetsCurrentLayout);
+        if(lefty.GetComponent<HP>().hp <= 0){
+            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
+            EndMatch();
+        }
     }
 
      public void TargetLeftScored(){
-        lScore += 50;
-        lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
+        lefty.GetComponent<HP>().hp += targetHealthPickUp;
+        lefty.GetComponent<HP>().UpdateHealth();
+        //lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
     }
 
     public void TargetRightScored(){
-        rScore += 50;
-        rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
+        righty.GetComponent<HP>().hp += targetHealthPickUp;
+        lefty.GetComponent<HP>().UpdateHealth();
+        //rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
     }
 
     /**
@@ -189,47 +193,38 @@ public void resetPointTargets(GameObject curr){
         }
     }
 
-    public IEnumerator EndMatch(){
+    private IEnumerator Animate(GameObject winner, GameObject loser){
+        //Debug.Log("I happened.");
+        ParticleSystem death;
+        winner.GetComponent<Player>().enabled = false;
+        loser.GetComponent<Player>().enabled = false;
+        
+        winner.transform.GetChild(0).gameObject.SetActive(true);
+        death = loser.transform.GetChild(1).GetComponent<ParticleSystem>();
+        loser.GetComponent<SpriteRenderer>().enabled = false;
+        death.Play();
+        yield return new WaitForSeconds(death.main.startLifetime.constantMax);
+        death.Stop();
+        yield return new WaitForSeconds(3f);
+        winner.transform.GetChild(0).gameObject.SetActive(false);
+        winner.SetActive(false);
+        loser.SetActive(false);
+        loser.GetComponent<SpriteRenderer>().enabled = true;
+    }
+
+    public void EndMatch(){
         ball.SetActive(false);
         targetManager.SetActive(false);
         pointsTargetManager.SetActive(false);
 
-        ParticleSystem death;
-        if(lefty.GetComponent<Health>().health > righty.GetComponent<Health>().health){
-            lefty.GetComponent<Player>().enabled = false;
-            righty.GetComponent<Player>().enabled = false;
-            
-            lefty.transform.GetChild(0).gameObject.SetActive(true);
-            death = righty.transform.GetChild(1).GetComponent<ParticleSystem>();
-            righty.GetComponent<SpriteRenderer>().enabled = false;
-            death.Play();
-            yield return new WaitForSeconds(death.main.startLifetime.constantMax);
-            death.Stop();
-            yield return new WaitForSeconds(3f);
-            lefty.transform.GetChild(0).gameObject.SetActive(false);
-            lefty.SetActive(false);
-            righty.SetActive(false);
-            righty.GetComponent<SpriteRenderer>().enabled = true;
-        }else if(lefty.GetComponent<Health>().health < righty.GetComponent<Health>().health){
-            lefty.GetComponent<Player>().enabled = false;
-            righty.GetComponent<Player>().enabled = false;
-
-            righty.transform.GetChild(0).gameObject.SetActive(true);
-            death = lefty.transform.GetChild(1).GetComponent<ParticleSystem>();
-            lefty.GetComponent<SpriteRenderer>().enabled = false;
-            death.Play();
-            yield return new WaitForSeconds(death.main.startLifetime.constantMax);
-            death.Stop();
-            yield return new WaitForSeconds(3f);
-            righty.transform.GetChild(0).gameObject.SetActive(false);
-            lefty.SetActive(false);
-            righty.SetActive(false);
-            righty.GetComponent<SpriteRenderer>().enabled = true;
+        if(lefty.GetComponent<HP>().hp > righty.GetComponent<HP>().hp){
+            StartCoroutine(Animate(lefty.gameObject, righty.gameObject));
+        }else if(lefty.GetComponent<HP>().hp < righty.GetComponent<HP>().hp){
+            StartCoroutine(Animate(righty, lefty));
         }
 
         lefty.SetActive(false);
         righty.SetActive(false);
-
         resetMenu.SetActive(true);
     }
 

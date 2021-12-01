@@ -10,17 +10,25 @@ public class Health : MonoBehaviour
     public Transform uiHearts;
 
     public Image[] hearts;
-    public int health;
+    public int hp;
     public int numHearts;
 
+    void Start(){
+        /*hearts = new Image[ uiHearts.childCount ];
+        for(int i = 0; i < uiHearts.childCount; i++){
+            hearts[i] = uiHearts.GetChild(i).GetComponent<Image>();
+        }        
 
+        UpdateHealth();*/
+    }
+    
     public void UpdateHealth(){
         for(int i = 0; i < hearts.Length; i++){
-            if(health > numHearts){
-                health = numHearts;
+            if(hp > numHearts){
+                hp = numHearts;
             }
 
-            if(i < health){
+            /*if(i < health){
                 hearts[i].sprite = full;
             }else{
                 hearts[i].sprite = empty;
@@ -30,16 +38,7 @@ public class Health : MonoBehaviour
                 hearts[i].enabled = true;
             }else{
                 hearts[i].enabled = false;
-            }
+            }*/
         }
-    }
-
-    void Start(){
-        hearts = new Image[ uiHearts.childCount ];
-        for(int i = 0; i < uiHearts.childCount; i++){
-            hearts[i] = uiHearts.GetChild(i).GetComponent<Image>();
-        }        
-
-        UpdateHealth();
     }
 }

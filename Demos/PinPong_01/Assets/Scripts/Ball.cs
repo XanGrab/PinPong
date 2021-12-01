@@ -61,14 +61,14 @@ public class Ball : MonoBehaviour
         if(obj.gameObject.CompareTag("Target")){
             if(obj.gameObject.name.Equals("Target")){
                 score += 100;
+                lerpValue += 0.22f;  
+
+                Color objColor = obj.GetComponent<Renderer>().material.color;
+
+                _render.material.color = Color.Lerp(initColor, objColor,  lerpValue);
+                trail.material.color = _render.material.color;
             }
             FindObjectOfType<AudioManager>().Play("TargetBreak");
-            lerpValue += 0.15f;  
-
-            Color objColor = obj.GetComponent<Renderer>().material.color;
-
-            _render.material.color = Color.Lerp(initColor, objColor,  lerpValue);
-            trail.material.color = _render.material.color;
         }
     }
 

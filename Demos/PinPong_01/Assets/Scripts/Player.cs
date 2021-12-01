@@ -37,10 +37,7 @@ public class Player : MonoBehaviour
             //Debug.Log(gameObject.name + ": " + d);
             input.SwitchCurrentControlScheme(d, Keyboard.current);
         }
-
         controls = new PlayerControls();
-        //controls.Player.FlipUp.activeControl.IsPressed += ctx => OnFlipUp( ctx );
-        //controls.Player.FlipDown.performed += ctx => OnFlipDown( ctx );
     }
 
     void Start()
@@ -70,8 +67,8 @@ public class Player : MonoBehaviour
                 }
                 SetFlipComponents();
                 playerState = state.FlipUp;
+                am.Play("Flip");
             }
-            am.Play("Flip");
         }
     }
 
@@ -87,8 +84,8 @@ public class Player : MonoBehaviour
                 SetFlipComponents();
                 //flippingDown = ctx.action.triggered;
                 playerState = state.FlipDown;
+                am.Play("Flip");
             }
-            am.Play("Flip");
         }
     }
 
