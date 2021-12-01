@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     void Start(){
         playing = true;
         gamePaused = false;
+        gameMenu.SetActive(true);
         resetMenu.SetActive(false);
 
         //lefty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Left Keyboard", Keyboard.current);
@@ -77,10 +78,7 @@ public class GameManager : MonoBehaviour
     }
 
     void Update(){
-        if(playing && !gamePaused){
-            if(lefty.GetComponent<Health>().health <= 0 || righty.GetComponent<Health>().health <= 0){
-                EndMatch();
-            }
+        if(playing && (!gamePaused)){
 
             /*
             timeValue -= Time.deltaTime;
@@ -100,6 +98,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void leftScored(){
+        Debug.Log(righty.GetComponent<Health>().health);
+        if(righty.GetComponent<Health>().health <= 0){
+            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
+            EndMatch();
+        }
         //lScore += ball.GetComponent<Ball>().score;
         righty.GetComponent<Health>().health--;
         righty.GetComponent<Health>().UpdateHealth();
@@ -110,6 +113,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void rightScored(){
+        Debug.Log(lefty.GetComponent<Health>().health);
+        if(lefty.GetComponent<Health>().health <= 0){
+            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
+            EndMatch();
+        }
         //rScore += ball.GetComponent<Ball>().score;
         lefty.GetComponent<Health>().health--;
         lefty.GetComponent<Health>().UpdateHealth();
