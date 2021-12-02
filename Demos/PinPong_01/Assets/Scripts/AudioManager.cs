@@ -26,7 +26,6 @@ public class AudioManager : MonoBehaviour
     }
 
     void Start(){
-        Play("MenuTheme");
     }
 
     public void Play(string name){
@@ -46,6 +45,7 @@ public class AudioManager : MonoBehaviour
         s.source.timeSamples = time;
         s.source.Play();
     }
+
     public void Stop(string name){
         Sound s = Array.Find(sounds, sound => sound.name == name); 
         if(s == null){
@@ -63,5 +63,19 @@ public class AudioManager : MonoBehaviour
         }        
 
         return s.source.timeSamples;
+    }
+
+    public void Quiet(string name, bool active){
+        Sound s = Array.Find(sounds, sound => sound.name == name); 
+        if(s == null){
+            Debug.LogWarning("Sount: " + s.name + " not found.");
+            return;
+        }        
+
+        if(active){
+            s.source.volume *= 0.4f;
+        }else{
+            s.source.volume *= 1/0.4f;
+        }
     }
 }

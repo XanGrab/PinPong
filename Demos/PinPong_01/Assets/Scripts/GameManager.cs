@@ -195,12 +195,14 @@ public void resetPointTargets(GameObject curr){
 
     private IEnumerator Animate(GameObject winner, GameObject loser){
         //Debug.Log("I happened.");
+        am.Quiet("ArenaTheme", true);
         ParticleSystem death;
         winner.GetComponent<Player>().enabled = false;
         loser.GetComponent<Player>().enabled = false;
         winner.transform.position = new Vector3(winner.transform.position.x, 0f, winner.transform.position.z);
         
         winner.transform.GetChild(0).gameObject.SetActive(true);
+        am.Play("Winner");
         death = loser.transform.GetChild(1).GetComponent<ParticleSystem>();
         loser.GetComponent<SpriteRenderer>().enabled = false;
         death.Play();
@@ -208,6 +210,7 @@ public void resetPointTargets(GameObject curr){
         death.Stop();
         yield return new WaitForSeconds(3f);
         winner.transform.GetChild(0).gameObject.SetActive(false);
+        am.Quiet("ArenaTheme", false);
         winner.SetActive(false);
         loser.SetActive(false);
         loser.GetComponent<SpriteRenderer>().enabled = true;
@@ -224,10 +227,9 @@ public void resetPointTargets(GameObject curr){
             //lefty.transform.GetChild(0).gameObject.SetActive(true);
             StartCoroutine(Animate(lefty, righty));
         }else if(lefty.GetComponent<HP>().hp < righty.GetComponent<HP>().hp){
-            righty.transform.GetChild(0).gameObject.SetActive(true);
+            //righty.transform.GetChild(0).gameObject.SetActive(true);
             StartCoroutine(Animate(righty, lefty));
         }
-
     }
 
     public void Rematch(){
