@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+
+    void Start(){
+        FindObjectOfType<AudioManager>().Play("MainTheme");
+    }
+
     public void PlayGame(){
         AudioManager am = FindObjectOfType<AudioManager>();
         int currTime = am.GetSoundTime("MenuTheme");

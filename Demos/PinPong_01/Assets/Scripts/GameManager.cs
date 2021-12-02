@@ -198,6 +198,7 @@ public void resetPointTargets(GameObject curr){
         ParticleSystem death;
         winner.GetComponent<Player>().enabled = false;
         loser.GetComponent<Player>().enabled = false;
+        winner.transform.position = new Vector3(winner.transform.position.x, 0f, winner.transform.position.z);
         
         winner.transform.GetChild(0).gameObject.SetActive(true);
         death = loser.transform.GetChild(1).GetComponent<ParticleSystem>();
@@ -210,6 +211,8 @@ public void resetPointTargets(GameObject curr){
         winner.SetActive(false);
         loser.SetActive(false);
         loser.GetComponent<SpriteRenderer>().enabled = true;
+        resetMenu.SetActive(true);
+        
     }
 
     public void EndMatch(){
@@ -218,14 +221,13 @@ public void resetPointTargets(GameObject curr){
         pointsTargetManager.SetActive(false);
 
         if(lefty.GetComponent<HP>().hp > righty.GetComponent<HP>().hp){
-            StartCoroutine(Animate(lefty.gameObject, righty.gameObject));
+            //lefty.transform.GetChild(0).gameObject.SetActive(true);
+            StartCoroutine(Animate(lefty, righty));
         }else if(lefty.GetComponent<HP>().hp < righty.GetComponent<HP>().hp){
+            righty.transform.GetChild(0).gameObject.SetActive(true);
             StartCoroutine(Animate(righty, lefty));
         }
 
-        lefty.SetActive(false);
-        righty.SetActive(false);
-        resetMenu.SetActive(true);
     }
 
     public void Rematch(){
