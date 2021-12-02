@@ -51,8 +51,10 @@ public class GameManager : MonoBehaviour
     [Header("Targets")]
     public GameObject targetManager;
     public GameObject pointsTargetManager;
+    public GameObject powerupManager;
     public GameObject currentLayout;
     public GameObject pointTargetsCurrentLayout;
+    public GameObject powerupCurrentLayout;
     public int targetHealthPickUp;
 
     private static bool playing;
@@ -73,9 +75,11 @@ public class GameManager : MonoBehaviour
         //lefty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Left Keyboard", Keyboard.current);
         //righty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Right Keyboard", Keyboard.current);
         am = FindObjectOfType<AudioManager>();
-        currentLayout = targetManager.transform.GetChild(Random.Range(0, targetManager.transform.childCount - 1)).gameObject;
+        currentLayout = targetManager.transform.GetChild(0).gameObject;
         pointsTargetManager = GameObject.Find("Points Target Manager");
-        pointTargetsCurrentLayout = pointsTargetManager.transform.GetChild(Random.Range(0, pointsTargetManager.transform.childCount - 1)).gameObject;
+        pointTargetsCurrentLayout = pointsTargetManager.transform.GetChild(0).gameObject;
+        powerupManager = GameObject.Find("Powerup Manager");
+        powerupCurrentLayout = powerupManager.transform.GetChild(Random.Range(0, pointsTargetManager.transform.childCount - 1)).gameObject;
     }
 
     void Update(){
@@ -107,6 +111,7 @@ public class GameManager : MonoBehaviour
         ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
         resetPointTargets(pointTargetsCurrentLayout);
+        resetPowerUp(powerupCurrentLayout);
         if(righty.GetComponent<HP>().hp <= 0){
             //Debug.Log("Health: " + righty.GetComponent<Health>().health);
             EndMatch();
@@ -123,6 +128,7 @@ public class GameManager : MonoBehaviour
         ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
         resetPointTargets(pointTargetsCurrentLayout);
+        resetPowerUp(powerupCurrentLayout);
         if(lefty.GetComponent<HP>().hp <= 0){
             //Debug.Log("Health: " + righty.GetComponent<Health>().health);
             EndMatch();
@@ -172,25 +178,35 @@ public class GameManager : MonoBehaviour
     }
 
     public void resetTargets(GameObject curr){
-        curr.SetActive(false);
-        int rand = Random.Range(0, targetManager.transform.childCount);
-        Debug.Log(rand);
-        curr = targetManager.transform.GetChild(rand).gameObject;
         curr.SetActive(true);
         for(int i = 0; i < curr.transform.childCount; i++){
+        float randX = Random.Range(-10.0f, 10.0f);
+        float randY = Random.Range(-5.30f, 6.50F);
+        //Debug.Log("x: " + randX + " | y: " + randY);
+            curr.transform.GetChild(i).position= new Vector3(randX, randY, 0);
             curr.transform.GetChild(i).gameObject.SetActive(true);
         }
     }
 
 public void resetPointTargets(GameObject curr){
-        curr.SetActive(false);
-        int rand = Random.Range(0, pointsTargetManager.transform.childCount);
-        Debug.Log(rand);
-        curr = pointsTargetManager.transform.GetChild(rand).gameObject;
         curr.SetActive(true);
         for(int i = 0; i < curr.transform.childCount; i++){
+        float randX = Random.Range(-10.0f, 10.0f);
+        float randY = Random.Range(-5.30f, 6.50F);
+        //Debug.Log("x: " + randX + " | y: " + randY);
+            curr.transform.GetChild(i).position= new Vector3(randX, randY, 0);
             curr.transform.GetChild(i).gameObject.SetActive(true);
         }
+    }
+
+    public void resetPowerUp(GameObject curr) {
+        curr.SetActive(false);
+         int rand = Random.Range(0, (powerupManager.transform.childCount));
+        curr = powerupManager.transform.GetChild(rand).gameObject;
+        float randX = Random.Range(-10.0f, 10.0f);
+        float randY = Random.Range(-5.30f, 6.50F);
+        curr.transform.position= new Vector3(randX, randY, 0);
+        curr.gameObject.SetActive(true);
     }
 
     private IEnumerator Animate(GameObject winner, GameObject loser){
@@ -219,7 +235,7 @@ public void resetPointTargets(GameObject curr){
         ball.SetActive(false);
         targetManager.SetActive(false);
         pointsTargetManager.SetActive(false);
-
+        powerupManager.SetActive(false);
         if(lefty.GetComponent<HP>().hp > righty.GetComponent<HP>().hp){
             //lefty.transform.GetChild(0).gameObject.SetActive(true);
             StartCoroutine(Animate(lefty, righty));
