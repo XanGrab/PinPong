@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     public int targetHealthPickUp;
 
     private static bool playing;
-    private static bool gamePaused;
+    public static bool gamePaused;
     AudioManager am;
 
     void Awake(){

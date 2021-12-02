@@ -6,6 +6,7 @@ public class Parallax : MonoBehaviour
 {
     Vector3 startPos;
     SpriteRenderer mySprite;
+
     public float moveSpeed;
 
     Transform myTrans;
@@ -20,9 +21,11 @@ public class Parallax : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        myTrans.Translate(moveSpeed, 0, 0);
-        if(myTrans.position.x > (startPos.x + (1.5 * mySprite.bounds.size.x))){
-            myTrans.position = new Vector3 (startPos.x - (1.5f * mySprite.bounds.size.x), myTrans.position.y, myTrans.position.z);
+        if(!GameManager.gamePaused){
+            myTrans.Translate(moveSpeed, 0, 0);
+            if(myTrans.position.x > (startPos.x + (1.5 * mySprite.bounds.size.x))){
+                myTrans.position = new Vector3 (startPos.x - (1.5f * mySprite.bounds.size.x), myTrans.position.y, myTrans.position.z);
+            }
         }
     }
 }

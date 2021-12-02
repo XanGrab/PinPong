@@ -1547,7 +1547,7 @@ MonoBehaviour:
   pointsTargetManager: {fileID: 497672410}
   currentLayout: {fileID: 0}
   pointTargetsCurrentLayout: {fileID: 0}
-  targetHealthPickUp: 0
+  targetHealthPickUp: 50
 --- !u!4 &358041412
 Transform:
   m_ObjectHideFlags: 0
