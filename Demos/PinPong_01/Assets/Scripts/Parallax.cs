@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
-    public SpriteRenderer sprite;
+    Vector3 startPos;
+    SpriteRenderer mySprite;
+    public float moveSpeed;
+
+    Transform myTrans;
     // Start is called before the first frame update
     void Start()
     {
-        sprite = this.gameObject.GetComponent<SpriteRenderer>();
+        startPos = this.gameObject.transform.position;
+        mySprite = this.gameObject.GetComponent<SpriteRenderer>();
+        myTrans = this.gameObject.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.gameObject.transform.Translate(0.01f, 0, 0);
+        myTrans.Translate(moveSpeed, 0, 0);
+        if(myTrans.position.x > (startPos.x + (1.5 * mySprite.bounds.size.x))){
+            myTrans.position = new Vector3 (startPos.x - (1.5f * mySprite.bounds.size.x), myTrans.position.y, myTrans.position.z);
+        }
     }
 }
