@@ -2263,9 +2263,53 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4824456506369763224, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
+      propertyPath: sounds.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824456506369763224, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
       propertyPath: sounds.Array.data[4].clip
       value: 
       objectReference: {fileID: 8300000, guid: 6b85ce0e04b9c8c43b7862aa05175e2e, type: 3}
+    - target: {fileID: 4824456506369763224, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
+      propertyPath: sounds.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 59535062296eae547b948e3a8918b2e9, type: 3}
+    - target: {fileID: 4824456506369763224, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
+      propertyPath: sounds.Array.data[6].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824456506369763224, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
+      propertyPath: sounds.Array.data[6].name
+      value: Winner
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824456506369763224, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
+      propertyPath: sounds.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 884bbb93b76cb8142b9d37b3a9c35a5d, type: 3}
+    - target: {fileID: 4824456506369763224, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
+      propertyPath: sounds.Array.data[7].name
+      value: Freeze
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824456506369763224, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
+      propertyPath: sounds.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 46eccc7b28950784baa5b5d8d7dbf866, type: 3}
+    - target: {fileID: 4824456506369763224, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
+      propertyPath: sounds.Array.data[8].name
+      value: Speedy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824456506369763224, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
+      propertyPath: sounds.Array.data[6].volume
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824456506369763224, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
+      propertyPath: sounds.Array.data[7].volume
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824456506369763224, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
+      propertyPath: sounds.Array.data[8].volume
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 4824456506369763225, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
       propertyPath: m_Name
       value: Audio Manager
@@ -7898,18 +7942,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1081879703}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Flip
-          m_BoolArgument: 0
-        m_CallState: 2
     m_ActionId: e52da68b-1272-4635-9690-a8d19797fef6
     m_ActionName: Player/Right Keyboard[/Keyboard/upArrow,/Keyboard/downArrow]
   - m_PersistentCalls:
@@ -7924,18 +7956,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1081879703}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Flip
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: c1aa5e49-c4b5-4497-8f61-497a042124f3
@@ -8130,18 +8150,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1081879703}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Flip
-          m_BoolArgument: 0
-        m_CallState: 2
     m_ActionId: e52da68b-1272-4635-9690-a8d19797fef6
     m_ActionName: Player/Right Keyboard[/Keyboard/upArrow,/Keyboard/downArrow]
   - m_PersistentCalls:
@@ -8156,18 +8164,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1081879703}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Flip
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: c1aa5e49-c4b5-4497-8f61-497a042124f3

@@ -35,14 +35,14 @@ public class Ball : MonoBehaviour
     }
 
     void Update(){
-        if(rb.velocity.sqrMagnitude > maxSqrVelocity){
+        if(rb.velocity.sqrMagnitude > maxSqrVelocity && superSpeed == 0){
             Debug.Log("slowling velocity: " + rb.velocity.sqrMagnitude);
             rb.velocity *= 0.9f;
         }
     }
 
     private void Launch(){
-        score = 10;
+        score = 100;
         float x = Random.Range(0, 2) == 0 ? -1 : 1;
         float y = Random.Range(0, 2) == 0 ? -1 : 1;
         rb.velocity = new Vector2(x, y) * speed;
@@ -79,6 +79,7 @@ public class Ball : MonoBehaviour
                 //Debug.Log("Left");
                 touchedLast = -1;
                 if (superSpeed == -1) {
+                    FindObjectOfType<AudioManager>().Play("Speedy");
                     rb.velocity = rb.velocity * 3;
                     superSpeed = 0;
                     GameObject paddleLeft = GameObject.Find("Paddle Left");
@@ -89,6 +90,7 @@ public class Ball : MonoBehaviour
                 //Debug.Log("Right");
                 touchedLast = 1;
                 if (superSpeed == 1) {
+                    FindObjectOfType<AudioManager>().Play("Speedy");
                     rb.velocity = rb.velocity * 3;
                     superSpeed = 0;
                     GameObject paddleRight = GameObject.Find("Paddle Right");

@@ -47,13 +47,11 @@ public class SuperSpeedTarget : MonoBehaviour
         mr.enabled = true;
     }
 
-    private IEnumerator ShowAndHide(GameObject go, float delay )
-  {
-      
-          go.SetActive(true);
-Debug.Log("set to false");
-    yield return new WaitForSeconds(5);
-    Debug.Log("set to true");
-    go.SetActive(false);
-  }
+    private IEnumerator ShowAndHide(GameObject go, float delay ){
+        go.SetActive(true);
+        Debug.Log("set to false");
+        yield return new WaitForSeconds(5);
+        Debug.Log("set to true");
+        go.SetActive(false);
+    }
 }

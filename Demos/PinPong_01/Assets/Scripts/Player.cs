@@ -41,14 +41,14 @@ public class Player : MonoBehaviour
         controls = new PlayerControls();
     }
 
-    public void Freeze() {
+    public void UnFreeze() {
     //Debug.Log("froze");
-    playerState = state.Move;
-    GetComponent<SpriteRenderer>().color = Color.white;
+        GetComponent<SpriteRenderer>().color = Color.white;
+        playerState = state.Move;
     }
 
     public void changeStateToFrozen() {
-    playerState = state.Frozen;
+        playerState = state.Frozen;
     }
 
     void Start()
@@ -161,8 +161,9 @@ public class Player : MonoBehaviour
                 }
                 break;
             case state.Frozen:
-                GetComponent<SpriteRenderer>().color = Color.blue;
-                Invoke("Freeze", 1f);
+                GetComponent<SpriteRenderer>().color = Color.cyan;
+                am.Play("Freeze");
+                Invoke("UnFreeze", 1f);
                 break;
         }
     }
