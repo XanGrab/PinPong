@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
         FlipUp,
         FlipDown,
         ResetUp,
-        ResetDown
+        ResetDown,
+        Frozen
     }
     private state playerState;
     public float speed;
@@ -38,6 +39,16 @@ public class Player : MonoBehaviour
             input.SwitchCurrentControlScheme(d, Keyboard.current);
         }
         controls = new PlayerControls();
+    }
+
+    public void Freeze() {
+    //Debug.Log("froze");
+    playerState = state.Move;
+    GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    public void changeStateToFrozen() {
+    playerState = state.Frozen;
     }
 
     void Start()
@@ -148,6 +159,10 @@ public class Player : MonoBehaviour
                     SetMoveComponents();
                     playerState = state.Move;
                 }
+                break;
+            case state.Frozen:
+                GetComponent<SpriteRenderer>().color = Color.blue;
+                Invoke("Freeze", 1f);
                 break;
         }
     }

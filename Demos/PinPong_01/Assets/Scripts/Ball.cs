@@ -5,6 +5,8 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public int touchedLast = 0;
+    public int superSpeed = 0;
+
     public float speed;
     public float maxSqrVelocity;
     public int score = 100;
@@ -40,7 +42,7 @@ public class Ball : MonoBehaviour
     }
 
     private void Launch(){
-        score = 100;
+        score = 10;
         float x = Random.Range(0, 2) == 0 ? -1 : 1;
         float y = Random.Range(0, 2) == 0 ? -1 : 1;
         rb.velocity = new Vector2(x, y) * speed;
@@ -60,7 +62,7 @@ public class Ball : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D obj){
         if(obj.gameObject.CompareTag("Target")){
             if(obj.gameObject.name.Equals("Target")){
-                score += 100;
+                score += 10;
                 lerpValue += 0.22f;  
 
                 Color objColor = obj.GetComponent<Renderer>().material.color;
@@ -76,9 +78,23 @@ public class Ball : MonoBehaviour
             if (other.gameObject.name.Equals("Paddle Left")) {
                 //Debug.Log("Left");
                 touchedLast = -1;
+                if (superSpeed == -1) {
+                    rb.velocity = rb.velocity * 3;
+                    superSpeed = 0;
+                    GameObject paddleLeft = GameObject.Find("Paddle Left");
+                    //Kind of janky to change color
+                    paddleLeft.GetComponent<SpriteRenderer>().color = Color.white;
+                }
             } else if (other.gameObject.name.Equals("Paddle Right")) {
                 //Debug.Log("Right");
                 touchedLast = 1;
+                if (superSpeed == 1) {
+                    rb.velocity = rb.velocity * 3;
+                    superSpeed = 0;
+                    GameObject paddleRight = GameObject.Find("Paddle Right");
+                    //Kind of janky to change color
+                    paddleRight.GetComponent<SpriteRenderer>().color = Color.white;
+                }
             }
                      
     }
