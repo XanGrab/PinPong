@@ -29,7 +29,6 @@ public class FreezeTarget : MonoBehaviour
                
             } else if (obj.gameObject.GetComponent<Ball>().touchedLast == 1){
                 GameObject pL = GameObject.Find("Paddle Left");
-                FindObjectOfType<AudioManager>().Play("Freeze");
                 pL.GetComponent<Player>().changeStateToFrozen();
 
             }
