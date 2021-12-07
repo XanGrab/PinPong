@@ -29,15 +29,15 @@ public class Player : MonoBehaviour
     void OnDisable(){ controls.Player.Disable(); }
 
     void Awake(){
-        //Debug.Log("Gamepad Count: " + Gamepad.all.Count);
-        if(Gamepad.all.Count == 0){
+        Debug.Log("Gamepad Count: " + Gamepad.all.Count);
+        //if(Gamepad.all.Count == 0){
             PlayerInput input = GetComponent<PlayerInput>();
-
             string d = input.defaultControlScheme;
 
-            //Debug.Log(gameObject.name + ": " + d);
+            //for()
+            Debug.Log(gameObject.name + ": " + d);
             input.SwitchCurrentControlScheme(d, Keyboard.current);
-        }
+        //}
         controls = new PlayerControls();
     }
 

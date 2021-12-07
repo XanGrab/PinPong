@@ -162,6 +162,7 @@ public class GameManager : MonoBehaviour
     }*/
 
     public void OnPause(){
+        am.Play("ButtonPress");
         if(gamePaused){
             Debug.Log("Resume!");
             gamePaused = false;
