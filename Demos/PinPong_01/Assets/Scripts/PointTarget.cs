@@ -22,9 +22,11 @@ public class PointTarget : MonoBehaviour
         if(obj.gameObject.CompareTag("Ball")){
             StartCoroutine(Break());
             if (obj.gameObject.GetComponent<Ball>().touchedLast == -1) {
-                GameManager.Instance.TargetLeftScored();
+                //GameManager.Instance.TargetLeftScored();
+                FindObjectOfType<GameManager>().LeftHPPickUp();
             } else if (obj.gameObject.GetComponent<Ball>().touchedLast == 1){
-                GameManager.Instance.TargetRightScored();
+                //GameManager.Instance.TargetRightScored();
+                FindObjectOfType<GameManager>().RightHPPickUp();
             }
 
         }

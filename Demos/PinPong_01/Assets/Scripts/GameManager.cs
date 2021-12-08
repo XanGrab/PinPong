@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
 
     private static GameManager _instance;
+    
     public static GameManager Instance {
     get {
         if (_instance == null) {
@@ -135,15 +136,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-     public void TargetLeftScored(){
+     public void LeftHPPickUp(){
         lefty.GetComponent<HP>().hp += targetHealthPickUp;
         lefty.GetComponent<HP>().UpdateHealth();
         //lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
     }
 
-    public void TargetRightScored(){
+    public void RightHPPickUp(){
         righty.GetComponent<HP>().hp += targetHealthPickUp;
-        lefty.GetComponent<HP>().UpdateHealth();
+        righty.GetComponent<HP>().UpdateHealth();
         //rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
     }
 
@@ -162,7 +163,6 @@ public class GameManager : MonoBehaviour
     }*/
 
     public void OnPause(){
-        am.Play("ButtonPress");
         if(gamePaused){
             Debug.Log("Resume!");
             gamePaused = false;
