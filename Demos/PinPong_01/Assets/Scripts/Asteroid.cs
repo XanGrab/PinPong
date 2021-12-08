@@ -7,14 +7,17 @@ public class Asteroid : MonoBehaviour
     public int health;
     private ParticleSystem particles;
     private MeshRenderer mr;
+    private Animator anim;
     private CircleCollider2D circle2D;
 
     private void Awake(){
         particles = GetComponentInChildren<ParticleSystem>();
+        anim = GetComponent<Animator>();
         circle2D = GetComponent<CircleCollider2D>();
         mr = GetComponent<MeshRenderer>();
     }
     private void OnCollisionEnter2D(Collision2D other) {
+        anim.Play("AstroidPulse", 0, 0f);
         health--;
         if(other.gameObject.CompareTag("Ball") || other.gameObject.CompareTag("PowerUp")){
             if(health <= 0){

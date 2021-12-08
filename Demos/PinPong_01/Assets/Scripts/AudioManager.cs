@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
         if(instance == null){
             instance = this;
         }else{
-            Destroy(gameObject);
+            Destroy(this);
             return;
         }
         DontDestroyOnLoad(gameObject);
@@ -30,8 +30,12 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string name){
         Sound s = Array.Find(sounds, sound => sound.name == name); 
-        if(s == null || s.source == null){
+        if(s == null){
             Debug.LogWarning("Sound: " + name + " not found.");
+            return;
+        }        
+        if(s.source == null){
+            Debug.LogWarning("Sound: " + s.name + " source missing.");
             return;
         }        
         Debug.Log("Sound: " + name);
@@ -41,6 +45,10 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == name); 
         if(s == null){
             Debug.LogWarning("Sound: " + s.name + " not found.");
+            return;
+        }        
+        if(s.source == null){
+            Debug.LogWarning("Sound: " + s.name + " source missing.");
             return;
         }        
         s.source.timeSamples = time;
@@ -53,6 +61,10 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sount: " + s.name + " not found.");
             return;
         }        
+        if(s.source == null){
+            Debug.LogWarning("Sound: " + s.name + " source missing.");
+            return;
+        }        
         s.source.Stop();
     }
 
@@ -62,6 +74,10 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sount: " + s.name + " not found.");
             return -1;
         }        
+        if(s.source == null){
+            Debug.LogWarning("Sound: " + s.name + " source missing.");
+            return -1;
+        }        
 
         return s.source.timeSamples;
     }
@@ -69,7 +85,11 @@ public class AudioManager : MonoBehaviour
     public void Quiet(string name, bool active){
         Sound s = Array.Find(sounds, sound => sound.name == name); 
         if(s == null){
-            Debug.LogWarning("Sount: " + s.name + " not found.");
+            Debug.LogWarning("Sound: " + s.name + " not found.");
+            return;
+        }        
+        if(s.source == null){
+            Debug.LogWarning("Sound: " + s.name + " source missing.");
             return;
         }        
 
