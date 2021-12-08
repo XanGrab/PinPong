@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class FreezeTarget : MonoBehaviour
 {
+    private Transform parent;
     private ParticleSystem particles;
-    private SpriteRenderer sr;
+    private MeshRenderer mr;
     private BoxCollider2D box2D;
 
     private void Awake(){
-        particles = GetComponentInChildren<ParticleSystem>();
+        parent = gameObject.transform.parent;
+        particles = parent.GetComponentInChildren<ParticleSystem>();
         box2D = GetComponentInChildren<BoxCollider2D>();
-        sr = GetComponent<SpriteRenderer>();
+        mr = GetComponent<MeshRenderer>();
     }
     void Update()
     {
-        //transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
-       // StartCoroutine( ShowAndHide(gameObject, 5.0f) ); // 5 second
+        transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
+        // StartCoroutine( ShowAndHide(gameObject, 5.0f) ); // 5 second
     }
 
     private void OnTriggerEnter2D(Collider2D obj){
@@ -37,12 +39,14 @@ public class FreezeTarget : MonoBehaviour
 
     private IEnumerator Break(){
         particles.Play();
-        sr.enabled = false;
+        mr.enabled = false;
         box2D.enabled = false;
+        parent.GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSeconds(particles.main.startLifetime.constantMax);
-        gameObject.SetActive(false);
+        parent.gameObject.SetActive(false);
+        parent.GetComponent<SpriteRenderer>().enabled = true;
         box2D.enabled = true;
-        sr.enabled = true;
+        mr.enabled = true;
     }
 
     private IEnumerator ShowAndHide(GameObject go, float delay){ 

@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class SuperSpeedTarget : MonoBehaviour
 {
+    private Transform parent;
     private ParticleSystem particles;
-    private SpriteRenderer sr;
+    private MeshRenderer mr;
     private BoxCollider2D box2D;
  
     private void Awake(){
-        particles = GetComponentInChildren<ParticleSystem>();
+        parent = gameObject.transform.parent;
+        particles = parent.GetComponentInChildren<ParticleSystem>();
         box2D = GetComponent<BoxCollider2D>();
-        sr = GetComponent<SpriteRenderer>();
+        mr = GetComponent<MeshRenderer>();
     }
     void Update()
     {
@@ -39,12 +41,14 @@ public class SuperSpeedTarget : MonoBehaviour
 
     private IEnumerator Break(){
         particles.Play();
-        sr.enabled = false;
+        mr.enabled = false;
+        parent.GetComponent<SpriteRenderer>().enabled = false;
         box2D.enabled = false;
         yield return new WaitForSeconds(particles.main.startLifetime.constantMax);
-        gameObject.SetActive(false);
+        parent.gameObject.SetActive(false);
+        parent.GetComponent<SpriteRenderer>().enabled = true;
         box2D.enabled = true;
-        sr.enabled = true;
+        mr.enabled = true;
     }
 
     private IEnumerator ShowAndHide(GameObject go, float delay){

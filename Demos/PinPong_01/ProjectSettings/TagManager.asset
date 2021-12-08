@@ -9,6 +9,7 @@ TagManager:
   - Paddle
   - Target
   - PlayerWall
+  - PowerUp
   layers:
   - Default
   - TransparentFX
