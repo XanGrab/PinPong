@@ -5,17 +5,17 @@ using UnityEngine;
 public class FreezeTarget : MonoBehaviour
 {
     private ParticleSystem particles;
-    private MeshRenderer mr;
+    private SpriteRenderer sr;
     private BoxCollider2D box2D;
 
     private void Awake(){
         particles = GetComponentInChildren<ParticleSystem>();
-        box2D = GetComponent<BoxCollider2D>();
-        mr = GetComponent<MeshRenderer>();
+        box2D = GetComponentInChildren<BoxCollider2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
     void Update()
     {
-        transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
+        //transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
        // StartCoroutine( ShowAndHide(gameObject, 5.0f) ); // 5 second
     }
 
@@ -37,15 +37,15 @@ public class FreezeTarget : MonoBehaviour
 
     private IEnumerator Break(){
         particles.Play();
-        mr.enabled = false;
+        sr.enabled = false;
         box2D.enabled = false;
         yield return new WaitForSeconds(particles.main.startLifetime.constantMax);
         gameObject.SetActive(false);
         box2D.enabled = true;
-        mr.enabled = true;
+        sr.enabled = true;
     }
 
-    private IEnumerator ShowAndHide(GameObject go, float delay ){ 
+    private IEnumerator ShowAndHide(GameObject go, float delay){ 
         go.SetActive(true);
         Debug.Log("set to false");
         yield return new WaitForSeconds(5);

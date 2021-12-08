@@ -5,13 +5,13 @@ using UnityEngine;
 public class SuperSpeedTarget : MonoBehaviour
 {
     private ParticleSystem particles;
-    private MeshRenderer mr;
+    private SpriteRenderer sr;
     private BoxCollider2D box2D;
  
     private void Awake(){
         particles = GetComponentInChildren<ParticleSystem>();
         box2D = GetComponent<BoxCollider2D>();
-        mr = GetComponent<MeshRenderer>();
+        sr = GetComponent<SpriteRenderer>();
     }
     void Update()
     {
@@ -39,15 +39,15 @@ public class SuperSpeedTarget : MonoBehaviour
 
     private IEnumerator Break(){
         particles.Play();
-        mr.enabled = false;
+        sr.enabled = false;
         box2D.enabled = false;
         yield return new WaitForSeconds(particles.main.startLifetime.constantMax);
         gameObject.SetActive(false);
         box2D.enabled = true;
-        mr.enabled = true;
+        sr.enabled = true;
     }
 
-    private IEnumerator ShowAndHide(GameObject go, float delay ){
+    private IEnumerator ShowAndHide(GameObject go, float delay){
         go.SetActive(true);
         Debug.Log("set to false");
         yield return new WaitForSeconds(5);
