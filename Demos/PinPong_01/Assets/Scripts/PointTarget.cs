@@ -40,5 +40,6 @@ public class PointTarget : MonoBehaviour
         gameObject.SetActive(false);
         box2D.enabled = true;
         mr.enabled = true;
+        FindObjectOfType<GameManager>().pointTargetsBroken++;
     }
 }
