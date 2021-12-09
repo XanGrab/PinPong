@@ -24,8 +24,10 @@ public class Asteroid : MonoBehaviour
                 StartCoroutine(Break());
             }
         }
+        FindObjectOfType<AudioManager>().Play("Bumper");
     }
     private IEnumerator Break(){
+        FindObjectOfType<AudioManager>().Play("RockBreak");
         particles.Play();
         mr.enabled = false;
         circle2D.enabled = false;

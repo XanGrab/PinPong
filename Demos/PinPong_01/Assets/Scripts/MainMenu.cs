@@ -7,9 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     Settings settings;
     private void Awake() {
-        settings = FindObjectOfType<Settings>();
-
-        settings.SetQuality(3);
+        QualitySettings.SetQualityLevel(3);
         Resolution[] resolutions = Screen.resolutions;
         int currentResolutionIndex = 0;
         for(int i = 0; i < resolutions.Length; i++){
@@ -17,7 +15,8 @@ public class MainMenu : MonoBehaviour
                 currentResolutionIndex = i;
             }
         }
-        settings.SetResolution(currentResolutionIndex);
+        Resolution resolution = resolutions[currentResolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
     void Start(){

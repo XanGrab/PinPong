@@ -19,7 +19,7 @@ public class Ball : MonoBehaviour
     Color initColor;
     private float lerpValue;
     GameObject[] playerWalls;
-
+    
     void Start()
     {
         startPos = transform.position;
@@ -72,11 +72,11 @@ public class Ball : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D obj){
         if(obj.gameObject.CompareTag("Target")){
             if(obj.gameObject.name.Equals("Target")){
-                score += 10;
+                score += 100;
+                FindObjectOfType<GameManager>().DisplayPoints(transform.position);
+
                 lerpValue += 0.22f;  
-
                 Color objColor = obj.GetComponent<Renderer>().material.color;
-
                 _render.material.color = Color.Lerp(initColor, objColor,  lerpValue);
                 trail.material.color = _render.material.color;
             }
@@ -108,6 +108,5 @@ public class Ball : MonoBehaviour
                     paddleRight.GetComponent<SpriteRenderer>().color = Color.white;
                 }
             }
-                     
     }
 }

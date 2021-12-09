@@ -1337,6 +1337,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 7628285168627771273, guid: 24624b0fd421b024380d8381d46a2e85, type: 3}
   ball: {fileID: 0}
+  displayPrefab: {fileID: 6620945977249683010, guid: bd7828f35d198f741a9e7904b032cc13, type: 3}
+  launchTxt: {fileID: 1347494348}
   lefty: {fileID: 889358449}
   leftGoal: {fileID: 1966721394}
   righty: {fileID: 1990180243}
@@ -1347,7 +1349,6 @@ MonoBehaviour:
   resetMenu: {fileID: 1002333491}
   pauseMenu: {fileID: 1654652304}
   timeValue: 4
-  launchTxt: {fileID: 1347494348}
   targetManager: {fileID: 1305210467}
   pointsTargetManager: {fileID: 497672410}
   powerupManager: {fileID: 0}

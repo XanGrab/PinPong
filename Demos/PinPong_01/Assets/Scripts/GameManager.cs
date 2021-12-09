@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     [Header("Ball")]
     public GameObject ballPrefab;
     public GameObject ball;
+    public GameObject displayPrefab;
+    public GameObject launchTxt;
 
     [Header("Player Input")]
     private PlayerInput playerInput;
@@ -49,7 +51,6 @@ public class GameManager : MonoBehaviour
     [Header("Timer")]
     //public Text timerText;
     public float timeValue;
-    public GameObject launchTxt;
 
     [Header("Targets")]
     public GameObject targetManager;
@@ -119,6 +120,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void leftScored(){
+        if(righty.GetComponent<HP>().hp <= 0){
+            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
+            EndMatch();
+        }
+        am.Play("Break");
         //Debug.Log("Right HP" + righty.GetComponent<HP>().hp);
         //lScore += ball.GetComponent<Ball>().score;
         righty.GetComponent<HP>().hp -= ball.GetComponent<Ball>().score;
@@ -133,13 +139,14 @@ public class GameManager : MonoBehaviour
         resetTargets(currentLayout);
         resetPointTargets(pointTargetsCurrentLayout);
         resetPowerUp(powerupCurrentLayout);
-        if(righty.GetComponent<HP>().hp <= 0){
-            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
-            EndMatch();
-        }
     }
 
     public void rightScored(){
+        if(lefty.GetComponent<HP>().hp <= 0){
+            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
+            EndMatch();
+        }
+        am.Play("Break");
         //Debug.Log("Left HP: " + lefty.GetComponent<HP>().hp);
         rScore += ball.GetComponent<Ball>().score;
         //lefty.GetComponent<HP>().hp--;
@@ -154,12 +161,26 @@ public class GameManager : MonoBehaviour
         resetTargets(currentLayout);
         resetPointTargets(pointTargetsCurrentLayout);
         resetPowerUp(powerupCurrentLayout);
-        if(lefty.GetComponent<HP>().hp <= 0){
-            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
-            EndMatch();
-        }
     }
 
+    public void DisplayPoints(Vector3 position){
+        GameObject display;
+        display = Instantiate(displayPrefab, position, Quaternion.identity);
+        display.GetComponentInChildren<TextMeshPro>().text = ball.GetComponent<Ball>().score.ToString();
+        display.GetComponentInChildren<Animator>().Play("Ball Points", 0, 0f);
+    }
+    public void DisplayDamage(Vector3 position){
+        GameObject display;
+
+        if(position.x < 0){
+            position.x += 1.5f;  
+        }else{
+            position.x -= 1.5f;  
+        }
+        display = Instantiate(displayPrefab, position, Quaternion.identity);
+        display.GetComponentInChildren<TextMeshPro>().text = "-" + ball.GetComponent<Ball>().score.ToString();
+        display.GetComponentInChildren<Animator>().Play("Damaged", 0, 0f);
+    }
      public void LeftHPPickUp(){
         lefty.GetComponent<HP>().hp += targetHealthPickUp;
         lefty.GetComponent<HP>().UpdateHealth();
@@ -188,19 +209,25 @@ public class GameManager : MonoBehaviour
 
     public void OnPause(){
         //Debug.Log("OnPause Called.");
-        am.Play("ButtonPress");
+        FindObjectOfType<AudioManager>().Play("ButtonPress");
         if(gamePaused){
             Debug.Log("Resume!");
             gamePaused = false;
             Time.timeScale = 1f;
             gameMenu.SetActive(true);
             pauseMenu.SetActive(false);
+            if(launchTxt.activeSelf){
+                launchTxt.SetActive(false);
+            }
         }else{
             Debug.Log("Pause.");
             gamePaused = true;
             Time.timeScale = 0f;
             gameMenu.SetActive(false);
             pauseMenu.SetActive(true);
+            if(timeValue > 0){
+                launchTxt.SetActive(true);
+            }
         }
     }
 
@@ -261,6 +288,7 @@ public void resetPointTargets(GameObject curr){
     }
 
     public void EndMatch(){
+        timeValue = -1;
         ball.SetActive(false);
         targetManager.SetActive(false);
         pointsTargetManager.SetActive(false);
