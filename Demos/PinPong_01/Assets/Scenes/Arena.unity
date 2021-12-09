@@ -1172,32 +1172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b14ac9acd9e264a89a8eb3ea07eca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 7628285168627771273, guid: 24624b0fd421b024380d8381d46a2e85, type: 3}
-  ball: {fileID: 0}
-  displayPrefab: {fileID: 6620945977249683010, guid: bd7828f35d198f741a9e7904b032cc13, type: 3}
-  launchTxt: {fileID: 1347494348}
-  lefty: {fileID: 889358449}
-  leftGoal: {fileID: 1966721394}
-  righty: {fileID: 1990180243}
-  rightGoal: {fileID: 1649533356}
-  gameMenu: {fileID: 113500079}
-  lScoreTxt: {fileID: 1419582333}
-  rScoreTxt: {fileID: 1725662973}
-  resetMenu: {fileID: 1002333491}
-  pauseMenu: {fileID: 1654652304}
-  timeValue: 4
-  targetManager: {fileID: 1305210467}
-  pointsTargetManager: {fileID: 497672410}
-  powerupManager: {fileID: 0}
-  currentLayout: {fileID: 0}
-  pointTargetsCurrentLayout: {fileID: 0}
-  powerupCurrentLayout: {fileID: 0}
-  targetsBroken: 0
-  pointTargetsBroken: 0
-  numTargets: 0
-  targetHealthPickUp: 50
-  powerupTimerValue: 20
---- !u!4 &358041412
+--- !u!4 &358041412 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5974524444443660116, guid: 54685402af0bb9c4d90949ba4f16327d, type: 3}
   m_PrefabInstance: {fileID: 1352215520}
@@ -2043,7 +2018,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1764967007}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Rematch
         m_Mode: 1
@@ -2053,18 +2028,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: ButtonPress
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &799963746
@@ -6078,7 +6041,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1764967007}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ToMainMenu
         m_Mode: 1
@@ -6088,18 +6051,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: ButtonPress
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1672056397
@@ -6562,7 +6513,11 @@ MonoBehaviour:
   currentLayout: {fileID: 0}
   pointTargetsCurrentLayout: {fileID: 0}
   powerupCurrentLayout: {fileID: 0}
+  targetsBroken: 0
+  pointTargetsBroken: 0
+  numTargets: 0
   targetHealthPickUp: 50
+  powerupTimerValue: 20
 --- !u!1 &1768625390
 GameObject:
   m_ObjectHideFlags: 0
@@ -7786,7 +7741,7 @@ Transform:
   - {fileID: 847617345}
   - {fileID: 197770474}
   - {fileID: 2125997062}
-  - {fileID: 318654080}
+  - {fileID: 358041412}
   m_Father: {fileID: 497672411}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

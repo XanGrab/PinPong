@@ -343,12 +343,14 @@ public void updateNumTargets() {
     }
 
     public void Rematch(){
+        am.Play("ButtonPress");
+        settings.gameObject.SetActive(true);
         SceneManager.LoadScene("Arena");
     }
 
     public void ToMainMenu(){
+        am.Play("ButtonPress");
         if(gamePaused){
-            am.Play("ButtonPress");
             OnPause();
         }
         
