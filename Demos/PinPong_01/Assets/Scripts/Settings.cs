@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Audio;
@@ -11,11 +12,20 @@ public class Settings : MonoBehaviour
     public float SFXVol;
     public int qualityVal;
 
+    public static Settings instance;
     public AudioMixer audioMixer;
     public TMP_Dropdown resolutionDropdown;
     Resolution[] resolutions;
 
     void Awake(){
+        if(instance != null){
+            Destroy(gameObject);
+            return;
+        }else{
+            instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
+
         resolutions = Screen.resolutions;
         List<string> resolutionOptions = new List<string>(resolutions.Length);
         int currentResolutionIndex = 0;
@@ -35,10 +45,15 @@ public class Settings : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
-        SetMusicVolume(musicVol);
-        SetSFXVolume(SFXVol);
-        SetQuality(qualityVal);
+        //SetMusicVolume(musicVol);
+        //SetSFXVolume(SFXVol);
+        //SetQuality(qualityVal);
     }
+
+    /*void OnSceneLoaded()
+    {
+        gameObject.SetActive(true);
+    }*/
 
     public void SetMusicVolume(float volume){
         audioMixer.SetFloat("MusicVolume", volume);

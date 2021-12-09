@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     public GameObject rScoreTxt;
     public GameObject resetMenu;
     public GameObject pauseMenu;
+    public Settings settings;
     private int lScore;
     private int rScore;
 
@@ -66,6 +67,13 @@ public class GameManager : MonoBehaviour
     AudioManager am;
 
     void Awake(){
+        settings = FindObjectOfType<Settings>();
+        if(settings == null){
+            Debug.LogError("null settings");
+            return;
+        }
+        settings.gameObject.SetActive(false);
+        
         controls = new PlayerControls();
         _instance = this;
         //controls.Player.Pause.canceled += ctx => OnPause();
@@ -208,7 +216,7 @@ public class GameManager : MonoBehaviour
     }*/
 
     public void OnPause(){
-        //Debug.Log("OnPause Called.");
+        Debug.Log("OnPause Called.");
         FindObjectOfType<AudioManager>().Play("ButtonPress");
         if(gamePaused){
             Debug.Log("Resume!");
@@ -216,8 +224,9 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
             gameMenu.SetActive(true);
             pauseMenu.SetActive(false);
-            if(launchTxt.activeSelf){
-                launchTxt.SetActive(false);
+            settings.gameObject.SetActive(false);
+            if(timeValue > 0){
+                launchTxt.SetActive(true);
             }
         }else{
             Debug.Log("Pause.");
@@ -225,9 +234,8 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0f;
             gameMenu.SetActive(false);
             pauseMenu.SetActive(true);
-            if(timeValue > 0){
-                launchTxt.SetActive(true);
-            }
+            settings.gameObject.SetActive(true);
+            launchTxt.SetActive(false);
         }
     }
 
@@ -315,6 +323,7 @@ public void resetPointTargets(GameObject curr){
         //int currTime = am.GetSoundTime("ArenaTheme");
         am.Stop("ArenaTheme");
         am.Play("MenuTheme");
+        settings.gameObject.SetActive(true);
         SceneManager.LoadScene("Main Menu");
     }
 }

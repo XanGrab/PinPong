@@ -6,7 +6,14 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     Settings settings;
-    private void Awake() {
+    void Awake() {
+        settings = FindObjectOfType<Settings>();
+        if(settings == null){
+            Debug.LogError("null settings");
+            return;
+        }
+        settings.gameObject.SetActive(false);
+
         QualitySettings.SetQualityLevel(3);
         Resolution[] resolutions = Screen.resolutions;
         int currentResolutionIndex = 0;
@@ -28,7 +35,16 @@ public class MainMenu : MonoBehaviour
         int currTime = am.GetSoundTime("MenuTheme");
         am.Stop("MenuTheme");
         am.Play("ArenaTheme");
+        //test
+        settings.gameObject.SetActive(true);
         SceneManager.LoadScene("Arena");
+    }
+
+    public void EnableOptions(){
+        settings.gameObject.SetActive(true);
+    }
+    public void DisableOptions(){
+        settings.gameObject.SetActive(false);
     }
 
     public void QuitGame(){
