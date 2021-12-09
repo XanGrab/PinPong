@@ -23,7 +23,7 @@ public class Parallax : MonoBehaviour
     {
         if(!GameManager.gamePaused){
             myTrans.Translate(moveSpeed, 0, 0);
-            if(myTrans.position.x > (startPos.x + (1.5 * mySprite.bounds.size.x))){
+            if(myTrans.position.x > (startPos.x + (1.8 * mySprite.bounds.size.x))){
                 myTrans.position = new Vector3 (startPos.x - (1.5f * mySprite.bounds.size.x), myTrans.position.y, myTrans.position.z);
             }
         }

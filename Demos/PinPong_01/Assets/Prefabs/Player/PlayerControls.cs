@@ -223,7 +223,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""7d0e90e4-f78b-4e75-b1dd-b6ac12e09c13"",
                     ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Left Keyboard;Right Keyboard"",
                     ""action"": ""Pause"",

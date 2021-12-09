@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     }
 
     [Header("Ball")]
+    public GameObject ballPrefab;
     public GameObject ball;
 
     [Header("Player Input")]
@@ -45,9 +46,10 @@ public class GameManager : MonoBehaviour
     private int lScore;
     private int rScore;
 
-    /*[Header("Timer")]
-    public Text timerText;
-    public float timeValue = 90;*/
+    [Header("Timer")]
+    //public Text timerText;
+    public float timeValue;
+    public GameObject launchTxt;
 
     [Header("Targets")]
     public GameObject targetManager;
@@ -76,6 +78,7 @@ public class GameManager : MonoBehaviour
         //lefty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Left Keyboard", Keyboard.current);
         //righty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Right Keyboard", Keyboard.current);
         am = FindObjectOfType<AudioManager>();
+        timeValue = 4f;
         currentLayout = targetManager.transform.GetChild(0).gameObject;
         pointsTargetManager = GameObject.Find("Points Target Manager");
         pointTargetsCurrentLayout = pointsTargetManager.transform.GetChild(0).gameObject;
@@ -86,6 +89,18 @@ public class GameManager : MonoBehaviour
     void Update(){
         if(playing && (!gamePaused)){
 
+            if(Mathf.FloorToInt(timeValue) > 0){
+                launchTxt.GetComponent<TextMeshProUGUI>().text = Mathf.FloorToInt(timeValue).ToString();
+                timeValue -= Time.deltaTime;
+            }if(Mathf.FloorToInt(timeValue) == 0){
+                timeValue = -1;
+                
+                launchTxt.SetActive(false);
+                Debug.Log("Seting a paddle velocity to zero!");
+                Debug.Log("Calling Ball Reset");
+                ball = Instantiate(ballPrefab, new Vector3(0.0f, 0.0f, 1f), Quaternion.identity);
+                //ball.GetComponent<Ball>().Reset();
+            }
             /*
             timeValue -= Time.deltaTime;
             DisplayTime(timeValue);
@@ -109,7 +124,12 @@ public class GameManager : MonoBehaviour
         righty.GetComponent<HP>().hp -= ball.GetComponent<Ball>().score;
         righty.GetComponent<HP>().UpdateHealth();
         lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
-        ball.GetComponent<Ball>().Reset();
+        //ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Destroy(ball);
+        launchTxt.SetActive(true);
+        timeValue = 4;
+        //launchTxt.SetActive(true);
+        //ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
         resetPointTargets(pointTargetsCurrentLayout);
         resetPowerUp(powerupCurrentLayout);
@@ -126,7 +146,11 @@ public class GameManager : MonoBehaviour
         lefty.GetComponent<HP>().hp -= ball.GetComponent<Ball>().score;
         lefty.GetComponent<HP>().UpdateHealth();
         rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
-        ball.GetComponent<Ball>().Reset();
+        //ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Destroy(ball);
+        launchTxt.SetActive(true);
+        timeValue = 4;
+        //ball.GetComponent<Ball>().Reset();
         resetTargets(currentLayout);
         resetPointTargets(pointTargetsCurrentLayout);
         resetPowerUp(powerupCurrentLayout);
@@ -163,6 +187,8 @@ public class GameManager : MonoBehaviour
     }*/
 
     public void OnPause(){
+        //Debug.Log("OnPause Called.");
+        am.Play("ButtonPress");
         if(gamePaused){
             Debug.Log("Resume!");
             gamePaused = false;
@@ -232,7 +258,6 @@ public void resetPointTargets(GameObject curr){
         loser.SetActive(false);
         loser.GetComponent<SpriteRenderer>().enabled = true;
         resetMenu.SetActive(true);
-        
     }
 
     public void EndMatch(){
@@ -259,9 +284,9 @@ public void resetPointTargets(GameObject curr){
             OnPause();
         }
         
-        int currTime = am.GetSoundTime("ArenaTheme");
+        //int currTime = am.GetSoundTime("ArenaTheme");
         am.Stop("ArenaTheme");
-        am.Play("MenuTheme", currTime);
+        am.Play("MenuTheme");
         SceneManager.LoadScene("Main Menu");
     }
 }

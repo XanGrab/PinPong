@@ -39,6 +39,11 @@ public class Player : MonoBehaviour
             input.SwitchCurrentControlScheme(d, Keyboard.current);
         //}
         controls = new PlayerControls();
+        
+        playerWalls = GameObject.FindGameObjectsWithTag("PlayerWall");
+        foreach(GameObject wall in playerWalls){
+            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>());
+        }
     }
 
     public void UnFreeze() {
@@ -57,7 +62,6 @@ public class Player : MonoBehaviour
         hj = gameObject.GetComponent<HingeJoint2D>();
         am = FindObjectOfType<AudioManager>();
         walls = GameObject.FindGameObjectsWithTag("Wall");
-        playerWalls = GameObject.FindGameObjectsWithTag("PlayerWall");
 
         SetMoveComponents();
         playerState = state.Move;
@@ -78,7 +82,8 @@ public class Player : MonoBehaviour
                 }
                 SetFlipComponents();
                 playerState = state.FlipUp;
-                am.Play("Flip");
+                //am.Play("Flip");
+                FindObjectOfType<AudioManager>().Play("Flip");
             }
         }
     }
@@ -95,7 +100,8 @@ public class Player : MonoBehaviour
                 SetFlipComponents();
                 //flippingDown = ctx.action.triggered;
                 playerState = state.FlipDown;
-                am.Play("Flip");
+                //am.Play("Flip");
+                FindObjectOfType<AudioManager>().Play("Flip");
             }
         }
     }
@@ -107,9 +113,6 @@ public class Player : MonoBehaviour
         foreach(GameObject wall in walls){
             Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>(), false);
         }
-        foreach(GameObject wall in playerWalls){
-            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>(), false);
-        }
     }
 
     void SetFlipComponents(){
@@ -117,9 +120,6 @@ public class Player : MonoBehaviour
         hj.enabled = true;
         
         foreach(GameObject wall in walls){
-            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>());
-        }
-        foreach(GameObject wall in playerWalls){
             Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>());
         }
     }

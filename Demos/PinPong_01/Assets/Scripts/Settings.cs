@@ -7,6 +7,10 @@ using UnityEngine.Audio;
 
 public class Settings : MonoBehaviour
 {
+    public float musicVol;
+    public float SFXVol;
+    public int qualityVal;
+
     public AudioMixer audioMixer;
     public TMP_Dropdown resolutionDropdown;
     Resolution[] resolutions;
@@ -17,7 +21,9 @@ public class Settings : MonoBehaviour
         int currentResolutionIndex = 0;
         for(int i = 0; i < resolutions.Length; i++){
             string option = resolutions[i].width + " x " + resolutions[i].height;
-            resolutionOptions.Add(option);
+            if(!resolutionOptions.Contains(option)){
+                resolutionOptions.Add(option);
+            }
 
             if(resolutions[i].Equals(Screen.currentResolution)){
                 currentResolutionIndex = i;
@@ -29,7 +35,9 @@ public class Settings : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
-        SetQuality(3);
+        SetMusicVolume(musicVol);
+        SetSFXVolume(SFXVol);
+        SetQuality(qualityVal);
     }
 
     public void SetMusicVolume(float volume){

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -13,6 +14,7 @@ public class Ball : MonoBehaviour
     public Rigidbody2D rb;
     public Vector2 startPos;
     private TrailRenderer trail;
+    private float launchTime;
     private Renderer _render;
     Color initColor;
     private float lerpValue;
@@ -25,12 +27,14 @@ public class Ball : MonoBehaviour
         trail = GetComponent<TrailRenderer>();
         //startGradient = trail.colorGradient;
         _render = GetComponent<Renderer>();
+        //launchText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         playerWalls = GameObject.FindGameObjectsWithTag("PlayerWall");
         foreach(GameObject wall in playerWalls){
             Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>());
         }
         initColor = Color.white;
         lerpValue = 0f;
+        //launchTime = 4;
         Launch();
     }
 
@@ -41,7 +45,8 @@ public class Ball : MonoBehaviour
         }
     }
 
-    private void Launch(){
+    public void Launch(){
+        //trail.Clear();
         score = 100;
         float x = Random.Range(0, 2) == 0 ? -1 : 1;
         float y = Random.Range(0, 2) == 0 ? -1 : 1;
@@ -51,8 +56,13 @@ public class Ball : MonoBehaviour
     public void Reset(){
         transform.position = startPos;
         FindObjectOfType<AudioManager>().Play("Break");
+        //transform.GetChild(0).gameObject.SetActive(true);
         Launch();
         //trail.Clear();
+        //launchTime = 4;
+        
+        //WHY???
+        //rb.velocity = Vector2.zero;
         lerpValue = 0f;
         trail.material.color = initColor;
         _render.material.color = trail.material.color;

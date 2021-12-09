@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
         if(instance == null){
             instance = this;
         }else{
-            Destroy(this);
+            Destroy(this.gameObject);
             return;
         }
         DontDestroyOnLoad(gameObject);
@@ -38,7 +38,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound: " + s.name + " source missing.");
             return;
         }        
-        Debug.Log("Sound: " + name);
+        Debug.Log("Sound Played: " + name);
         s.source.Play();
     }
     public void Play(string name, int time){
@@ -58,13 +58,15 @@ public class AudioManager : MonoBehaviour
     public void Stop(string name){
         Sound s = Array.Find(sounds, sound => sound.name == name); 
         if(s == null){
-            Debug.LogWarning("Sount: " + s.name + " not found.");
+            Debug.LogWarning("Sound: " + s.name + " not found.");
             return;
         }        
         if(s.source == null){
             Debug.LogWarning("Sound: " + s.name + " source missing.");
             return;
         }        
+
+        Debug.Log("Sound Stoped: " + s.name);
         s.source.Stop();
     }
 
