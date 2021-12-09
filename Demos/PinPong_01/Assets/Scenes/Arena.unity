@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Target
       objectReference: {fileID: 0}
+    - target: {fileID: 4810142032927427160, guid: a3f0e213a47569649bf07a1aaddd926a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4810142032927427164, guid: a3f0e213a47569649bf07a1aaddd926a, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -199,6 +203,10 @@ PrefabInstance:
     - target: {fileID: 4810142032927427160, guid: a3f0e213a47569649bf07a1aaddd926a, type: 3}
       propertyPath: m_Name
       value: Target
+      objectReference: {fileID: 0}
+    - target: {fileID: 4810142032927427160, guid: a3f0e213a47569649bf07a1aaddd926a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4810142032927427164, guid: a3f0e213a47569649bf07a1aaddd926a, type: 3}
       propertyPath: m_RootOrder
@@ -559,6 +567,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2067404959}
     m_Modifications:
+    - target: {fileID: 5974524444443660112, guid: 54685402af0bb9c4d90949ba4f16327d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5974524444443660116, guid: 54685402af0bb9c4d90949ba4f16327d, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1160,7 +1172,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b14ac9acd9e264a89a8eb3ea07eca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &318654080 stripped
+  ballPrefab: {fileID: 7628285168627771273, guid: 24624b0fd421b024380d8381d46a2e85, type: 3}
+  ball: {fileID: 0}
+  displayPrefab: {fileID: 6620945977249683010, guid: bd7828f35d198f741a9e7904b032cc13, type: 3}
+  launchTxt: {fileID: 1347494348}
+  lefty: {fileID: 889358449}
+  leftGoal: {fileID: 1966721394}
+  righty: {fileID: 1990180243}
+  rightGoal: {fileID: 1649533356}
+  gameMenu: {fileID: 113500079}
+  lScoreTxt: {fileID: 1419582333}
+  rScoreTxt: {fileID: 1725662973}
+  resetMenu: {fileID: 1002333491}
+  pauseMenu: {fileID: 1654652304}
+  timeValue: 4
+  targetManager: {fileID: 1305210467}
+  pointsTargetManager: {fileID: 497672410}
+  powerupManager: {fileID: 0}
+  currentLayout: {fileID: 0}
+  pointTargetsCurrentLayout: {fileID: 0}
+  powerupCurrentLayout: {fileID: 0}
+  targetsBroken: 0
+  pointTargetsBroken: 0
+  numTargets: 0
+  targetHealthPickUp: 50
+  powerupTimerValue: 20
+--- !u!4 &358041412
 Transform:
   m_CorrespondingSourceObject: {fileID: 5974524444443660116, guid: 54685402af0bb9c4d90949ba4f16327d, type: 3}
   m_PrefabInstance: {fileID: 1352215520}
@@ -1495,6 +1532,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Target
       objectReference: {fileID: 0}
+    - target: {fileID: 4810142032927427160, guid: a3f0e213a47569649bf07a1aaddd926a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4810142032927427164, guid: a3f0e213a47569649bf07a1aaddd926a, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1828,6 +1869,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Target
       objectReference: {fileID: 0}
+    - target: {fileID: 4810142032927427160, guid: a3f0e213a47569649bf07a1aaddd926a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4810142032927427161, guid: a3f0e213a47569649bf07a1aaddd926a, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -2087,6 +2132,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2067404959}
     m_Modifications:
+    - target: {fileID: 5974524444443660112, guid: 54685402af0bb9c4d90949ba4f16327d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5974524444443660116, guid: 54685402af0bb9c4d90949ba4f16327d, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3731,6 +3780,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2067404959}
     m_Modifications:
+    - target: {fileID: 5974524444443660112, guid: 54685402af0bb9c4d90949ba4f16327d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5974524444443660116, guid: 54685402af0bb9c4d90949ba4f16327d, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -4489,6 +4542,10 @@ PrefabInstance:
     - target: {fileID: 5974524444443660112, guid: 54685402af0bb9c4d90949ba4f16327d, type: 3}
       propertyPath: m_Name
       value: Target Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5974524444443660112, guid: 54685402af0bb9c4d90949ba4f16327d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5974524444443660116, guid: 54685402af0bb9c4d90949ba4f16327d, type: 3}
       propertyPath: m_RootOrder
@@ -6367,6 +6424,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Target Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5974524444443660112, guid: 54685402af0bb9c4d90949ba4f16327d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5974524444443660116, guid: 54685402af0bb9c4d90949ba4f16327d, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -6770,6 +6831,10 @@ PrefabInstance:
     - target: {fileID: 4810142032927427160, guid: a3f0e213a47569649bf07a1aaddd926a, type: 3}
       propertyPath: m_Name
       value: Target
+      objectReference: {fileID: 0}
+    - target: {fileID: 4810142032927427160, guid: a3f0e213a47569649bf07a1aaddd926a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4810142032927427161, guid: a3f0e213a47569649bf07a1aaddd926a, type: 3}
       propertyPath: m_IsTrigger

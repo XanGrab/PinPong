@@ -60,8 +60,11 @@ public class GameManager : MonoBehaviour
     public GameObject currentLayout;
     public GameObject pointTargetsCurrentLayout;
     public GameObject powerupCurrentLayout;
+    public int targetsBroken = 0;
+    public int pointTargetsBroken = 0;
+    public int numTargets;
     public int targetHealthPickUp;
-
+    public float powerupTimerValue = 20;
     private static bool playing;
     public static bool gamePaused;
     AudioManager am;
@@ -93,11 +96,12 @@ public class GameManager : MonoBehaviour
         pointTargetsCurrentLayout = pointsTargetManager.transform.GetChild(0).gameObject;
         powerupManager = GameObject.Find("Powerup Manager");
         powerupCurrentLayout = powerupManager.transform.GetChild(Random.Range(0, pointsTargetManager.transform.childCount - 1)).gameObject;
+        numTargets = 4;
     }
 
     void Update(){
         if(playing && (!gamePaused)){
-
+            powerupTimerValue -= Time.deltaTime;
             if(Mathf.FloorToInt(timeValue) > 0){
                 launchTxt.GetComponent<TextMeshProUGUI>().text = Mathf.FloorToInt(timeValue).ToString();
                 timeValue -= Time.deltaTime;
@@ -109,6 +113,19 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Calling Ball Reset");
                 ball = Instantiate(ballPrefab, new Vector3(0.0f, 0.0f, 1f), Quaternion.identity);
                 //ball.GetComponent<Ball>().Reset();
+            }
+
+            if (targetsBroken == numTargets) {
+                targetsBroken = 0;
+                resetTargets(currentLayout);
+            }
+            if (pointTargetsBroken == numTargets) {
+                pointTargetsBroken = 0;
+                resetPointTargets(pointTargetsCurrentLayout);
+            }
+            if (powerupTimerValue < 1) {
+                resetPowerUp();
+                powerupTimerValue = Random.Range(15, 25);
             }
             /*
             timeValue -= Time.deltaTime;
@@ -128,15 +145,17 @@ public class GameManager : MonoBehaviour
     }
 
     public void leftScored(){
-        if(righty.GetComponent<HP>().hp <= 0){
-            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
-            EndMatch();
-        }
+        
         am.Play("Break");
         //Debug.Log("Right HP" + righty.GetComponent<HP>().hp);
         //lScore += ball.GetComponent<Ball>().score;
         righty.GetComponent<HP>().hp -= ball.GetComponent<Ball>().score;
         righty.GetComponent<HP>().UpdateHealth();
+        if(righty.GetComponent<HP>().hp <= 0){
+            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
+            EndMatch();
+            return;
+        }
         lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
         //ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         Destroy(ball);
@@ -144,31 +163,32 @@ public class GameManager : MonoBehaviour
         timeValue = 4;
         //launchTxt.SetActive(true);
         //ball.GetComponent<Ball>().Reset();
+         updateNumTargets();
         resetTargets(currentLayout);
         resetPointTargets(pointTargetsCurrentLayout);
-        resetPowerUp(powerupCurrentLayout);
     }
 
     public void rightScored(){
-        if(lefty.GetComponent<HP>().hp <= 0){
-            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
-            EndMatch();
-        }
         am.Play("Break");
         //Debug.Log("Left HP: " + lefty.GetComponent<HP>().hp);
         rScore += ball.GetComponent<Ball>().score;
         //lefty.GetComponent<HP>().hp--;
         lefty.GetComponent<HP>().hp -= ball.GetComponent<Ball>().score;
         lefty.GetComponent<HP>().UpdateHealth();
+         if(lefty.GetComponent<HP>().hp <= 0){
+            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
+            EndMatch();
+            return;
+        }
         rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
         //ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         Destroy(ball);
         launchTxt.SetActive(true);
         timeValue = 4;
         //ball.GetComponent<Ball>().Reset();
+         updateNumTargets();
         resetTargets(currentLayout);
         resetPointTargets(pointTargetsCurrentLayout);
-        resetPowerUp(powerupCurrentLayout);
     }
 
     public void DisplayPoints(Vector3 position){
@@ -177,6 +197,7 @@ public class GameManager : MonoBehaviour
         display.GetComponentInChildren<TextMeshPro>().text = ball.GetComponent<Ball>().score.ToString();
         display.GetComponentInChildren<Animator>().Play("Ball Points", 0, 0f);
     }
+
     public void DisplayDamage(Vector3 position){
         GameObject display;
 
@@ -239,20 +260,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void resetTargets(GameObject curr){
+     public void resetTargets(GameObject curr){
         curr.SetActive(true);
-        for(int i = 0; i < curr.transform.childCount; i++){
+        for(int i = 0; i < numTargets; i++){
         float randX = Random.Range(-10.0f, 10.0f);
         float randY = Random.Range(-5.30f, 6.50F);
         //Debug.Log("x: " + randX + " | y: " + randY);
             curr.transform.GetChild(i).position= new Vector3(randX, randY, 0);
             curr.transform.GetChild(i).gameObject.SetActive(true);
         }
+        //numberOfTargets = 4;
     }
 
 public void resetPointTargets(GameObject curr){
         curr.SetActive(true);
-        for(int i = 0; i < curr.transform.childCount; i++){
+        for(int i = 0; i < numTargets; i++){
         float randX = Random.Range(-10.0f, 10.0f);
         float randY = Random.Range(-5.30f, 6.50F);
         //Debug.Log("x: " + randX + " | y: " + randY);
@@ -261,14 +283,24 @@ public void resetPointTargets(GameObject curr){
         }
     }
 
-    public void resetPowerUp(GameObject curr) {
-        curr.SetActive(false);
+public void updateNumTargets() {
+    int leftHp = lefty.GetComponent<HP>().hp;
+    int rightHp = righty.GetComponent<HP>().hp;
+    if (((leftHp + rightHp) <= 1500) && ((leftHp + rightHp) > 1000)) {
+        numTargets = 5;
+    }
+     if ((leftHp + rightHp) <= 1000) {
+        numTargets = 6;
+    }
+}
+    public void resetPowerUp() {
+        powerupCurrentLayout.SetActive(false);
          int rand = Random.Range(0, (powerupManager.transform.childCount));
-        curr = powerupManager.transform.GetChild(rand).gameObject;
+        powerupCurrentLayout = powerupManager.transform.GetChild(rand).gameObject;
         float randX = Random.Range(-10.0f, 10.0f);
         float randY = Random.Range(-5.30f, 6.50F);
-        curr.transform.position= new Vector3(randX, randY, 0);
-        curr.gameObject.SetActive(true);
+        powerupCurrentLayout.transform.position= new Vector3(randX, randY, 0);
+        powerupCurrentLayout.gameObject.SetActive(true);
     }
 
     private IEnumerator Animate(GameObject winner, GameObject loser){

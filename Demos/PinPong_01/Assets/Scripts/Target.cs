@@ -32,5 +32,6 @@ public class Target : MonoBehaviour
         gameObject.SetActive(false);
         box2D.enabled = true;
         mr.enabled = true;
+        FindObjectOfType<GameManager>().targetsBroken++;
     }
 }
