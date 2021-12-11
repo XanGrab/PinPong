@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
             Debug.LogError("null settings");
             return;
         }
-        settings.gameObject.SetActive(false);
+        settings.GetComponent<Canvas>().enabled = false;
 
         QualitySettings.SetQualityLevel(3);
         Resolution[] resolutions = Screen.resolutions;
@@ -36,18 +36,13 @@ public class MainMenu : MonoBehaviour
         am.Stop("MenuTheme");
         am.Play("ArenaTheme");
         //test
-        settings.gameObject.SetActive(true);
         SceneManager.LoadScene("Arena");
     }
 
     public void EnableOptions(){
-        settings.gameObject.SetActive(true);
+        settings.GetComponent<Canvas>().enabled = true;
     }
     public void DisableOptions(){
-        settings.gameObject.SetActive(false);
-    }
-
-    public void QuitGame(){
-        Application.Quit();
+        settings.GetComponent<Canvas>().enabled = false;
     }
 }

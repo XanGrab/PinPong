@@ -8,21 +8,23 @@ using UnityEngine.Audio;
 
 public class Settings : MonoBehaviour
 {
+    private static Settings _instance;
+    public static Settings Instance { get{ return _instance; } }    
+
     public float musicVol;
     public float SFXVol;
     public int qualityVal;
 
-    public static Settings instance;
     public AudioMixer audioMixer;
     public TMP_Dropdown resolutionDropdown;
     Resolution[] resolutions;
 
-    void Awake(){
-        if(instance != null){
+    private void Awake(){
+        if(_instance != null && _instance != this){
             Destroy(gameObject);
             return;
         }else{
-            instance = this;
+            _instance = this;
         }
         DontDestroyOnLoad(gameObject);
 
@@ -49,11 +51,6 @@ public class Settings : MonoBehaviour
         //SetSFXVolume(SFXVol);
         //SetQuality(qualityVal);
     }
-
-    /*void OnSceneLoaded()
-    {
-        gameObject.SetActive(true);
-    }*/
 
     public void SetMusicVolume(float volume){
         audioMixer.SetFloat("MusicVolume", volume);

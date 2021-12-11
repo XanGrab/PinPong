@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
             Debug.LogError("null settings");
             return;
         }
-        settings.gameObject.SetActive(false);
+        settings.GetComponent<Canvas>().enabled = false;
         
         controls = new PlayerControls();
         _instance = this;
@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
         gamePaused = false;
         gameMenu.SetActive(true);
         resetMenu.SetActive(false);
+        launchTxt.SetActive(true);
 
         //lefty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Left Keyboard", Keyboard.current);
         //righty.GetComponent<PlayerInput>().SwitchCurrentControlScheme(controlScheme: "Right Keyboard", Keyboard.current);
@@ -102,6 +103,10 @@ public class GameManager : MonoBehaviour
     void Update(){
         if(playing && (!gamePaused)){
             powerupTimerValue -= Time.deltaTime;
+            
+            /**
+            * Launches the Countdown sequence if timeValue > 0, else tiemValue is set to -1 when disabled
+            */
             if(Mathf.FloorToInt(timeValue) > 0){
                 launchTxt.GetComponent<TextMeshProUGUI>().text = Mathf.FloorToInt(timeValue).ToString();
                 timeValue -= Time.deltaTime;
@@ -115,6 +120,9 @@ public class GameManager : MonoBehaviour
                 //ball.GetComponent<Ball>().Reset();
             }
 
+            /**
+            * Resets target layouts if all targets destroyed
+            */
             if (targetsBroken == numTargets) {
                 targetsBroken = 0;
                 resetTargets(currentLayout);
@@ -127,70 +135,50 @@ public class GameManager : MonoBehaviour
                 resetPowerUp();
                 powerupTimerValue = Random.Range(15, 25);
             }
-            /*
-            timeValue -= Time.deltaTime;
-            DisplayTime(timeValue);
-
-            if(timeValue < 1){
-                if(lScore != rScore){
-                    playing = false;
-                    StartCoroutine(EndMatch());
-                }else{
-                    timeValue += 30;
-                }
-            }*/
         }
-        // Debug.Log(ball.GetComponent<Ball>().velo);
-        //  Debug.Log(ball.GetComponent<Ball>().speed);
     }
 
-    public void leftScored(){
-        
+    /**
+    * Handles the Event when a player scores
+    * 
+    * int param: player - determins the scoring player
+    */
+    public void Score( int player ){
+        // Play Score Sound and Update Health        
         am.Play("Break");
-        //Debug.Log("Right HP" + righty.GetComponent<HP>().hp);
-        //lScore += ball.GetComponent<Ball>().score;
-        righty.GetComponent<HP>().hp -= ball.GetComponent<Ball>().score;
-        righty.GetComponent<HP>().UpdateHealth();
-        if(righty.GetComponent<HP>().hp <= 0){
-            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
-            EndMatch();
-            return;
+        if(player == -1){
+            rScore += ball.GetComponent<Ball>().score;
+            lefty.GetComponent<HP>().hp -= ball.GetComponent<Ball>().score;
+            lefty.GetComponent<HP>().UpdateHealth();
+            if(lefty.GetComponent<HP>().hp <= 0){
+                EndMatch();
+                return;
+            }
+            rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
+        }else{
+            lScore += ball.GetComponent<Ball>().score;
+            righty.GetComponent<HP>().hp -= ball.GetComponent<Ball>().score;
+            righty.GetComponent<HP>().UpdateHealth();
+            if(righty.GetComponent<HP>().hp <= 0){
+                EndMatch();
+                return;
+            }
+            lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
         }
-        lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
-        //ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+        // Ready Launch Sequence
         Destroy(ball);
         launchTxt.SetActive(true);
         timeValue = 4;
-        //launchTxt.SetActive(true);
-        //ball.GetComponent<Ball>().Reset();
-         updateNumTargets();
+        updateNumTargets();
         resetTargets(currentLayout);
         resetPointTargets(pointTargetsCurrentLayout);
+
     }
 
-    public void rightScored(){
-        am.Play("Break");
-        //Debug.Log("Left HP: " + lefty.GetComponent<HP>().hp);
-        rScore += ball.GetComponent<Ball>().score;
-        //lefty.GetComponent<HP>().hp--;
-        lefty.GetComponent<HP>().hp -= ball.GetComponent<Ball>().score;
-        lefty.GetComponent<HP>().UpdateHealth();
-         if(lefty.GetComponent<HP>().hp <= 0){
-            //Debug.Log("Health: " + righty.GetComponent<Health>().health);
-            EndMatch();
-            return;
-        }
-        rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
-        //ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        Destroy(ball);
-        launchTxt.SetActive(true);
-        timeValue = 4;
-        //ball.GetComponent<Ball>().Reset();
-         updateNumTargets();
-        resetTargets(currentLayout);
-        resetPointTargets(pointTargetsCurrentLayout);
-    }
-
+    /**
+    * This method Displays the ball's point value when a ball breaks a target
+    */
     public void DisplayPoints(Vector3 position){
         GameObject display;
         display = Instantiate(displayPrefab, position, Quaternion.identity);
@@ -198,6 +186,9 @@ public class GameManager : MonoBehaviour
         display.GetComponentInChildren<Animator>().Play("Ball Points", 0, 0f);
     }
 
+    /**
+    * This method Displays the points lost when a ball enters a goal
+    */
     public void DisplayDamage(Vector3 position){
         GameObject display;
 
@@ -210,32 +201,20 @@ public class GameManager : MonoBehaviour
         display.GetComponentInChildren<TextMeshPro>().text = "-" + ball.GetComponent<Ball>().score.ToString();
         display.GetComponentInChildren<Animator>().Play("Damaged", 0, 0f);
     }
-     public void LeftHPPickUp(){
-        lefty.GetComponent<HP>().hp += targetHealthPickUp;
-        lefty.GetComponent<HP>().UpdateHealth();
-        //lScoreTxt.GetComponent<TextMeshProUGUI>().text = lScore.ToString();
-    }
 
-    public void RightHPPickUp(){
-        righty.GetComponent<HP>().hp += targetHealthPickUp;
-        righty.GetComponent<HP>().UpdateHealth();
-        //rScoreTxt.GetComponent<TextMeshProUGUI>().text = rScore.ToString();
-    }
-
-    /**
-     * Timer Functionality
-     */
-    /*void DisplayTime(float timeToDisplay){
-        if(timeToDisplay < 0){
-            timeToDisplay = 0;
+    /** 
+    * int param: player - determins the scoring player
+    */
+    public void HPPickUp(int player){
+        if(player == -1){
+            lefty.GetComponent<HP>().hp += targetHealthPickUp;
+            lefty.GetComponent<HP>().UpdateHealth();
+        }else{
+            righty.GetComponent<HP>().hp += targetHealthPickUp;
+            righty.GetComponent<HP>().UpdateHealth();
         }
-
-        int min = Mathf.FloorToInt(timeToDisplay / 60);
-        int sec = Mathf.FloorToInt(timeToDisplay % 60);
-
-        timerText.text = string.Format("{0:00}:{1:00}", min, sec);
-    }*/
-
+    }
+    
     public void OnPause(){
         Debug.Log("OnPause Called.");
         FindObjectOfType<AudioManager>().Play("ButtonPress");
@@ -245,7 +224,8 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
             gameMenu.SetActive(true);
             pauseMenu.SetActive(false);
-            settings.gameObject.SetActive(false);
+            //settings.gameObject.SetActive(false);
+            settings.GetComponent<Canvas>().enabled = false;
             if(timeValue > 0){
                 launchTxt.SetActive(true);
             }
@@ -255,7 +235,8 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0f;
             gameMenu.SetActive(false);
             pauseMenu.SetActive(true);
-            settings.gameObject.SetActive(true);
+            //settings.gameObject.SetActive(true);
+            settings.GetComponent<Canvas>().enabled = true;
             launchTxt.SetActive(false);
         }
     }
@@ -265,19 +246,16 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i < numTargets; i++){
         float randX = Random.Range(-10.0f, 10.0f);
         float randY = Random.Range(-5.30f, 6.50F);
-        //Debug.Log("x: " + randX + " | y: " + randY);
             curr.transform.GetChild(i).position= new Vector3(randX, randY, 0);
             curr.transform.GetChild(i).gameObject.SetActive(true);
         }
-        //numberOfTargets = 4;
     }
 
-public void resetPointTargets(GameObject curr){
+    public void resetPointTargets(GameObject curr){
         curr.SetActive(true);
         for(int i = 0; i < numTargets; i++){
         float randX = Random.Range(-10.0f, 10.0f);
         float randY = Random.Range(-5.30f, 6.50F);
-        //Debug.Log("x: " + randX + " | y: " + randY);
             curr.transform.GetChild(i).position= new Vector3(randX, randY, 0);
             curr.transform.GetChild(i).gameObject.SetActive(true);
         }
@@ -303,7 +281,7 @@ public void updateNumTargets() {
         powerupCurrentLayout.gameObject.SetActive(true);
     }
 
-    private IEnumerator Animate(GameObject winner, GameObject loser){
+    private IEnumerator EndAnimation(GameObject winner, GameObject loser){
         //Debug.Log("I happened.");
         am.Quiet("ArenaTheme", true);
         ParticleSystem death;
@@ -335,16 +313,16 @@ public void updateNumTargets() {
         powerupManager.SetActive(false);
         if(lefty.GetComponent<HP>().hp > righty.GetComponent<HP>().hp){
             //lefty.transform.GetChild(0).gameObject.SetActive(true);
-            StartCoroutine(Animate(lefty, righty));
+            StartCoroutine(EndAnimation(lefty, righty));
         }else if(lefty.GetComponent<HP>().hp < righty.GetComponent<HP>().hp){
             //righty.transform.GetChild(0).gameObject.SetActive(true);
-            StartCoroutine(Animate(righty, lefty));
+            StartCoroutine(EndAnimation(righty, lefty));
         }
     }
 
     public void Rematch(){
         am.Play("ButtonPress");
-        settings.gameObject.SetActive(true);
+        settings.GetComponent<Canvas>().enabled = true;
         SceneManager.LoadScene("Arena");
     }
 
@@ -354,10 +332,8 @@ public void updateNumTargets() {
             OnPause();
         }
         
-        //int currTime = am.GetSoundTime("ArenaTheme");
         am.Stop("ArenaTheme");
         am.Play("MenuTheme");
-        settings.gameObject.SetActive(true);
         SceneManager.LoadScene("Main Menu");
     }
 }

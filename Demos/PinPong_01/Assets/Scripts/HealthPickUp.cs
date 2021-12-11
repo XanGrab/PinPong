@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointTarget : MonoBehaviour
+public class HealthPickUp : MonoBehaviour
 {
     private ParticleSystem particles;
     private MeshRenderer mr;
@@ -23,10 +23,12 @@ public class PointTarget : MonoBehaviour
             StartCoroutine(Break());
             if (obj.gameObject.GetComponent<Ball>().touchedLast == -1) {
                 //GameManager.Instance.TargetLeftScored();
-                FindObjectOfType<GameManager>().LeftHPPickUp();
+                //FindObjectOfType<GameManager>().LeftHPPickUp();
+                FindObjectOfType<GameManager>().HPPickUp( -1 );
             } else if (obj.gameObject.GetComponent<Ball>().touchedLast == 1){
                 //GameManager.Instance.TargetRightScored();
-                FindObjectOfType<GameManager>().RightHPPickUp();
+                //FindObjectOfType<GameManager>().RightHPPickUp();
+                FindObjectOfType<GameManager>().HPPickUp( 1 );
             }
 
         }
