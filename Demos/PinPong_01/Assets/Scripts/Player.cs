@@ -129,7 +129,6 @@ public class Player : MonoBehaviour
         //Debug.Log(gameObject.name + " state: " + playerState);
         switch(playerState){
             case state.Move:
-            Debug.Log("MovVector: " + movVector);
                 rb.velocity = new Vector2(0, movVector.y * speed);
                 break;
             case state.FlipUp:

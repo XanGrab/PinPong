@@ -73,7 +73,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Left Keyboard"",
+                    ""groups"": ""KeyboardP1"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -84,7 +84,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Left Keyboard"",
+                    ""groups"": ""KeyboardP1"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -106,7 +106,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/i"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Right Keyboard"",
+                    ""groups"": ""KeyboardP2"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -117,7 +117,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Right Keyboard"",
+                    ""groups"": ""KeyboardP2"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -161,7 +161,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Right Keyboard"",
+                    ""groups"": ""KeyboardP2"",
                     ""action"": ""Flip Up"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -172,7 +172,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Left Keyboard"",
+                    ""groups"": ""KeyboardP1"",
                     ""action"": ""Flip Up"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -194,7 +194,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/l"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Right Keyboard"",
+                    ""groups"": ""KeyboardP2"",
                     ""action"": ""Flip Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -205,7 +205,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Left Keyboard"",
+                    ""groups"": ""KeyboardP1"",
                     ""action"": ""Flip Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -226,8 +226,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""Left Keyboard"",
-            ""bindingGroup"": ""Left Keyboard"",
+            ""name"": ""KeyboardP1"",
+            ""bindingGroup"": ""KeyboardP1"",
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
@@ -237,8 +237,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Right Keyboard"",
-            ""bindingGroup"": ""Right Keyboard"",
+            ""name"": ""KeyboardP2"",
+            ""bindingGroup"": ""KeyboardP2"",
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
@@ -369,22 +369,22 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
-    private int m_LeftKeyboardSchemeIndex = -1;
-    public InputControlScheme LeftKeyboardScheme
+    private int m_KeyboardP1SchemeIndex = -1;
+    public InputControlScheme KeyboardP1Scheme
     {
         get
         {
-            if (m_LeftKeyboardSchemeIndex == -1) m_LeftKeyboardSchemeIndex = asset.FindControlSchemeIndex("Left Keyboard");
-            return asset.controlSchemes[m_LeftKeyboardSchemeIndex];
+            if (m_KeyboardP1SchemeIndex == -1) m_KeyboardP1SchemeIndex = asset.FindControlSchemeIndex("KeyboardP1");
+            return asset.controlSchemes[m_KeyboardP1SchemeIndex];
         }
     }
-    private int m_RightKeyboardSchemeIndex = -1;
-    public InputControlScheme RightKeyboardScheme
+    private int m_KeyboardP2SchemeIndex = -1;
+    public InputControlScheme KeyboardP2Scheme
     {
         get
         {
-            if (m_RightKeyboardSchemeIndex == -1) m_RightKeyboardSchemeIndex = asset.FindControlSchemeIndex("Right Keyboard");
-            return asset.controlSchemes[m_RightKeyboardSchemeIndex];
+            if (m_KeyboardP2SchemeIndex == -1) m_KeyboardP2SchemeIndex = asset.FindControlSchemeIndex("KeyboardP2");
+            return asset.controlSchemes[m_KeyboardP2SchemeIndex];
         }
     }
     private int m_GamepadSchemeIndex = -1;

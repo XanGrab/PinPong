@@ -827,7 +827,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 231645003}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f47d3182fd12c8c43b3f33a907b3fb7e, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -2329,11 +2329,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5010156999936448973, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_DefaultControlScheme
-      value: Left Keyboard
+      value: KeyboardP1
       objectReference: {fileID: 0}
     - target: {fileID: 5010156999936448973, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5010156999936448973, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_NeverAutoSwitchControlSchemes
@@ -5992,7 +5992,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1639542287}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f47d3182fd12c8c43b3f33a907b3fb7e, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -7480,11 +7480,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5010156999936448973, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_DefaultControlScheme
-      value: Right Keyboard
+      value: KeyboardP2
       objectReference: {fileID: 0}
     - target: {fileID: 5010156999936448973, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5010156999936448973, guid: cf6c71b8c310de54bb5e36354c290658, type: 3}
       propertyPath: m_NeverAutoSwitchControlSchemes

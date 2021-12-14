@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     Settings settings;
+    AudioManager audioManager;
     void Awake() {
         settings = FindObjectOfType<Settings>();
         if(settings == null){
@@ -13,6 +14,12 @@ public class MainMenu : MonoBehaviour
             return;
         }
         settings.GetComponent<Canvas>().enabled = false;
+
+        audioManager = FindObjectOfType<AudioManager>();
+        if(audioManager == null){
+            Debug.LogError("null audio manager");
+            return;
+        }
 
         QualitySettings.SetQualityLevel(3);
         Resolution[] resolutions = Screen.resolutions;
@@ -44,5 +51,9 @@ public class MainMenu : MonoBehaviour
     }
     public void DisableOptions(){
         settings.GetComponent<Canvas>().enabled = false;
+    }
+
+    public void ButtonSound(){
+        audioManager.Play("ButtonPress");
     }
 }
