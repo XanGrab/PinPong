@@ -13,6 +13,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
     /// </summary>
     public class GamepadIconsExample : MonoBehaviour
     {
+        public GamepadIcons keyboard;
         public GamepadIcons xbox;
         public GamepadIcons ps4;
 
@@ -37,6 +38,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 icon = ps4.GetSprite(controlPath);
             else if (InputSystem.IsFirstLayoutBasedOnSecond(deviceLayoutName, "Gamepad"))
                 icon = xbox.GetSprite(controlPath);
+            else if (InputSystem.IsFirstLayoutBasedOnSecond(deviceLayoutName, "Keyboard"))
+                icon = keyboard.GetSprite(controlPath);
 
             var textComponent = component.bindingText;
 
@@ -79,6 +82,32 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             public Sprite rightStick;
             public Sprite leftStickPress;
             public Sprite rightStickPress;
+            public Sprite aKey;
+            public Sprite bKey;
+            public Sprite cKey;
+            public Sprite dKey;
+            public Sprite eKey;
+            public Sprite fKey;
+            public Sprite gKey;
+            public Sprite hKey;
+            public Sprite iKey;
+            public Sprite jKey;
+            public Sprite kKey;
+            public Sprite lKey;
+            public Sprite mKey;
+            public Sprite nKey;
+            public Sprite oKey;
+            public Sprite pKey;
+            public Sprite qKey;
+            public Sprite rKey;
+            public Sprite sKey;
+            public Sprite tKey;
+            public Sprite uKey;
+            public Sprite vKey;
+            public Sprite wKey;
+            public Sprite xKey;
+            public Sprite yKey;
+            public Sprite zKey;
 
             public Sprite GetSprite(string controlPath)
             {
@@ -105,6 +134,32 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                     case "rightStick": return rightStick;
                     case "leftStickPress": return leftStickPress;
                     case "rightStickPress": return rightStickPress;
+                    case "aKey": return aKey;
+                    case "bKey": return bKey;
+                    case "cKey": return cKey;
+                    case "dKey": return dKey;
+                    case "eKey": return eKey;
+                    case "fKey": return fKey;
+                    case "gKey": return gKey;
+                    case "hKey": return hKey;
+                    case "iKey": return iKey;
+                    case "jKey": return jKey;
+                    case "kKey": return kKey;
+                    case "lKey": return lKey;
+                    case "mKey": return mKey;
+                    case "nKey": return nKey;
+                    case "oKey": return oKey;
+                    case "pKey": return pKey;
+                    case "qKey": return qKey;
+                    case "rKey": return rKey;
+                    case "sKey": return sKey;
+                    case "tKey": return tKey;
+                    case "uKey": return uKey;
+                    case "vKey": return vKey;
+                    case "wKey": return wKey;
+                    case "xKey": return xKey;
+                    case "yKey": return yKey;
+                    case "zKey": return zKey;
                 }
                 return null;
             }

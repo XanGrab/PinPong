@@ -49,9 +49,12 @@ public class GameManager : MonoBehaviour
     private int lScore;
     private int rScore;
 
-    [Header("Timer")]
-    //public Text timerText;
-    public float timeValue;
+    [Header("Pause")]
+    [SerializeField]
+    private InputAction pauseButton;
+    private static bool playing;
+    public static bool gamePaused;
+    private float timeValue;
 
     [Header("Targets")]
     public GameObject targetManager;
@@ -65,10 +68,15 @@ public class GameManager : MonoBehaviour
     public int numTargets;
     public int targetHealthPickUp;
     public float powerupTimerValue = 20;
-    private static bool playing;
-    public static bool gamePaused;
+
     AudioManager am;
 
+    private void OnEnable() {
+        pauseButton.Enable();    
+    }
+    private void OnDisable() {
+        pauseButton.Disable();
+    }
     void Awake(){
         settings = FindObjectOfType<Settings>();
         if(settings == null){
@@ -79,7 +87,7 @@ public class GameManager : MonoBehaviour
         
         controls = new PlayerControls();
         _instance = this;
-        //controls.Player.Pause.canceled += ctx => OnPause();
+        pauseButton.performed += ctx => OnPause();
     }
     void Start(){
         playing = true;

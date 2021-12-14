@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     void OnDisable(){ controls.Player.Disable(); }
 
     void Awake(){
-        Debug.Log("Gamepad Count: " + Gamepad.all.Count);
+        //Debug.Log("Gamepad Count: " + Gamepad.all.Count);
         //if(Gamepad.all.Count == 0){
             PlayerInput input = GetComponent<PlayerInput>();
             string d = input.defaultControlScheme;
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
     }
 
     public void OnMove( InputAction.CallbackContext context ){
-        movVector = context.ReadValue<Vector2>() * speed;
+        movVector.y = context.ReadValue<float>() * speed;
     }
 
     public void OnFlipUp( InputAction.CallbackContext ctx ){
@@ -129,7 +129,8 @@ public class Player : MonoBehaviour
         //Debug.Log(gameObject.name + " state: " + playerState);
         switch(playerState){
             case state.Move:
-                rb.velocity = movVector * speed;
+            Debug.Log("MovVector: " + movVector);
+                rb.velocity = new Vector2(0, movVector.y * speed);
                 break;
             case state.FlipUp:
                 rb.AddTorque(flipTorque * 10f);

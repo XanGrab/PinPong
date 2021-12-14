@@ -5,15 +5,16 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
-    public static AudioManager instance;
+    public static AudioManager _instance;
+    public static AudioManager Instance { get{ return _instance; } }    
 
     void Awake()
     {
-        if(instance == null){
-            instance = this;
-        }else{
-            Destroy(this.gameObject);
+        if(_instance != null && _instance != this){
+            Destroy(gameObject);
             return;
+        }else{
+            _instance = this;
         }
         DontDestroyOnLoad(gameObject);
 
@@ -38,7 +39,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound: " + s.name + " source missing.");
             return;
         }        
-        Debug.Log("Sound Played: " + name);
+        //Debug.Log("Sound Played: " + name);
         s.source.Play();
     }
     public void Play(string name, int time){
