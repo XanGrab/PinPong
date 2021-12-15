@@ -18,7 +18,6 @@ public class FreezeTarget : MonoBehaviour
     void Update()
     {
         transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
-        // StartCoroutine( ShowAndHide(gameObject, 5.0f) ); // 5 second
     }
 
     private void OnTriggerEnter2D(Collider2D obj){
@@ -27,12 +26,13 @@ public class FreezeTarget : MonoBehaviour
             //touchedLast = -1 means that paddle left touched the ball last, and therefore hit the freeze target
             if (obj.gameObject.GetComponent<Ball>().touchedLast == -1) {
                 GameObject pR = GameObject.Find("Paddle Right");
-                pR.GetComponent<Player>().changeStateToFrozen();
+                pR.GetComponent<Player>().Freeze();
+                //Debug.Log("Freeze!");
                
             } else if (obj.gameObject.GetComponent<Ball>().touchedLast == 1){
                 GameObject pL = GameObject.Find("Paddle Left");
-                pL.GetComponent<Player>().changeStateToFrozen();
-
+                pL.GetComponent<Player>().Freeze();
+                //Debug.Log("Freeze!");
             }
         }
     }

@@ -6,6 +6,6 @@ public class DestroyOnExit : StateMachineBehaviour
 {
     override
     public void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex) {
-        Destroy(animator.gameObject);
+        Destroy(animator.transform.parent.gameObject);
     }
 }

@@ -16,7 +16,7 @@ public class HP : MonoBehaviour
     void Start(){
         uiHP_txt = uiHP.GetComponent<TextMeshProUGUI>();
         if(uiHP_txt == null){
-            Debug.Log("wtf");
+            //Debug.Log("UI null.");
         }
         UpdateHealth();
     }

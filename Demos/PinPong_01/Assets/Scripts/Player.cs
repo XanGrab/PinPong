@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,15 +30,9 @@ public class Player : MonoBehaviour
     void OnDisable(){ controls.Player.Disable(); }
 
     void Awake(){
-        //Debug.Log("Gamepad Count: " + Gamepad.all.Count);
-        //if(Gamepad.all.Count == 0){
-            PlayerInput input = GetComponent<PlayerInput>();
-            string d = input.defaultControlScheme;
-
-            //for()
-            Debug.Log(gameObject.name + ": " + d);
-            input.SwitchCurrentControlScheme(d, Keyboard.current);
-        //}
+        PlayerInput input = GetComponent<PlayerInput>();
+        string d = input.defaultControlScheme;
+        input.SwitchCurrentControlScheme(d, Keyboard.current);
         controls = new PlayerControls();
         
         playerWalls = GameObject.FindGameObjectsWithTag("PlayerWall");
@@ -46,15 +41,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void UnFreeze() {
-    //Debug.Log("froze");
-        GetComponent<SpriteRenderer>().color = Color.white;
-        playerState = state.Move;
-    }
-
-    public void changeStateToFrozen() {
-        playerState = state.Frozen;
-    }
 
     void Start()
     {
@@ -82,7 +68,6 @@ public class Player : MonoBehaviour
                 }
                 SetFlipComponents();
                 playerState = state.FlipUp;
-                //am.Play("Flip");
                 FindObjectOfType<AudioManager>().Play("Flip");
             }
         }
@@ -98,9 +83,7 @@ public class Player : MonoBehaviour
                     hj.limits = limits;
                 }
                 SetFlipComponents();
-                //flippingDown = ctx.action.triggered;
                 playerState = state.FlipDown;
-                //am.Play("Flip");
                 FindObjectOfType<AudioManager>().Play("Flip");
             }
         }
@@ -119,14 +102,34 @@ public class Player : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.None;
         hj.enabled = true;
         
+        // Ignore wall collisions when flipping
         foreach(GameObject wall in walls){
             Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>());
         }
     }
 
+    public void Freeze() {
+        StartCoroutine(Frozen());
+    }
+    
+    /**
+    * Called by ball on power-up collect
+    */
+    private IEnumerator Frozen() {
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        playerState = state.Frozen;
+        GetComponent<SpriteRenderer>().color = Color.cyan;
+        am.Play("Freeze");
+        yield return new WaitForSeconds(1f);
+        //Debug.Log("~UnFreeze~");
+        GetComponent<SpriteRenderer>().color = Color.white;
+        SetMoveComponents();
+        playerState = state.Move;
+    }
+
     void FixedUpdate()
     {        
-        //Debug.Log(gameObject.name + " state: " + playerState);
+        // Debug.Log(gameObject.name + " state: " + playerState);
         switch(playerState){
             case state.Move:
                 rb.velocity = new Vector2(0, movVector.y * speed);
@@ -141,7 +144,6 @@ public class Player : MonoBehaviour
                 if(Mathf.Round(gameObject.transform.rotation.eulerAngles.z)%360 == Mathf.Abs(hj.limits.min)){
                     //re-enable wall collisions
                     gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-                    //flippingUp = false;
                     SetMoveComponents();
                     playerState = state.Move;
                 }
@@ -154,16 +156,13 @@ public class Player : MonoBehaviour
             case state.ResetUp:
                 rb.AddTorque(flipTorque);
                 if(Mathf.Round(gameObject.transform.rotation.eulerAngles.z)%360 == Mathf.Abs(hj.limits.min)){
+                    //re-enable wall collisions
                     gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-                    //flippingDown = false;
                     SetMoveComponents();
                     playerState = state.Move;
                 }
                 break;
             case state.Frozen:
-                GetComponent<SpriteRenderer>().color = Color.cyan;
-                am.Play("Freeze");
-                Invoke("UnFreeze", 1f);
                 break;
         }
     }

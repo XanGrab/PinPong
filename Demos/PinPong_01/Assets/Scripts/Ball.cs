@@ -25,28 +25,25 @@ public class Ball : MonoBehaviour
         startPos = transform.position;
         rb = GetComponent<Rigidbody2D>();   
         trail = GetComponent<TrailRenderer>();
-        //startGradient = trail.colorGradient;
         _render = GetComponent<Renderer>();
-        //launchText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         playerWalls = GameObject.FindGameObjectsWithTag("PlayerWall");
         foreach(GameObject wall in playerWalls){
             Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>());
         }
         initColor = Color.white;
         lerpValue = 0f;
-        //launchTime = 4;
         Launch();
     }
 
     void Update(){
+        // add velocity clamping to ball
         if(rb.velocity.sqrMagnitude > maxSqrVelocity && superSpeed == 0){
-            Debug.Log("slowling velocity: " + rb.velocity.sqrMagnitude);
+            //Debug.Log("slowling velocity: " + rb.velocity.sqrMagnitude);
             rb.velocity *= 0.9f;
         }
     }
 
     public void Launch(){
-        //trail.Clear();
         score = 100;
         float x = Random.Range(0, 2) == 0 ? -1 : 1;
         float y = Random.Range(0, 2) == 0 ? -1 : 1;
@@ -56,13 +53,8 @@ public class Ball : MonoBehaviour
     public void Reset(){
         transform.position = startPos;
         FindObjectOfType<AudioManager>().Play("Break");
-        //transform.GetChild(0).gameObject.SetActive(true);
         Launch();
-        //trail.Clear();
-        //launchTime = 4;
         
-        //WHY???
-        //rb.velocity = Vector2.zero;
         lerpValue = 0f;
         trail.material.color = initColor;
         _render.material.color = trail.material.color;
@@ -75,6 +67,7 @@ public class Ball : MonoBehaviour
                 score += 100;
                 FindObjectOfType<GameManager>().DisplayPoints(transform.position);
 
+                // Change Color
                 lerpValue += 0.22f;  
                 Color objColor = obj.GetComponent<Renderer>().material.color;
                 _render.material.color = Color.Lerp(initColor, objColor,  lerpValue);
@@ -86,7 +79,6 @@ public class Ball : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) {
             if (other.gameObject.name.Equals("Paddle Left")) {
-                //Debug.Log("Left");
                 touchedLast = -1;
                 if (superSpeed == -1) {
                     FindObjectOfType<AudioManager>().Play("Speedy");
@@ -97,7 +89,6 @@ public class Ball : MonoBehaviour
                     paddleLeft.GetComponent<SpriteRenderer>().color = Color.white;
                 }
             } else if (other.gameObject.name.Equals("Paddle Right")) {
-                //Debug.Log("Right");
                 touchedLast = 1;
                 if (superSpeed == 1) {
                     FindObjectOfType<AudioManager>().Play("Speedy");

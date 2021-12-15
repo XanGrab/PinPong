@@ -121,7 +121,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1, y: 1.1}
+  m_Size: {x: 1.25, y: 1.25}
   m_EdgeRadius: 0
 --- !u!212 &1139782281279696319
 SpriteRenderer:
@@ -182,6 +182,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 916786772191674069, guid: 54685402af0bb9c4d90949ba4f16327d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3529246911416037078, guid: 54685402af0bb9c4d90949ba4f16327d, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
       value: 0.5

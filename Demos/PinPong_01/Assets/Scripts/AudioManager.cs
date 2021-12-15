@@ -40,7 +40,9 @@ public class AudioManager : MonoBehaviour
             return;
         }        
         //Debug.Log("Sound Played: " + name);
-        s.source.Play();
+        if(!s.source.isPlaying){
+            s.source.Play();
+        }
     }
     public void Play(string name, int time){
         Sound s = Array.Find(sounds, sound => sound.name == name); 

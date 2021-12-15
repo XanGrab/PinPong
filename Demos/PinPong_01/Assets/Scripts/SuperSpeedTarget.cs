@@ -18,19 +18,17 @@ public class SuperSpeedTarget : MonoBehaviour
     void Update()
     {
         transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
-        //StartCoroutine( ShowAndHide(gameObject, 5.0f) ); // 5 second
     }
 
     private void OnTriggerEnter2D(Collider2D obj){
         StartCoroutine(Break());
         if(obj.gameObject.CompareTag("Ball")){
-            //touchedLast = -1 means that paddle left touched the ball last, and therefore hit the freeze target
+            // touchedLast = -1 means that paddle left touched the ball last, and therefore hit the freeze target
             if (obj.gameObject.GetComponent<Ball>().touchedLast == -1) {
                     obj.gameObject.GetComponent<Ball>().superSpeed = -1;
                     GameObject paddleLeft = GameObject.Find("Paddle Left");
                     //Kind of janky to change color
                     paddleLeft.GetComponent<SpriteRenderer>().color = Color.red;
-               // GameManager.Instance.TargetLeftScored();
             } else if (obj.gameObject.GetComponent<Ball>().touchedLast == 1){
                     obj.gameObject.GetComponent<Ball>().superSpeed = 1;
                     GameObject paddleRight = GameObject.Find("Paddle Right");
