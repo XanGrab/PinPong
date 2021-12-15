@@ -84,12 +84,12 @@ public class GameManager : MonoBehaviour
         // always assign the keyboard assuming not null
         if(Keyboard.current != null){
             leftInput = lefty.GetComponent<PlayerInput>();
-            string d = leftInput.defaultControlScheme;
-            leftInput.SwitchCurrentControlScheme(d, Keyboard.current);
+            string leftDevice = leftInput.defaultControlScheme;
+            leftInput.SwitchCurrentControlScheme(leftDevice, Keyboard.current);
             
-            rightInput = lefty.GetComponent<PlayerInput>();
-            d = rightInput.defaultControlScheme;
-            leftInput.SwitchCurrentControlScheme(d, Keyboard.current);
+            rightInput = righty.GetComponent<PlayerInput>();
+            string rightDevice = rightInput.defaultControlScheme;
+            rightInput.SwitchCurrentControlScheme(rightDevice, Keyboard.current);
         }
         
         // assign gamepad if connected
@@ -98,7 +98,9 @@ public class GameManager : MonoBehaviour
         }else if(Gamepad.all.Count > 1){
             Gamepad[] gamepads = Gamepad.all.ToArray();
             leftInput.SwitchCurrentControlScheme(gamepads[0]);
+            Debug.Log("left paired w: " + gamepads[0].name);
             rightInput.SwitchCurrentControlScheme(gamepads[1]);
+            Debug.Log("right paired w: " + gamepads[1].name);
         }
         Debug.Log("Gamepads: " + Gamepad.all.Count);
     }
