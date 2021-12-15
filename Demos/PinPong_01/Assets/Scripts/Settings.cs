@@ -1,21 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Audio;
 
 public class Settings : MonoBehaviour
 {
     private static Settings _instance;
+    private int controllers;
     public static Settings Instance { get{ return _instance; } }    
-
+    public AudioMixer audioMixer;
     public float musicVol;
     public float SFXVol;
     public int qualityVal;
 
-    public AudioMixer audioMixer;
     public TMP_Dropdown resolutionDropdown;
     Resolution[] resolutions;
 
@@ -71,4 +68,6 @@ public class Settings : MonoBehaviour
     public void SetFullScreen (bool isFullScreen){
         Screen.fullScreen = isFullScreen;
     }
+
+
 }

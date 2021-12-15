@@ -26,14 +26,14 @@ public class Player : MonoBehaviour
     GameObject[] playerWalls;
     AudioManager am;
 
-    void OnEnable(){ controls.Player.Enable(); }
-    void OnDisable(){ controls.Player.Disable(); }
+    //void OnEnable(){ controls.Player.Enable(); }
+    //void OnDisable(){ controls.Player.Disable(); }
 
     void Awake(){
-        PlayerInput input = GetComponent<PlayerInput>();
+        /*PlayerInput input = GetComponent<PlayerInput>();
         string d = input.defaultControlScheme;
         input.SwitchCurrentControlScheme(d, Keyboard.current);
-        controls = new PlayerControls();
+        controls = new PlayerControls();*/
         
         playerWalls = GameObject.FindGameObjectsWithTag("PlayerWall");
         foreach(GameObject wall in playerWalls){

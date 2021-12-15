@@ -1,5 +1,5 @@
 using System.Collections;
-//using System.Collections.Generic;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -33,11 +33,13 @@ public class GameManager : MonoBehaviour
     [Header("Left Player")]
     public GameObject lefty;
     public GameObject leftGoal;
+    private PlayerInput leftInput;
 
 
     [Header("Right Player")]
     public GameObject righty;
     public GameObject rightGoal;
+    private PlayerInput rightInput;
 
     [Header("UI")]
     public GameObject gameMenu;
@@ -77,6 +79,30 @@ public class GameManager : MonoBehaviour
     private void OnDisable() {
         pauseButton.Disable();
     }
+
+    private void UpdateControllers(){
+        // always assign the keyboard assuming not null
+        if(Keyboard.current != null){
+            leftInput = lefty.GetComponent<PlayerInput>();
+            string d = leftInput.defaultControlScheme;
+            leftInput.SwitchCurrentControlScheme(d, Keyboard.current);
+            
+            rightInput = lefty.GetComponent<PlayerInput>();
+            d = rightInput.defaultControlScheme;
+            leftInput.SwitchCurrentControlScheme(d, Keyboard.current);
+        }
+        
+        // assign gamepad if connected
+        if(Gamepad.all.Count == 1){
+            leftInput.SwitchCurrentControlScheme(Gamepad.current);
+        }else if(Gamepad.all.Count > 1){
+            Gamepad[] gamepads = Gamepad.all.ToArray();
+            leftInput.SwitchCurrentControlScheme(gamepads[0]);
+            rightInput.SwitchCurrentControlScheme(gamepads[1]);
+        }
+        Debug.Log("Gamepads: " + Gamepad.all.Count);
+    }
+
     void Awake(){
         settings = FindObjectOfType<Settings>();
         if(settings == null){
@@ -85,7 +111,22 @@ public class GameManager : MonoBehaviour
         }
         settings.GetComponent<Canvas>().enabled = false;
         
-        controls = new PlayerControls();
+        /*leftInput = lefty.GetComponent<PlayerInput>();
+        string d = leftInput.defaultControlScheme;
+        leftInput.SwitchCurrentControlScheme(d, Keyboard.current);
+        
+        rightInput = lefty.GetComponent<PlayerInput>();
+        d = rightInput.defaultControlScheme;
+        leftInput.SwitchCurrentControlScheme(d, Keyboard.current);*/
+        UpdateControllers();
+        InputSystem.onDeviceChange += (device, change) => {
+            switch(change){
+                case InputDeviceChange.ConfigurationChanged:
+                    UpdateControllers();
+                    break;
+            }
+        };
+        
         _instance = this;
         pauseButton.performed += ctx => OnPause();
     }

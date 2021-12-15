@@ -16182,11 +16182,11 @@ PrefabInstance:
     - target: {fileID: 4824456506369763224, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
       propertyPath: sounds.Array.data[1].clip
       value: 
-      objectReference: {fileID: 8300000, guid: b306c2c3758f7284aa1440b530f772b2, type: 3}
+      objectReference: {fileID: 8300000, guid: a4f756e3328619e4eb668f10d0db7cb9, type: 3}
     - target: {fileID: 4824456506369763224, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
       propertyPath: sounds.Array.data[2].clip
       value: 
-      objectReference: {fileID: 8300000, guid: b624739b8a7441e498c057d78a9a1411, type: 3}
+      objectReference: {fileID: 8300000, guid: 2369a4ddae25e524aa360725fd494075, type: 3}
     - target: {fileID: 4824456506369763224, guid: 66dd3ffc990ab6a4e911fb7b65c08864, type: 3}
       propertyPath: sounds.Array.data[3].clip
       value: 
