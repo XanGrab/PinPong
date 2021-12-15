@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3784562494612075194}
   - component: {fileID: 8214226084791772519}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143329059117720927}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.024677122}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 2.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,11 +44,11 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.1600698, b: 0, a: 1}
-  m_Intensity: 2.02
-  m_Range: 2.24
+  m_Intensity: 3
+  m_Range: 6
   m_SpotAngle: 1
   m_InnerSpotAngle: 1
-  m_CookieSize: 10
+  m_CookieSize: 2
   m_Shadows:
     m_Type: 0
     m_Resolution: -1
@@ -81,12 +81,12 @@ Light:
   m_RenderMode: 2
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 0, y: 2}
-  m_BounceIntensity: 1
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 5
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -104,7 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8044806294999635134}
   - component: {fileID: 8667105538926862603}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Crown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 6907043477694592206}
   - component: {fileID: 7852886496983680079}
   - component: {fileID: 3311829254527317022}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Paddle
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5010156999936449011}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11, y: -1, z: 0}
+  m_LocalPosition: {x: -11, y: 0.55, z: 0}
   m_LocalScale: {x: 0.4, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -239,7 +239,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -257,8 +257,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1272905871
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -416,6 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a7f5c4da9c091409193c41a6343f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasSpeedPower: 0
   speed: 0
   flipTorque: 0
 --- !u!114 &7852886496983680079
@@ -462,7 +463,7 @@ GameObject:
   - component: {fileID: 255334347175925621}
   - component: {fileID: 8056487914467282280}
   - component: {fileID: 7914118071586742660}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5331,13 +5332,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8170650846605495732}
   - component: {fileID: 5763139588891454477}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Speed Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8170650846605495732
 Transform:
   m_ObjectHideFlags: 0
@@ -5405,13 +5406,22 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.51908433
-        inSlope: 0
-        outSlope: 0
+        value: 0.50437486
+        inSlope: 0.1725048
+        outSlope: 0.1725048
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.5263671
+      - serializedVersion: 3
+        time: 0.99554443
+        value: 0
+        inSlope: 0.16608047
+        outSlope: 0.16608047
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.10870827
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

@@ -24,15 +24,17 @@ public class SuperSpeedTarget : MonoBehaviour
         StartCoroutine(Break());
         if(obj.gameObject.CompareTag("Ball")){
             // touchedLast = -1 means that paddle left touched the ball last, and therefore hit the freeze target
+            GameObject paddle = null;
             if (obj.gameObject.GetComponent<Ball>().touchedLast == -1) {
-                    obj.gameObject.GetComponent<Ball>().superSpeed = -1;
-                    GameObject paddleLeft = GameObject.Find("Paddle Left");
-                    //Kind of janky to change color
-                    paddleLeft.GetComponent<SpriteRenderer>().color = Color.red;
+                paddle = GameObject.Find("Paddle Left");
             } else if (obj.gameObject.GetComponent<Ball>().touchedLast == 1){
-                    obj.gameObject.GetComponent<Ball>().superSpeed = 1;
-                    GameObject paddleRight = GameObject.Find("Paddle Right");
-                    paddleRight.GetComponent<SpriteRenderer>().color = Color.red;
+                paddle = GameObject.Find("Paddle Right");
+            }
+
+            if(paddle != null){
+                paddle.GetComponent<Player>().hasSpeedPower = true;
+                paddle.transform.GetChild(2).gameObject.SetActive(true);
+                paddle.GetComponent<SpriteRenderer>().color = Color.red;
             }
         }
     }

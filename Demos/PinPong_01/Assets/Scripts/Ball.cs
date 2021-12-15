@@ -6,8 +6,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public int touchedLast = 0;
-    public int superSpeed = 0;
-
+    public bool speedHit = false;
     public float speed;
     public float maxSqrVelocity;
     public int score = 100;
@@ -37,8 +36,7 @@ public class Ball : MonoBehaviour
 
     void Update(){
         // add velocity clamping to ball
-        if(rb.velocity.sqrMagnitude > maxSqrVelocity && superSpeed == 0){
-            //Debug.Log("slowling velocity: " + rb.velocity.sqrMagnitude);
+        if(rb.velocity.sqrMagnitude > maxSqrVelocity && speedHit == false){
             rb.velocity *= 0.9f;
         }
     }
@@ -78,26 +76,21 @@ public class Ball : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-            if (other.gameObject.name.Equals("Paddle Left")) {
+        if (other.gameObject.CompareTag("Player")) {
+            GameObject paddle = other.gameObject;
+            if(paddle.name.Equals("Paddle Left")){
                 touchedLast = -1;
-                if (superSpeed == -1) {
-                    FindObjectOfType<AudioManager>().Play("Speedy");
-                    rb.velocity = rb.velocity * 3;
-                    superSpeed = 0;
-                    GameObject paddleLeft = GameObject.Find("Paddle Left");
-                    //Kind of janky to change color
-                    paddleLeft.GetComponent<SpriteRenderer>().color = Color.white;
-                }
-            } else if (other.gameObject.name.Equals("Paddle Right")) {
+            }else{
                 touchedLast = 1;
-                if (superSpeed == 1) {
-                    FindObjectOfType<AudioManager>().Play("Speedy");
-                    rb.velocity = rb.velocity * 3;
-                    superSpeed = 0;
-                    GameObject paddleRight = GameObject.Find("Paddle Right");
-                    //Kind of janky to change color
-                    paddleRight.GetComponent<SpriteRenderer>().color = Color.white;
-                }
+            }    
+
+            if (paddle.GetComponent<Player>().hasSpeedPower) {
+                FindObjectOfType<AudioManager>().Play("Speedy");
+                rb.velocity = rb.velocity * 3;
+                paddle.GetComponent<Player>().hasSpeedPower = false;
+                paddle.transform.GetChild(2).gameObject.SetActive(false);
+                paddle.GetComponent<SpriteRenderer>().color = Color.white;
             }
+        }
     }
 }

@@ -13,13 +13,13 @@ public class Player : MonoBehaviour
         ResetDown,
         Frozen
     }
+
+    public bool hasSpeedPower;
     private state playerState;
     public float speed;
     public float flipTorque;
 
     private Vector2 movVector;
-    //private bool flippingUp;
-    //private bool flippingDown;
     private Rigidbody2D rb;
     private HingeJoint2D hj;
     GameObject[] walls;
@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
         walls = GameObject.FindGameObjectsWithTag("Wall");
 
         SetMoveComponents();
+        hasSpeedPower = false;
         playerState = state.Move;
     }
 
@@ -126,6 +127,7 @@ public class Player : MonoBehaviour
         SetMoveComponents();
         playerState = state.Move;
     }
+
 
     void FixedUpdate()
     {        

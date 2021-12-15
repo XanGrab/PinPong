@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
 
             if (pointTargetsBroken == numTargets) {
                 pointTargetsBroken = 0;
-                resetPointTargets(pointTargetsCurrentLayout);
+                resetTargets(pointTargetsCurrentLayout);
             }
 
             if (powerupTimerValue < 1) {
@@ -177,7 +177,7 @@ public class GameManager : MonoBehaviour
         timeValue = 4;
         updateNumTargets();
         resetTargets(currentLayout);
-        resetPointTargets(pointTargetsCurrentLayout);
+        resetTargets(pointTargetsCurrentLayout);
 
     }
 
@@ -247,17 +247,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-     public void resetTargets(GameObject curr){
-        curr.SetActive(true);
-        for(int i = 0; i < numTargets; i++){
-        float randX = Random.Range(-10.0f, 10.0f);
-        float randY = Random.Range(-5.30f, 6.50F);
-            curr.transform.GetChild(i).position= new Vector3(randX, randY, 0);
-            curr.transform.GetChild(i).gameObject.SetActive(true);
-        }
-    }
-
-    public void resetPointTargets(GameObject curr){
+    /**
+    * Reset targets given for some given layout
+    * param curr - Layout object
+    */
+    public void resetTargets(GameObject curr){
         curr.SetActive(true);
         for(int i = 0; i < numTargets; i++){
         float randX = Random.Range(-9.5f, 9.5f);
@@ -266,25 +260,32 @@ public class GameManager : MonoBehaviour
             curr.transform.GetChild(i).gameObject.SetActive(true);
         }
     }
-
-public void updateNumTargets() {
-    int leftHp = lefty.GetComponent<HP>().hp;
-    int rightHp = righty.GetComponent<HP>().hp;
-    if (((leftHp + rightHp) <= 1500) && ((leftHp + rightHp) > 1000)) {
-        numTargets = 5;
-    }
-     if ((leftHp + rightHp) <= 1000) {
-        numTargets = 6;
-    }
-}
+    
+    /**
+    * Resets power-up items for a given layout
+    */
     public void resetPowerUp() {
         powerupCurrentLayout.SetActive(false);
-         int rand = Random.Range(0, (powerupManager.transform.childCount));
+        int rand = Random.Range(0, (powerupManager.transform.childCount));
         powerupCurrentLayout = powerupManager.transform.GetChild(rand).gameObject;
         float randX = Random.Range(-9.5f, 9.5f);
         float randY = Random.Range(-5f, 5F);
-        powerupCurrentLayout.transform.position= new Vector3(randX, randY, 0);
+        powerupCurrentLayout.transform.position = new Vector3(randX, randY, 0);
         powerupCurrentLayout.gameObject.SetActive(true);
+    }
+
+    /**
+    *
+    */
+    public void updateNumTargets() {
+        int leftHp = lefty.GetComponent<HP>().hp;
+        int rightHp = righty.GetComponent<HP>().hp;
+        if (((leftHp + rightHp) <= 1500) && ((leftHp + rightHp) > 1000)) {
+            numTargets = 5;
+        }
+        if ((leftHp + rightHp) <= 1000) {
+            numTargets = 6;
+        }
     }
 
     /**
