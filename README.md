@@ -1,5 +1,11 @@
-# PinPong
+# PINPONG!
 Game Design II Project
+
+DOWNLOAD:
+itch.io - https://xanxg.itch.io/pinpong
+Unity Play - 
+GitHub Pages - 
+
 GAMEPLAY
 Controls
 Keyboard Control
@@ -27,10 +33,3 @@ Player could acquire following power ups by:
 Super speed on the ball by hitting the Super speed target with orange comet icon
 Froze enemy paddle by hitting the Frozen target with blue snowflake icon
 Reflection of ball by hitting the Asteroid target. (The Asteroid target would last 3 collisions instead of 1 like other targets.
-
-
-File locations:
-Art assets- Placed in the Pin-Pong Aesthetic Elements Folder
-Build of game- 1）excutable installer
-		  2) WebGL version on Github
-		  3) itch.io upload
