@@ -112,18 +112,11 @@ public class GameManager : MonoBehaviour
             return;
         }
         settings.GetComponent<Canvas>().enabled = false;
-        
-        /*leftInput = lefty.GetComponent<PlayerInput>();
-        string d = leftInput.defaultControlScheme;
-        leftInput.SwitchCurrentControlScheme(d, Keyboard.current);
-        
-        rightInput = lefty.GetComponent<PlayerInput>();
-        d = rightInput.defaultControlScheme;
-        leftInput.SwitchCurrentControlScheme(d, Keyboard.current);*/
+
         UpdateControllers();
         InputSystem.onDeviceChange += (device, change) => {
             switch(change){
-                case InputDeviceChange.ConfigurationChanged:
+                default:
                     UpdateControllers();
                     break;
             }

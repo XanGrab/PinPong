@@ -8,7 +8,9 @@ public class Ball : MonoBehaviour
     public int touchedLast = 0;
     public bool speedHit = false;
     public float speed;
-    public float maxSqrVelocity;
+    private float maxSqrVelocity = 600;
+    private float minSqrVelocity = 10;
+
     public int score = 100;
     public Rigidbody2D rb;
     public Vector2 startPos;
@@ -38,6 +40,9 @@ public class Ball : MonoBehaviour
         // add velocity clamping to ball
         if(rb.velocity.sqrMagnitude > maxSqrVelocity && speedHit == false){
             rb.velocity *= 0.9f;
+        }
+        if(rb.velocity.sqrMagnitude < minSqrVelocity){
+            rb.velocity *= 1.1f;
         }
     }
 

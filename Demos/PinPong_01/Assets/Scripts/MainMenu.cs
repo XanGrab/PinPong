@@ -30,7 +30,7 @@ public class MainMenu : MonoBehaviour
             }
         }
         Resolution resolution = resolutions[currentResolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        //Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
     void Start(){
