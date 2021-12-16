@@ -20,17 +20,6 @@ public class MainMenu : MonoBehaviour
             Debug.LogError("null audio manager");
             return;
         }
-
-        QualitySettings.SetQualityLevel(3);
-        Resolution[] resolutions = Screen.resolutions;
-        int currentResolutionIndex = 0;
-        for(int i = 0; i < resolutions.Length; i++){
-            if(resolutions[i].Equals(Screen.currentResolution)){
-                currentResolutionIndex = i;
-            }
-        }
-        Resolution resolution = resolutions[currentResolutionIndex];
-        //Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
     void Start(){

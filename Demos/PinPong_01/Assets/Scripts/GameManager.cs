@@ -358,10 +358,8 @@ public class GameManager : MonoBehaviour
         pointsTargetManager.SetActive(false);
         powerupManager.SetActive(false);
         if(lefty.GetComponent<HP>().hp > righty.GetComponent<HP>().hp){
-            //lefty.transform.GetChild(0).gameObject.SetActive(true);
             StartCoroutine(EndAnimation(lefty, righty));
         }else if(lefty.GetComponent<HP>().hp < righty.GetComponent<HP>().hp){
-            //righty.transform.GetChild(0).gameObject.SetActive(true);
             StartCoroutine(EndAnimation(righty, lefty));
         }
     }

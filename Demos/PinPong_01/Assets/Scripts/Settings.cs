@@ -44,9 +44,9 @@ public class Settings : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
-        //SetMusicVolume(musicVol);
-        //SetSFXVolume(SFXVol);
-        //SetQuality(qualityVal);
+        SetMusicVolume(musicVol);
+        SetSFXVolume(SFXVol);
+        SetQuality(qualityVal);
     }
 
     public void SetMusicVolume(float volume){

@@ -2085,12 +2085,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnLeft: {fileID: 1672056396}
+    m_SelectOnRight: {fileID: 1672056396}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
@@ -4103,11 +4103,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d48e0580f1e5a414eab6afcd8e1eeaaf, type: 3}
---- !u!1 &1051998852 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 69927117483344986, guid: d48e0580f1e5a414eab6afcd8e1eeaaf, type: 3}
+--- !u!114 &1051998852 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 69927117483344991, guid: d48e0580f1e5a414eab6afcd8e1eeaaf, type: 3}
   m_PrefabInstance: {fileID: 1051998851}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1075772831
 GameObject:
   m_ObjectHideFlags: 0
@@ -4777,7 +4783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 1051998852}
+  m_FirstSelected: {fileID: 2041004201}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1340033677
@@ -6417,12 +6423,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnLeft: {fileID: 799963745}
+    m_SelectOnRight: {fileID: 799963745}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
@@ -8103,10 +8109,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1051998852}
+    m_SelectOnDown: {fileID: 1051998852}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -8360,7 +8366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5761838607024478347, guid: 1cf67e0d50d14734e8bf02e322e0686a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5761838607024478351, guid: 1cf67e0d50d14734e8bf02e322e0686a, type: 3}
       propertyPath: m_RootOrder
