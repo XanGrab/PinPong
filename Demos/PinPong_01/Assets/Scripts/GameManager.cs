@@ -332,6 +332,8 @@ public class GameManager : MonoBehaviour
         ParticleSystem death;
         winner.GetComponent<Player>().enabled = false;
         loser.GetComponent<Player>().enabled = false;
+        winner.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        loser.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         winner.transform.position = new Vector3(winner.transform.position.x, 0f, winner.transform.position.z);
         
         winner.transform.GetChild(0).gameObject.SetActive(true);

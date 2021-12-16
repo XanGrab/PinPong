@@ -26,15 +26,7 @@ public class Player : MonoBehaviour
     GameObject[] playerWalls;
     AudioManager am;
 
-    //void OnEnable(){ controls.Player.Enable(); }
-    //void OnDisable(){ controls.Player.Disable(); }
-
     void Awake(){
-        /*PlayerInput input = GetComponent<PlayerInput>();
-        string d = input.defaultControlScheme;
-        input.SwitchCurrentControlScheme(d, Keyboard.current);
-        controls = new PlayerControls();*/
-        
         playerWalls = GameObject.FindGameObjectsWithTag("PlayerWall");
         foreach(GameObject wall in playerWalls){
             Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), wall.gameObject.GetComponent<Collider2D>());
@@ -61,9 +53,9 @@ public class Player : MonoBehaviour
     public void OnFlipUp( InputAction.CallbackContext ctx ){
         if(ctx.performed){
             if((playerState == state.Move) || (playerState == state.ResetDown)){
-                if(hj.anchor.y != 0.5){
+                if(hj.anchor.y < 0){
                     JointAngleLimits2D limits = hj.limits;
-                    hj.anchor = new Vector2(0, 0.5f);
+                    hj.anchor = new Vector2(0, hj.anchor.y * -1);
                     limits.max *= -1;
                     hj.limits = limits;
                 }
@@ -77,10 +69,10 @@ public class Player : MonoBehaviour
     public void OnFlipDown( InputAction.CallbackContext ctx ){
         if(ctx.performed){
             if((playerState == state.Move) || (playerState == state.ResetUp)){
-                if(hj.anchor.y != -0.5){
+                if(hj.anchor.y > 0){
                     JointAngleLimits2D limits = hj.limits;
                     limits.max *= -1;
-                    hj.anchor = new Vector2(0, -0.5f);
+                    hj.anchor = new Vector2(0, hj.anchor.y * -1);
                     hj.limits = limits;
                 }
                 SetFlipComponents();
