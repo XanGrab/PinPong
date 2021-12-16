@@ -36,9 +36,9 @@ public class FreezeTarget : MonoBehaviour
             }
         }
     }
-
     private IEnumerator Break(){
         particles.Play();
+        FindObjectOfType<AudioManager>().Play("PowerBreak");
         mr.enabled = false;
         box2D.enabled = false;
         parent.GetComponent<SpriteRenderer>().enabled = false;

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-//using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -357,6 +357,7 @@ public class GameManager : MonoBehaviour
         targetManager.SetActive(false);
         pointsTargetManager.SetActive(false);
         powerupManager.SetActive(false);
+        EventSystem.current.SetSelectedGameObject( resetMenu.transform.GetChild(0).gameObject );
         if(lefty.GetComponent<HP>().hp > righty.GetComponent<HP>().hp){
             StartCoroutine(EndAnimation(lefty, righty));
         }else if(lefty.GetComponent<HP>().hp < righty.GetComponent<HP>().hp){
