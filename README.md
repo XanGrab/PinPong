@@ -5,8 +5,6 @@ Project Files can be found in the DEMOS folder
 
 DOWNLOAD:
 itch.io - https://xanxg.itch.io/pinpong
-Unity Play - 
-GitHub Pages - 
 
 GAMEPLAY
 Controls
